@@ -1,5 +1,25 @@
 # Foodie
 
+# Git
+
+## Branches and Issues
+
+In this project there are only two types of branches:
+- __feature__
+- __fix__
+
+Feature has to be connected with one Issue. Fix branch may or may not be connected with branch. __Conventions__:
+- __only__ english words
+- branch name always starts with: ___feature/___ or ___fix/___
+- use a __dash__ instead of spaces
+- better when name of the branch is the same as issue name
+
+Example:
+- issue name: __Setup backend project__
+- branch name: __feature/setup-backend-project__
+
+## Merge Requests
+
 # Server installation and startup
 
 Firstly you need to install dotnet sdk (version 3.1.102) on your computer. You will find this in the link below:
