@@ -5,18 +5,20 @@
 ## Branches and Issues
 
 In this project there are only two types of branches:
-- __feature__
-- __fix__
+- ___feature___
+- ___fix___
 
-Feature has to be connected with one Issue. Fix branch may or may not be connected with branch. __Conventions__:
+Feature has to be connected with one Issue. Fix branch may or may not be connected with issue.
+
+__Conventions__:
 - __only__ english words
 - branch name always starts with: ___feature/___ or ___fix/___
-- use a __dash__ instead of spaces
+- use a __dash__ instead of space
 - better when name of the branch is the same as issue name
 
-Example:
-- issue name: __Setup backend project__
-- branch name: __feature/setup-backend-project__
+__Example__:
+- issue name: ___Setup backend project___
+- branch name: ___feature/setup-backend-project___
 
 ## Merge Requests
 
