@@ -19,7 +19,224 @@ namespace RestApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Entities.Models.AuthUser", b =>
+            modelBuilder.Entity("Entities.Models.DailyDiet", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Day")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DietId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DietId");
+
+                    b.ToTable("DailyDiet");
+                });
+
+            modelBuilder.Entity("Entities.Models.DailyMeal", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Day")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("DailyMeal");
+                });
+
+            modelBuilder.Entity("Entities.Models.Diet", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId")
+                        .IsUnique()
+                        .HasFilter("[CreatorId] IS NOT NULL");
+
+                    b.ToTable("Diet");
+                });
+
+            modelBuilder.Entity("Entities.Models.Ingredient", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Quantity")
+                        .HasColumnType("real");
+
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("Ingredient");
+                });
+
+            modelBuilder.Entity("Entities.Models.LikedRecipe", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LikedRecipe");
+                });
+
+            modelBuilder.Entity("Entities.Models.Meal", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DailyDietId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DailyDietId");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("Meal");
+                });
+
+            modelBuilder.Entity("Entities.Models.Rate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("Rate");
+                });
+
+            modelBuilder.Entity("Entities.Models.Recipe", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ComplexityLevel")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Cuisine")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EstimatedTime")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhotoPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId")
+                        .IsUnique()
+                        .HasFilter("[CreatorId] IS NOT NULL");
+
+                    b.ToTable("Recipes");
+                });
+
+            modelBuilder.Entity("Entities.Models.Step", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Instruction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("Step");
+                });
+
+            modelBuilder.Entity("Entities.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -84,6 +301,27 @@ namespace RestApi.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Entities.Models.UserDiet", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DietId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DietId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserDiet");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -113,29 +351,29 @@ namespace RestApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9bf7b003-9a12-420f-b686-0e9e848ff6b4",
-                            ConcurrencyStamp = "4489568a-0eca-41cf-b26e-5cd0b3ed8270",
+                            Id = "abbfc057-7496-41b9-a5ab-d3ea8d6b3eb6",
+                            ConcurrencyStamp = "6c107386-56ec-4505-bca1-c05a86991393",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "1422bf2f-bb1d-4789-9207-8fc660490fd0",
-                            ConcurrencyStamp = "4b67fb64-75bc-4db2-a432-6ba695deee91",
+                            Id = "28379e84-84d1-44ec-95a5-85b780b76d02",
+                            ConcurrencyStamp = "3b600027-48dd-444d-87e3-96b268ba1b4e",
                             Name = "Developer",
                             NormalizedName = "DEVELOPER"
                         },
                         new
                         {
-                            Id = "63e9827b-c3c0-4da4-8b0d-707a83a14a54",
-                            ConcurrencyStamp = "b67b26c6-f895-4234-88db-dba7556b6239",
+                            Id = "ac56e229-2f74-4687-8564-2ea5b9165edf",
+                            ConcurrencyStamp = "071b064c-44cb-45a4-9563-74933a24c8f4",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "b74e6ce9-5eb9-4fad-a327-b17767647e14",
-                            ConcurrencyStamp = "f6af53fe-27e6-4ea1-aaf0-e1407b272e3c",
+                            Id = "ee66e505-e523-4c50-8ebb-6c698a0d138e",
+                            ConcurrencyStamp = "160ab374-a1d2-425d-b110-6dd0746c19f0",
                             Name = "PremiumUser",
                             NormalizedName = "PREMIUMUSER"
                         });
@@ -245,6 +483,110 @@ namespace RestApi.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Entities.Models.DailyDiet", b =>
+                {
+                    b.HasOne("Entities.Models.Diet", null)
+                        .WithMany("DailyDiets")
+                        .HasForeignKey("DietId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.Models.DailyMeal", b =>
+                {
+                    b.HasOne("Entities.Models.Recipe", null)
+                        .WithMany("DailyMeals")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.Models.Diet", b =>
+                {
+                    b.HasOne("Entities.Models.User", "User")
+                        .WithOne("Diet")
+                        .HasForeignKey("Entities.Models.Diet", "CreatorId");
+                });
+
+            modelBuilder.Entity("Entities.Models.Ingredient", b =>
+                {
+                    b.HasOne("Entities.Models.Recipe", null)
+                        .WithMany("Ingredients")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.Models.LikedRecipe", b =>
+                {
+                    b.HasOne("Entities.Models.Recipe", null)
+                        .WithMany("LikedRecipes")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.User", null)
+                        .WithMany("LikedRecipes")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Entities.Models.Meal", b =>
+                {
+                    b.HasOne("Entities.Models.DailyDiet", null)
+                        .WithMany("Meals")
+                        .HasForeignKey("DailyDietId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.Recipe", null)
+                        .WithMany("Meals")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.Models.Rate", b =>
+                {
+                    b.HasOne("Entities.Models.User", "User")
+                        .WithMany("Rates")
+                        .HasForeignKey("AuthorId");
+
+                    b.HasOne("Entities.Models.Recipe", null)
+                        .WithMany("Rates")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.Models.Recipe", b =>
+                {
+                    b.HasOne("Entities.Models.User", "User")
+                        .WithOne("Recipe")
+                        .HasForeignKey("Entities.Models.Recipe", "CreatorId");
+                });
+
+            modelBuilder.Entity("Entities.Models.Step", b =>
+                {
+                    b.HasOne("Entities.Models.Recipe", null)
+                        .WithMany("Steps")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.Models.UserDiet", b =>
+                {
+                    b.HasOne("Entities.Models.Diet", null)
+                        .WithMany("UserDiets")
+                        .HasForeignKey("DietId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.User", null)
+                        .WithMany("UserDiets")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -256,7 +598,7 @@ namespace RestApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Entities.Models.AuthUser", null)
+                    b.HasOne("Entities.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -265,7 +607,7 @@ namespace RestApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Entities.Models.AuthUser", null)
+                    b.HasOne("Entities.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -280,7 +622,7 @@ namespace RestApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Models.AuthUser", null)
+                    b.HasOne("Entities.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -289,7 +631,7 @@ namespace RestApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Entities.Models.AuthUser", null)
+                    b.HasOne("Entities.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

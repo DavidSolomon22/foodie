@@ -13,10 +13,10 @@ namespace RestApi.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly UserManager<AuthUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IAuthenticationManager _authManager;
 
-        public AuthenticationController(UserManager<AuthUser> userManager, IMapper mapper, IAuthenticationManager authManager)
+        public AuthenticationController(UserManager<User> userManager, IMapper mapper, IAuthenticationManager authManager)
         {
             _mapper = mapper;
             _userManager = userManager;
@@ -26,7 +26,7 @@ namespace RestApi.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
-            var user = _mapper.Map<AuthUser>(userForRegistration);
+            var user = _mapper.Map<User>(userForRegistration);
 
             var result = await _userManager.CreateAsync(user, userForRegistration.Password);
             if(!result.Succeeded)

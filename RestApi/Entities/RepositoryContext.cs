@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Entities
 {
-    public class RepositoryContext : IdentityDbContext<AuthUser>
+    public class RepositoryContext : IdentityDbContext<User>
     {
         public RepositoryContext(DbContextOptions options)
             : base(options)
@@ -18,5 +18,7 @@ namespace Entities
             
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
         }
+
+        public DbSet<Recipe> Recipes {get; set;}
     }
 }

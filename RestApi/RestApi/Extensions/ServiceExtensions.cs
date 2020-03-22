@@ -28,7 +28,7 @@ namespace RestApi.Extensions
 
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            var builder = services.AddIdentityCore<AuthUser>(o =>
+            var builder = services.AddIdentityCore<User>(o =>
             {
                 o.Password.RequireDigit = true;
                 o.Password.RequireLowercase = false;

@@ -15,12 +15,12 @@ namespace RestApi.Utility
 {
     public class AuthenticationManager : IAuthenticationManager
     {
-        private readonly UserManager<AuthUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
 
-        private AuthUser _user;
+        private User _user;
 
-        public AuthenticationManager(UserManager<AuthUser> userManager, IConfiguration configuration)
+        public AuthenticationManager(UserManager<User> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _configuration = configuration;
