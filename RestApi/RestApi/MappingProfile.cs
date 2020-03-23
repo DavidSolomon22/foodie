@@ -8,7 +8,7 @@ namespace RestApi
     {
         public MappingProfile()
         {
-            CreateMap<UserForRegistrationDto, AuthUser>()
+            CreateMap<UserForRegistrationDto, User>()
                 .ForMember(dest =>
                     dest.UserName,
                     opt => opt.MapFrom(src => src.Email));
