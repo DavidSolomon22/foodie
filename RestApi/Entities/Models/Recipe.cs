@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
+    [Table("Recipes")]
     public class Recipe
     {
         public Guid Id {get; set;}

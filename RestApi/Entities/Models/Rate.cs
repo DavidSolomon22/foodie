@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
+    [Table("Rates")]
     public class Rate
     {
         public Guid Id {get; set;}
@@ -15,5 +16,6 @@ namespace Entities.Models
         public DateTime DateCreated {get; set;}
 
         public User User {get; set;}
+        public Recipe Recipe {set;get;}
     }
 }
