@@ -4,14 +4,16 @@ using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace RestApi.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20200325224814_OneCreatorManyRecipes")]
+    partial class OneCreatorManyRecipes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,9 +255,6 @@ namespace RestApi.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -280,9 +279,6 @@ namespace RestApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -355,29 +351,29 @@ namespace RestApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0c8c6fe1-1a7e-40a4-9cca-5bcf113463de",
-                            ConcurrencyStamp = "81338563-0392-4038-93ec-28c71c6b1d5e",
+                            Id = "66bce5f3-2ecc-4598-a201-54a8ac4dcf3a",
+                            ConcurrencyStamp = "75f2040b-e50d-4a15-8d06-73edf4560d9a",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "67f71a8e-c980-4171-8cc4-4fb96d33f933",
-                            ConcurrencyStamp = "6a41f9dd-31ec-40d8-b41f-4a1d1e66ad70",
+                            Id = "54021aae-9b90-4887-8c8b-8cb3c423391c",
+                            ConcurrencyStamp = "ff37ca11-19b6-430d-b334-bdac289c690a",
                             Name = "Developer",
                             NormalizedName = "DEVELOPER"
                         },
                         new
                         {
-                            Id = "274edc04-1ead-44a9-95bc-be8d24114d27",
-                            ConcurrencyStamp = "288a2817-5228-42f2-83e2-e3b571bd2829",
+                            Id = "12490bb6-31f5-4151-8d4e-70493f0a5e6a",
+                            ConcurrencyStamp = "57419bc2-ab2c-469c-b138-728dbb562423",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "0f346129-0aae-4bd8-b79c-a71c99f19a67",
-                            ConcurrencyStamp = "988f1774-2948-419f-a934-43e17da21536",
+                            Id = "6f9390b0-74c3-4e53-b38e-916dfe922577",
+                            ConcurrencyStamp = "fff8113b-ba02-4878-87ab-9000edbfaf1d",
                             Name = "PremiumUser",
                             NormalizedName = "PREMIUMUSER"
                         });
