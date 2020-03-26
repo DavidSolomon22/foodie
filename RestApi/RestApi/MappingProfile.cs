@@ -15,6 +15,10 @@ namespace RestApi
 
             CreateMap<UserForUpdateDto, User>().ReverseMap();
             CreateMap<User, UserDto>();
+
+            CreateMap<RecipeForCreationDto, Recipe>();
+            CreateMap<Recipe, RecipeDto>();
+            CreateMap<RecipeForUpdateDto, Recipe>();
         }
     }
 }
