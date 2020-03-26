@@ -49,6 +49,8 @@ namespace RestApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.ConfigureExceptionHandler();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCors("CorsPolicy");
