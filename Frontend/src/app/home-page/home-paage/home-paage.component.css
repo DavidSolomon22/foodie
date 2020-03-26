@@ -1,0 +1,75 @@
+.main {
+  background-color: #ecdcb0;
+}
+.title {
+  position: absolute;
+  left: 118px;
+  top: 340px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 190px;
+  line-height: 232px;
+  /* identical to box height */
+
+  color: #403584;
+}
+.second {
+  left: 136px;
+  top: 552px;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 72px;
+  line-height: 88px;
+
+  color: #ffffff;
+}
+.you {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 86px;
+  line-height: 105px;
+  color: #403584;
+}
+.card {
+  position: absolute;
+  width: 459px;
+  height: 599px;
+  left: 846px;
+  top: 241px;
+}
+.matTitle {
+  text-align: center;
+  font-family: 'Saira Semi Condensed';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 76px;
+  /* identical to box height */
+
+  letter-spacing: 0.375em;
+
+  color: #403584;
+  margin-top: 10%;
+}
+.mat-form-field {
+  justify-content: center;
+}
+.field {
+  margin-top: 15%;
+  display: flex;
+  justify-content: center;
+  font-family: 'Montserrat';
+}
+.password {
+  display: flex;
+  justify-content: center;
+  font-family: 'Montserrat';
+}
+.image {
+  background-position: center;
+  margin-left: 110%;
+}
