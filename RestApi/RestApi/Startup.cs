@@ -31,6 +31,7 @@ namespace RestApi
         {
             services.ConfigureCors();
             services.ConfigureSqlContext(Configuration);
+            services.ConfigureRepositoryManager();
             services.AddAutoMapper(typeof(Startup));
             services.AddAuthentication();
             services.ConfigureIdentity();
