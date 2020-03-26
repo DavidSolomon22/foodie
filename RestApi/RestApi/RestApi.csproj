@@ -3,7 +3,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entities\Entities.csproj"/>
     <ProjectReference Include="..\Contracts\Contracts.csproj"/>
     <ProjectReference Include="..\Repository\Repository.csproj"/>
   </ItemGroup>
@@ -12,5 +11,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2"/>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0"/>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2"/>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.2"/>
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="3.1.2"/>
   </ItemGroup>
 </Project>

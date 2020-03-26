@@ -12,6 +12,9 @@ namespace RestApi
                 .ForMember(dest =>
                     dest.UserName,
                     opt => opt.MapFrom(src => src.Email));
+
+            CreateMap<UserForUpdateDto, User>().ReverseMap();
+            CreateMap<User, UserDto>();
         }
     }
 }
