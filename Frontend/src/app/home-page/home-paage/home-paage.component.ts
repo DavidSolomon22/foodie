@@ -39,11 +39,6 @@ export class HomePaageComponent implements OnInit {
     this.service.login(val).subscribe((reponse: any) => {
       if (reponse.token !== undefined) {
         localStorage.setItem('access_token', reponse.token);
-        const decode = this.helper.decodeToken(reponse.token);
-        const expirationDate = this.helper.getTokenExpirationDate(
-          reponse.token
-        );
-        console.log(decode, expirationDate);
       }
     });
   }

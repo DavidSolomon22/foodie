@@ -12,8 +12,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
+import { AuthInterceptor } from './shared/authconfig.interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -31,17 +32,15 @@ export function tokenGetter() {
     MatButtonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: ['https://localhost:5001'],
-        blacklistedRoutes: [
-          'https://localhost:5001/api/authentication/register'
-        ]
-      }
-    })
+    JwtModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

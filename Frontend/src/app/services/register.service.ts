@@ -17,4 +17,15 @@ export class RegisterService {
     let uri = environment.baseUrl + `api/authentication/login`;
     return this.http.post(uri, form);
   }
+  users() {
+    let uri = environment.baseUrl + `api/users`;
+    return this.http.get(uri);
+  }
+  getToken() {
+    return localStorage.getItem('access_token');
+  }
+  get isLogged(): boolean {
+    let token = localStorage.getItem('access_token');
+    return token !== null ? true : false;
+  }
 }
