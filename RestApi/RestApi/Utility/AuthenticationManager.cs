@@ -42,6 +42,11 @@ namespace RestApi.Utility
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
 
+        public int? GetExpirationDate(string token)
+        {
+            return new JwtSecurityTokenHandler().ReadJwtToken(token).Payload.Exp;
+        }
+
         private SigningCredentials GetSigningCredentials()
         {
             var key = Encoding.UTF8.GetBytes(_configuration.GetSection("Secret:Key").Value);
