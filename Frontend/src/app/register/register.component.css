@@ -96,3 +96,8 @@
 a {
   color: black;
 }
+.invalid {
+  display: flex;
+  justify-content: center;
+  font-family: 'Montserrat';
+}

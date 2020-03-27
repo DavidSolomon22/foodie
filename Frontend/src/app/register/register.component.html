@@ -22,22 +22,56 @@
     </mat-card-header>
     <div class="matTitle">FOODIE</div>
     <div class="login">
-      <mat-form-field class="field">
-        <mat-icon matPrefix> local_post_office</mat-icon>
-        <mat-label>Email</mat-label>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field class="field">
+          <mat-icon matPrefix> local_post_office</mat-icon>
+          <mat-label>Email</mat-label>
 
-        <input matInput placeholder="" />
-      </mat-form-field>
-      <mat-form-field class="password">
-        <mat-icon matPrefix>lock</mat-icon>
-        <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            placeholder=""
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+          />
+        </mat-form-field>
+        <div *ngIf="submitted && f.email.errors" class="invalid">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">
+            Email must be a valid email address
+          </div>
+        </div>
 
-        <input matInput placeholder="" />
-      </mat-form-field>
+        <mat-form-field class="password">
+          <mat-icon matPrefix>lock</mat-icon>
+          <mat-label>Password</mat-label>
+
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            placeholder=""
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+          />
+        </mat-form-field>
+        <div *ngIf="submitted && f.password.errors" class="invalid">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors.minlength">
+            Password must be at least 8 characters
+          </div>
+          <div *ngIf="f.password.errors.pattern">
+            Password have at least one digit
+          </div>
+        </div>
+
+        <div class="button">
+          <button mat-raised-button color="#ecdcb0">
+            Register
+          </button>
+        </div>
+      </form>
     </div>
-    <div class="button">
-      <button mat-raised-button color="#ecdcb0">Register</button>
-    </div>
+
     <div class="register">
       <a
         routerLink="/home"

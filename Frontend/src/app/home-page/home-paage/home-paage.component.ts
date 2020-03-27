@@ -1,4 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { RegisterService } from 'src/app/services/register.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-home-paage',
@@ -6,7 +9,18 @@ import { Component, OnInit, ElementRef } from '@angular/core';
   styleUrls: ['./home-paage.component.css']
 })
 export class HomePaageComponent implements OnInit {
-  constructor(private elementRef: ElementRef) {}
+  form: FormGroup;
+  helper = new JwtHelperService();
+  constructor(
+    private elementRef: ElementRef,
+    private fb: FormBuilder,
+    private service: RegisterService
+  ) {
+    this.form = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
@@ -16,4 +30,21 @@ export class HomePaageComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  onSubmit() {
+    console.log(sessionStorage.getItem);
+
+    const val = this.form.value;
+    console.log(val);
+    this.service.login(val).subscribe((reponse: any) => {
+      if (reponse.token !== undefined) {
+        localStorage.setItem('access_token', reponse.token);
+        const decode = this.helper.decodeToken(reponse.token);
+        const expirationDate = this.helper.getTokenExpirationDate(
+          reponse.token
+        );
+        console.log(decode, expirationDate);
+      }
+    });
+  }
 }

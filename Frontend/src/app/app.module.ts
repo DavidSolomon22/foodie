@@ -11,26 +11,37 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RegisterComponent } from './register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
 
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 @NgModule({
-   declarations: [
-      AppComponent,
-      HomePaageComponent,
-      RegisterComponent
-   ],
-   imports: [
-      BrowserModule,
-      BrowserAnimationsModule,
-      AppRoutingModule,
-      MatCardModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatIconModule,
-      MatButtonModule
-   ],
-   providers: [],
-   bootstrap: [
-      AppComponent
-   ]
+  declarations: [AppComponent, HomePaageComponent, RegisterComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['https://localhost:5001'],
+        blacklistedRoutes: [
+          'https://localhost:5001/api/authentication/register'
+        ]
+      }
+    })
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
