@@ -7,5 +7,6 @@ namespace Contracts
     {
         Task<bool> ValidateUser(UserForAuthenticationDto userForAuth);
         Task<string> CreateToken();
+        int? GetExpirationDate(string token);
     }
 }
