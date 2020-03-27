@@ -31,13 +31,16 @@ namespace RestApi
         {
             services.ConfigureCors();
             services.ConfigureSqlContext(Configuration);
+            services.ConfigureRepositoryManager();
             services.AddAutoMapper(typeof(Startup));
             services.AddAuthentication();
             services.ConfigureIdentity();
             services.ConfigureJwt(Configuration);
             services.AddScoped<IAuthenticationManager, AuthenticationManager>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +50,8 @@ namespace RestApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.ConfigureExceptionHandler();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
