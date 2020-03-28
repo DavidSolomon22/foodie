@@ -1,3 +1,35 @@
-<p>
-  user-profile works!
-</p>
+<div class="container">
+  <mat-card class="card">
+    <div class="panel">
+      <div class="photo">
+        <img src="../../assets/img/user.png" />
+      </div>
+      <!-- <div class="photoButton">
+    <button mat-raised-button color="#E75858">Edit photo</button>
+      </div>-->
+    </div>
+    <div class="container">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-sm-5 textCenter">
+            <mat-form-field class="field">
+              <mat-label>First Name</mat-label>
+
+              <input matInput formControlName="firstname" placeholder="" />
+            </mat-form-field>
+          </div>
+          <div class="col-sm-offset-1 col-sm-6 textRight ">
+            <mat-form-field class="field">
+              <mat-label>Last Name</mat-label>
+
+              <input matInput formControlName="surname" placeholder="" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="saveButton">
+          <button mat-raised-button color="#ecdcb0">SAVE</button>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+</div>

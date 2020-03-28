@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { RegisterService } from '../services/register.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  form: FormGroup;
+  constructor(
+    private fb: FormBuilder,
+    private registerService: RegisterService
+  ) {
+    this.form = this.fb.group({
+      firstname: ['', Validators.required],
+      surname: ['', Validators.required]
+    });
   }
 
+  ngOnInit() {}
+
+  onSubmit() {
+    let fo = this.form.value;
+    this.registerService.updateUser(fo);
+  }
 }
