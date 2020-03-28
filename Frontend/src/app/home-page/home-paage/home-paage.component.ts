@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RegisterService } from 'src/app/services/register.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -11,22 +11,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class HomePaageComponent implements OnInit {
   form: FormGroup;
   helper = new JwtHelperService();
-  constructor(
-    private elementRef: ElementRef,
-    private fb: FormBuilder,
-    private service: RegisterService
-  ) {
+  constructor(private fb: FormBuilder, private service: RegisterService) {
     this.form = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
-  }
-
-  ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =
-      '#ECDCB0';
   }
 
   ngOnInit() {}
@@ -40,6 +29,9 @@ export class HomePaageComponent implements OnInit {
       if (reponse.token !== undefined) {
         localStorage.setItem('access_token', reponse.token);
       }
+      this.service.users().subscribe(resp => {
+        console.log(resp);
+      });
     });
   }
 }

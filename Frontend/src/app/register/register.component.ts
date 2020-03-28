@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
 
@@ -11,7 +11,6 @@ export class RegisterComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   constructor(
-    private elementRef: ElementRef,
     private fb: FormBuilder,
     private registerService: RegisterService
   ) {
@@ -26,12 +25,6 @@ export class RegisterComponent implements OnInit {
         ])
       ]
     });
-  }
-  ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =
-      '#ECDCB0';
   }
 
   ngOnInit() {}

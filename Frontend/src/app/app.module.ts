@@ -1,3 +1,6 @@
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AddRecipieComponent } from './repicies/recipies-page/addRecipie/addRecipie.component';
+import { RecipiesPageComponent } from './repicies/recipies-page/recipies-page.component';
 import { HomePaageComponent } from './home-page/home-paage/home-paage.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -20,7 +23,13 @@ export function tokenGetter() {
   return localStorage.getItem('access_token');
 }
 @NgModule({
-  declarations: [AppComponent, HomePaageComponent, RegisterComponent],
+  declarations: [
+    AppComponent,
+    HomePaageComponent,
+    RegisterComponent,
+    RecipiesPageComponent,
+    UserProfileComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
