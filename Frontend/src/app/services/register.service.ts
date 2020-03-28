@@ -43,7 +43,8 @@ export class RegisterService {
     jsonarray.push(name);
     jsonarray.push(surname);
     console.log(jsonarray);
-    let uri = environment.baseUrl + `api/users/`;
-    this.http.patch(uri, jsonarray);
+    var user = localStorage.getItem('user_id');
+    let uri = environment.baseUrl + `api/users/` + user;
+    return this.http.patch(uri, jsonarray);
   }
 }

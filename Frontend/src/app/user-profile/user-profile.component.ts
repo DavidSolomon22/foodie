@@ -23,6 +23,8 @@ export class UserProfileComponent implements OnInit {
 
   onSubmit() {
     let fo = this.form.value;
-    this.registerService.updateUser(fo);
+    this.registerService.updateUser(fo).subscribe(resp => {
+      alert('Successfully changed');
+    });
   }
 }

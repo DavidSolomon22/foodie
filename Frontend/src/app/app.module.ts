@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './shared/authconfig.interceptor';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -41,6 +42,7 @@ export function tokenGetter() {
     MatButtonModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatToolbarModule,
     JwtModule
   ],
   providers: [

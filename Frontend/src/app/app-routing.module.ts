@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AddRecipieComponent } from './repicies/recipies-page/addRecipie/addRecipie.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AuthGuard } from './shared/guard';
 
 const routes: Routes = [
   {
@@ -30,7 +31,12 @@ const routes: Routes = [
   },
   {
     path: 'userProfile',
-    component: UserProfileComponent
+    component: UserProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    component: HomePaageComponent
   }
 ];
 
