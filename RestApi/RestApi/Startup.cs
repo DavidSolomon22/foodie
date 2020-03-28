@@ -36,6 +36,7 @@ namespace RestApi
             services.AddAuthentication();
             services.ConfigureIdentity();
             services.ConfigureJwt(Configuration);
+            services.ConfigurePhotoService();
             services.AddScoped<IAuthenticationManager, AuthenticationManager>();
 
             services.AddControllers().AddNewtonsoftJson(options =>
