@@ -33,6 +33,11 @@ namespace RestApi.Utility
 
         }
 
+         public void DeletePhoto(string recipePhotoPath)
+         {
+             File.Delete(recipePhotoPath);
+         }
+
         public async Task<MemoryStream> GetRecipePhoto(string recipePhotoPath)
         {
             var memory = new MemoryStream();

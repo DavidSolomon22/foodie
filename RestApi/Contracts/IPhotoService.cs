@@ -12,6 +12,7 @@ namespace Contracts
         string UploadFile(IFormFile fileFromRequest);
 
         Task<MemoryStream> GetRecipePhoto(string recipePhotoPath);
+         void DeletePhoto(string recipePhotoPath);
         string GetContentType(string path);
         Dictionary<string, string> GetMimeTypes();
     }

@@ -146,6 +146,10 @@ namespace RestApi.Controllers
                 return NotFound();
             }
 
+            var oldPhotoPath = recipeEntity.PhotoPath;
+
+            _photoService.DeletePhoto(oldPhotoPath);
+
             var photoPath = _photoService.UploadFile(file);
 
             _mapper.Map(recipe, recipeEntity);
@@ -165,6 +169,10 @@ namespace RestApi.Controllers
             {
                 return NotFound();
             }
+
+            var photoPath = recipe.PhotoPath;
+
+            _photoService.DeletePhoto(photoPath);
 
             _repository.Recipe.DeleteRecipe(recipe);
             await _repository.SaveAsync();
