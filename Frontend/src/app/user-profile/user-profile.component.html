@@ -1,8 +1,7 @@
 <mat-toolbar class="toolbar">
-  <span class="toolbar-actions">
-    <span class="toolbar-action"> Add recipe </span>
-    <span class="toolbar-user-action"> Username </span>
-  </span>
+  <button mat-button (click)="logOut()" class="turn">
+    <mat-icon>settings_power</mat-icon>
+  </button>
 </mat-toolbar>
 <div class="container">
   <mat-card class="card">
@@ -25,6 +24,7 @@
                 class="test"
                 formControlName="firstname"
                 placeholder=""
+              />
             </mat-form-field>
           </div>
         </div>
