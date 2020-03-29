@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Repository;
+using RestApi.Utility;
 
 namespace RestApi.Extensions
 {
@@ -70,5 +71,9 @@ namespace RestApi.Extensions
                 };
             });
         }
+
+        public static void ConfigurePhotoService(this IServiceCollection services) =>
+            services.AddScoped<IPhotoService, PhotoService>();
+
     }
 }
