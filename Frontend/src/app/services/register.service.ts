@@ -10,6 +10,7 @@ export class RegisterService {
   constructor(private http: HttpClient) {}
 
   register(form: any) {
+    console.log(form);
     let uri = environment.baseUrl + `api/authentication/register`;
     return this.http.post(uri, form);
   }

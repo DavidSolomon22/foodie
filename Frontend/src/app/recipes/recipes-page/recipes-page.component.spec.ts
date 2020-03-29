@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { AddRecipieComponent } from './addRecipie.component';
+import { RecipesPageComponent } from './recipes-page.component';
 
-describe('AddRecipieComponent', () => {
-  let component: AddRecipieComponent;
-  let fixture: ComponentFixture<AddRecipieComponent>;
+describe('RecipesPageComponent', () => {
+  let component: RecipesPageComponent;
+  let fixture: ComponentFixture<RecipesPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddRecipieComponent ]
+      declarations: [ RecipesPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddRecipieComponent);
+    fixture = TestBed.createComponent(RecipesPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

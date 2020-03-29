@@ -1,6 +1,6 @@
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { AddRecipieComponent } from './repicies/recipies-page/addRecipie/addRecipie.component';
-import { RecipiesPageComponent } from './repicies/recipies-page/recipies-page.component';
+import { AddRecipeComponent } from './recipes/Recipes-page/addRecipe/addRecipe.component';
+import { RecipesPageComponent } from './recipes/Recipes-page/recipes-page.component';
 import { HomePaageComponent } from './home-page/home-paage/home-paage.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -13,6 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatSelectModule } from '@angular/material/select'; 
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -27,8 +29,9 @@ export function tokenGetter() {
     AppComponent,
     HomePaageComponent,
     RegisterComponent,
-    RecipiesPageComponent,
-    UserProfileComponent
+    RecipesPageComponent,
+    UserProfileComponent,
+    AddRecipeComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,8 @@ export function tokenGetter() {
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatToolbarModule,
+    MatSelectModule,
     ReactiveFormsModule,
     HttpClientModule,
     JwtModule
