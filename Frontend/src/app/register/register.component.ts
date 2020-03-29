@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,8 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   constructor(
     private fb: FormBuilder,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private snack: MatSnackBar
   ) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -40,9 +42,23 @@ export class RegisterComponent implements OnInit {
       console.log('form invalid');
     } else {
       console.log(val);
-      this.registerService.register(val).subscribe(resp => {
-        alert('Confirmation email has been sent');
-      });
+      this.registerService.register(val).subscribe(
+        resp => {
+          this.snack.open('Confirmation email has been sent', '', {
+            duration: 4000,
+            panelClass: ['snackbar'],
+            verticalPosition: 'top'
+          });
+        },
+        (error: any) => {
+          console.log(error.error);
+          this.snack.open('Email is already taken', '', {
+            duration: 4000,
+            panelClass: ['snackbar-wrong'],
+            verticalPosition: 'top'
+          });
+        }
+      );
     }
     // if (val.email && val.password) {
     //   console.log(val);

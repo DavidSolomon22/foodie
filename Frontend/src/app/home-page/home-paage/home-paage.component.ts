@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RegisterService } from 'src/app/services/register.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home-paage',
@@ -15,7 +16,8 @@ export class HomePaageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: RegisterService,
-    private router: Router
+    private router: Router,
+    private snack: MatSnackBar
   ) {
     this.form = this.fb.group({
       email: ['', Validators.required],
@@ -30,15 +32,22 @@ export class HomePaageComponent implements OnInit {
 
     const val = this.form.value;
     console.log(val);
-    this.service.login(val).subscribe((reponse: any) => {
-      if (reponse.token !== undefined) {
-        localStorage.setItem('access_token', reponse.token);
-        localStorage.setItem('user_id', reponse.userId);
-        this.router.navigateByUrl('userProfile');
+    this.service.login(val).subscribe(
+      (reponse: any) => {
+        if (reponse.token !== undefined) {
+          localStorage.setItem('access_token', reponse.token);
+          localStorage.setItem('user_id', reponse.userId);
+          this.router.navigateByUrl('userProfile');
+        }
+      },
+      (error: any) => {
+        console.log(error.error);
+        this.snack.open('Account is not confirmed ', '', {
+          duration: 4000,
+          panelClass: ['snackbar-wrong'],
+          verticalPosition: 'top'
+        });
       }
-      this.service.users().subscribe(resp => {
-        console.log(resp);
-      });
-    });
+    );
   }
 }

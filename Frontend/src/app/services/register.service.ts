@@ -28,6 +28,9 @@ export class RegisterService {
     let token = localStorage.getItem('access_token');
     return token !== null ? true : false;
   }
+  logOut() {
+    localStorage.clear();
+  }
   updateUser(fo: any) {
     var jsonarray = [];
     var name = {

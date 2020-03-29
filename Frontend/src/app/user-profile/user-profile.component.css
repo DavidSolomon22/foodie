@@ -25,6 +25,7 @@
   text-align: center;
 }
 .textRight {
+  justify-content: end;
   text-align: right;
 }
 .photoButton {
@@ -46,6 +47,7 @@
 }
 .row {
   height: 3%;
+  justify-content: center;
 }
 .saveButton {
   margin-top: 10%;
@@ -59,34 +61,18 @@
 }
 .toolbar {
   width: 100%;
-  height: 80px;
+  height: 100px;
   background-color: inherit;
-  position: relative;
 }
-
-.toolbar-actions {
-  position: absolute;
-  right: 0;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  height: 100%;
+.turn {
+  margin-left: 95%;
 }
-
-.toolbar-action {
-  color: #ffffff;
-  margin: 0 16px;
-  font-weight: 600;
-  cursor: pointer;
+.mat-icon {
+  font-size: 25px;
 }
-
-.toolbar-user-action {
-  background-color: #ffffff;
-  padding: 6px 12px;
-  margin: 0 16px;
-  color: #ecdcb0;
-  border-radius: 24px;
-  font-weight: 700;
-  cursor: pointer;
-  font-size: 18px;
+.field {
+  width: 100%;
+}
+.textRight {
+  margin-top: 3%;
 }

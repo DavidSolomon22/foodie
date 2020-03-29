@@ -17,17 +17,21 @@
     <div class="container">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="row">
-          <div class="col-sm-5 textCenter">
+          <div class="col-sm-offset-3 col-sm-6 textCenter">
             <mat-form-field class="field">
               <mat-label>First Name</mat-label>
-
-              <input matInput formControlName="firstname" placeholder="" />
+              <input
+                matInput
+                class="test"
+                formControlName="firstname"
+                placeholder=""
             </mat-form-field>
           </div>
-          <div class="col-sm-offset-1 col-sm-6 textRight ">
+        </div>
+        <div class="row">
+          <div class="col-sm-offset-3 col-sm-6 textright">
             <mat-form-field class="field">
               <mat-label>Last Name</mat-label>
-
               <input matInput formControlName="surname" placeholder="" />
             </mat-form-field>
           </div>

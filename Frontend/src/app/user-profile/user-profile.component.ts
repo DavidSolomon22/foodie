@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,7 +13,9 @@ export class UserProfileComponent implements OnInit {
   form: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private registerService: RegisterService
+    private router: Router,
+    private registerService: RegisterService,
+    private snack: MatSnackBar
   ) {
     this.form = this.fb.group({
       firstname: ['', Validators.required],
@@ -24,7 +28,16 @@ export class UserProfileComponent implements OnInit {
   onSubmit() {
     let fo = this.form.value;
     this.registerService.updateUser(fo).subscribe(resp => {
-      alert('Successfully changed');
+      this.snack.open('Successfully changed', '', {
+        duration: 2000,
+        panelClass: ['snackbar'],
+        verticalPosition: 'top'
+      });
     });
+  }
+
+  logOut() {
+    this.registerService.logOut();
+    this.router.navigateByUrl('home');
   }
 }
