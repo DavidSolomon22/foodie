@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using RestApi.Extensions;
 using RestApi.Utility;
 
@@ -36,6 +29,8 @@ namespace RestApi
             services.AddAuthentication();
             services.ConfigureIdentity();
             services.ConfigureJwt(Configuration);
+            services.ConfigurePhotoService();
+            services.ConfigureEmailSerivce(Configuration);
             services.AddScoped<IAuthenticationManager, AuthenticationManager>();
 
             services.AddControllers().AddNewtonsoftJson(options =>

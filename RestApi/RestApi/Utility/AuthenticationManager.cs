@@ -92,5 +92,12 @@ namespace RestApi.Utility
 
             return tokenOptions;
         }
+
+        public async Task<bool> IsEmailConfirmed(string email)
+        {
+            var entityUser = await _userManager.FindByEmailAsync(email);
+
+            return await _userManager.IsEmailConfirmedAsync(entityUser);
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -7,8 +8,10 @@ using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestApi.ModelBinders;
+using RestApi.Utility;
 
 namespace RestApi.Controllers
 {
@@ -20,16 +23,21 @@ namespace RestApi.Controllers
         private readonly IRepositoryManager _repository;
         private readonly IMapper _mapper;
 
-        public RecipesController(IRepositoryManager repository, IMapper mapper)
+        private readonly IPhotoService _photoService;
+
+        public RecipesController(IRepositoryManager repository, IMapper mapper, IPhotoService photoService)
         {
             _repository = repository;
             _mapper = mapper;
+            _photoService = photoService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateRecipe([FromBody]RecipeForCreationDto recipe)
+
+        [HttpPost, DisableRequestSizeLimit]
+        public async Task<IActionResult> CreateRecipe([ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "recipe")][FromForm] RecipeForCreationDto recipe, [FromForm] IFormFile file)
         {
-            if(recipe == null)
+
+            if (recipe == null)
             {
                 return BadRequest("RecipeForCreationDto object is null");
             }
@@ -39,7 +47,11 @@ namespace RestApi.Controllers
                 return UnprocessableEntity(ModelState);
             }
 
+            var photoPath = _photoService.UploadFile(file);
+
             var recipeEntity = _mapper.Map<Recipe>(recipe);
+
+            recipeEntity.PhotoPath = photoPath;
 
             _repository.Recipe.CreateRecipe(recipeEntity);
             await _repository.SaveAsync();
@@ -52,7 +64,7 @@ namespace RestApi.Controllers
         [HttpPost("collection")]
         public async Task<IActionResult> CreateRecipeCollection([FromBody] IEnumerable<RecipeForCreationDto> recipeCollection)
         {
-            if(recipeCollection == null)
+            if (recipeCollection == null)
             {
                 return BadRequest("Recipe collection is null");
             }
@@ -98,14 +110,14 @@ namespace RestApi.Controllers
         [HttpGet("collection/({ids})", Name = "RecipeCollection")]
         public async Task<IActionResult> GetRecipeCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))]IEnumerable<Guid> ids)
         {
-            if(ids == null)
+            if (ids == null)
             {
                 return BadRequest("Parameter ids is null");
             }
 
             var recipeEntities = await _repository.Recipe.GetRecipesByIdsAsync(ids, trackChanges: false);
 
-            if(ids.Count() != recipeEntities.Count())
+            if (ids.Count() != recipeEntities.Count())
             {
                 return NotFound();
             }
@@ -114,26 +126,36 @@ namespace RestApi.Controllers
             return Ok(recipesToReturn);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateRecipe(Guid id, [FromBody] RecipeForUpdateDto recipe)
+        [HttpPut, DisableRequestSizeLimit]
+        public async Task<IActionResult> UpdateRecipe([FromForm]Guid id, [ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "recipe")][FromForm] RecipeForCreationDto recipe, [FromForm] IFormFile file)
         {
-            if(recipe == null)
+            if (recipe == null)
             {
                 return BadRequest("RecipeForUpdateDto object is null");
             }
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return UnprocessableEntity(ModelState);
             }
 
             var recipeEntity = await _repository.Recipe.GetRecipeAsync(id, trackChanges: true);
-            if(recipeEntity == null)
+
+            if (recipeEntity == null)
             {
                 return NotFound();
             }
 
+            var oldPhotoPath = recipeEntity.PhotoPath;
+
+            _photoService.DeletePhoto(oldPhotoPath);
+
+            var photoPath = _photoService.UploadFile(file);
+
             _mapper.Map(recipe, recipeEntity);
+
+            recipeEntity.PhotoPath = photoPath;
+            
             await _repository.SaveAsync();
 
             return NoContent();
@@ -143,15 +165,37 @@ namespace RestApi.Controllers
         public async Task<IActionResult> DeleteRecipe(Guid id)
         {
             var recipe = await _repository.Recipe.GetRecipeAsync(id, trackChanges: false);
-            if(recipe == null)
+            if (recipe == null)
             {
                 return NotFound();
             }
+
+            var photoPath = recipe.PhotoPath;
+
+            _photoService.DeletePhoto(photoPath);
 
             _repository.Recipe.DeleteRecipe(recipe);
             await _repository.SaveAsync();
 
             return NoContent();
+        }
+
+        [HttpGet("photo/{id}")]
+        public async Task<IActionResult> GetRecipePhoto(Guid Id)
+        {
+
+            var recipe = await _repository.Recipe.GetRecipeAsync(Id,trackChanges: false);
+
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+
+            var recipePhotoPath = recipe.PhotoPath;
+
+            var recipePhoto = await _photoService.GetRecipePhoto(recipePhotoPath);
+
+            return File(recipePhoto, _photoService.GetContentType(recipePhotoPath), Path.GetFileName(recipePhotoPath));
         }
     }
 }
