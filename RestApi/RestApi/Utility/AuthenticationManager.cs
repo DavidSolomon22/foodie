@@ -42,6 +42,17 @@ namespace RestApi.Utility
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
 
+        public async Task<string> GetUserId(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            return user.Id;
+        }
+
+        public int? GetExpirationDate(string token)
+        {
+            return new JwtSecurityTokenHandler().ReadJwtToken(token).Payload.Exp;
+        }
+
         private SigningCredentials GetSigningCredentials()
         {
             var key = Encoding.UTF8.GetBytes(_configuration.GetSection("Secret:Key").Value);

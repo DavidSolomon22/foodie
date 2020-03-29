@@ -72,13 +72,16 @@ namespace RestApi.Controllers
             {
                 return Unauthorized();
             }
+            var token = await _authManager.CreateToken();
+            var userId = await _authManager.GetUserId(user.Email);
+            var expirationDate = _authManager.GetExpirationDate(token);
             
             if(!await _authManager.IsEmailConfirmed(user.Email))
             {
                 return Unauthorized();
             }
 
-            return Ok(new { Token = await _authManager.CreateToken() });
+            return Ok(new { token, userId, expirationDate });
         }
     }
 }
