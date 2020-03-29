@@ -32,6 +32,7 @@ namespace RestApi.Controllers
             var user = _mapper.Map<User>(userForRegistration);
 
             var result = await _userManager.CreateAsync(user, userForRegistration.Password);
+
             if (!result.Succeeded)
             {
                 foreach (var error in result.Errors)
@@ -41,10 +42,12 @@ namespace RestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication", new { token, email = user.Email }, Request.Scheme);
+            var confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+            var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication", new { confirmationToken, email = user.Email }, Request.Scheme);
 
             var message = new Message(new string[] { user.Email }, "Account confirmation email link", confirmationLink);
+
             await _emailSender.SendEmailAsync(message);
 
             await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
@@ -58,11 +61,13 @@ namespace RestApi.Controllers
             var user = await _userManager.FindByEmailAsync(email);
 
             if (user == null)
+            {
                 return BadRequest("User with such e-mail doesn't exist.");
+            }
 
             var result = await _userManager.ConfirmEmailAsync(user, token);
 
-            return Ok("Email has been succesfully confirmed.");
+            return Redirect("http://localhost:4200/home");
         }
 
         [HttpPost("login")]
@@ -72,8 +77,11 @@ namespace RestApi.Controllers
             {
                 return Unauthorized();
             }
+
             var token = await _authManager.CreateToken();
+
             var userId = await _authManager.GetUserId(user.Email);
+
             var expirationDate = _authManager.GetExpirationDate(token);
             
             if(!await _authManager.IsEmailConfirmed(user.Email))
