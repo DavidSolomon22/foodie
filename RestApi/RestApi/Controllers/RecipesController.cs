@@ -17,7 +17,7 @@ namespace RestApi.Controllers
 {
     [Route("api/recipes")]
     [ApiController]
-    [Authorize]
+    
     public class RecipesController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
@@ -33,7 +33,7 @@ namespace RestApi.Controllers
         }
 
 
-        [HttpPost, DisableRequestSizeLimit]
+        [HttpPost, DisableRequestSizeLimit, Authorize]
         public async Task<IActionResult> CreateRecipe([ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "recipe")][FromForm] RecipeForCreationDto recipe, [FromForm] IFormFile file)
         {
 
@@ -61,7 +61,7 @@ namespace RestApi.Controllers
             return CreatedAtRoute("RecipeById", new { id = recipeToReturn.Id }, recipeToReturn);
         }
 
-        [HttpPost("collection")]
+        [HttpPost("collection"), Authorize]
         public async Task<IActionResult> CreateRecipeCollection([FromBody] IEnumerable<RecipeForCreationDto> recipeCollection)
         {
             if (recipeCollection == null)
@@ -82,7 +82,7 @@ namespace RestApi.Controllers
             return CreatedAtRoute("RecipeCollection", new { ids }, recipeCollectionToReturn);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<IActionResult> GetRecipes()
         {
             var recipes = await _repository.Recipe.GetAllRecipesAsync(trackChanges: false);
@@ -92,7 +92,7 @@ namespace RestApi.Controllers
             return Ok(recipesDto);
         }
 
-        [HttpGet("{id}", Name = "RecipeById")]
+        [HttpGet("{id}", Name = "RecipeById"), Authorize]
         public async Task<IActionResult> GetRecipe(Guid id)
         {
             var recipe = await _repository.Recipe.GetRecipeAsync(id, trackChanges: false);
@@ -107,7 +107,7 @@ namespace RestApi.Controllers
             }
         }
 
-        [HttpGet("collection/({ids})", Name = "RecipeCollection")]
+        [HttpGet("collection/({ids})", Name = "RecipeCollection"), Authorize]
         public async Task<IActionResult> GetRecipeCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))]IEnumerable<Guid> ids)
         {
             if (ids == null)
@@ -126,7 +126,7 @@ namespace RestApi.Controllers
             return Ok(recipesToReturn);
         }
 
-        [HttpPut, DisableRequestSizeLimit]
+        [HttpPut, DisableRequestSizeLimit, Authorize]
         public async Task<IActionResult> UpdateRecipe([FromForm]Guid id, [ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "recipe")][FromForm] RecipeForCreationDto recipe, [FromForm] IFormFile file)
         {
             if (recipe == null)
@@ -161,7 +161,7 @@ namespace RestApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<IActionResult> DeleteRecipe(Guid id)
         {
             var recipe = await _repository.Recipe.GetRecipeAsync(id, trackChanges: false);

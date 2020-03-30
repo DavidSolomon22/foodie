@@ -22,6 +22,7 @@ namespace RestApi.Utility
             }
 
             var fileName = Path.GetRandomFileName() + '.' + fileExtension;
+
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), Path.Combine("Resources", "Images", fileName));
 
             using (var stream = new FileStream(pathToSave, FileMode.Create))
@@ -40,20 +41,24 @@ namespace RestApi.Utility
 
         public async Task<MemoryStream> GetRecipePhoto(string recipePhotoPath)
         {
-            var memory = new MemoryStream();
+            var photoStream = new MemoryStream();
+
             using (var stream = new FileStream(recipePhotoPath, FileMode.Open))
             {
-                await stream.CopyToAsync(memory);
+                await stream.CopyToAsync(photoStream);
             }
-            memory.Position = 0;
 
-            return memory;
+            photoStream.Position = 0;
+
+            return photoStream;
         }
         public string GetContentType(string path)
         {
-            var types = GetMimeTypes();
-            var ext = Path.GetExtension(path).ToLowerInvariant();
-            return types[ext];
+            var contenTypes = GetMimeTypes();
+
+            var extension = Path.GetExtension(path).ToLowerInvariant();
+
+            return contenTypes[extension];
         }
 
         public  Dictionary<string, string> GetMimeTypes()
