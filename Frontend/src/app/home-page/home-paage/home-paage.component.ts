@@ -37,7 +37,7 @@ export class HomePaageComponent implements OnInit {
         if (reponse.token !== undefined) {
           localStorage.setItem('access_token', reponse.token);
           localStorage.setItem('user_id', reponse.userId);
-          this.router.navigateByUrl('userProfile');
+          this.router.navigateByUrl('recipes');
         }
       },
       (error: any) => {

@@ -23,11 +23,13 @@ const routes: Routes = [
   },
   {
     path: 'recipes',
-    component: RecipesPageComponent
+    component: RecipesPageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'addRecipe',
-    component: RecipeAddComponent
+    component: RecipeAddComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'userProfile',
