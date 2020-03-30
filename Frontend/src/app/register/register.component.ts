@@ -60,12 +60,5 @@ export class RegisterComponent implements OnInit {
         }
       );
     }
-    // if (val.email && val.password) {
-    //   console.log(val);
-    //   this.registerService.register(val).subscribe(resp => {
-    //     console.log(resp);
-    //   });
-    // }
-    console.log('brak mailu');
   }
 }
