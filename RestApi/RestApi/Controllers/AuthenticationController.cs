@@ -75,7 +75,7 @@ namespace RestApi.Controllers
         {
             if (!await _authManager.ValidateUser(user))
             {
-                return Unauthorized();
+                return Unauthorized(new { error = "Wrong email or password" });
             }
 
             var token = await _authManager.CreateToken();
@@ -86,7 +86,7 @@ namespace RestApi.Controllers
             
             if(!await _authManager.IsEmailConfirmed(user.Email))
             {
-                return Unauthorized();
+                return Unauthorized(new { error = "Email not confirmed." });
             }
 
             return Ok(new { token, userId, expirationDate });
