@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Entities\Entities.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.2"/>
   </ItemGroup>
 
 </Project>

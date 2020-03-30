@@ -1,5 +1,5 @@
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { AddRecipeComponent } from './recipes/Recipes-page/addRecipe/addRecipe.component';
+import { RecipeAddComponent } from './recipes/recipe-add/recipe-add.component';
 import { RecipesPageComponent } from './recipes/Recipes-page/recipes-page.component';
 import { HomePaageComponent } from './home-page/home-paage/home-paage.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './shared/authconfig.interceptor';
+import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -31,7 +32,8 @@ export function tokenGetter() {
     RegisterComponent,
     RecipesPageComponent,
     UserProfileComponent,
-    AddRecipeComponent
+    RecipeAddComponent,
+    RecipeCardComponent
   ],
   imports: [
     BrowserModule,

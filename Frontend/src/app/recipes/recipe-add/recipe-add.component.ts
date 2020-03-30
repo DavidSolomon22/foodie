@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, Form } from '@angular/forms';
-import { AddRecipeService } from 'src/app/services/addRecipeService/addRecipe.service';
+import { RecipesService } from 'src/app/services/recipesService/recipes.service';
 import { RegisterService } from 'src/app/services/register.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -20,11 +20,11 @@ interface Step {
 }
 
 @Component({
-  selector: 'app-addRecipe',
-  templateUrl: './addRecipe.component.html',
-  styleUrls: ['./addRecipe.component.css']
+  selector: 'app-recipe-add',
+  templateUrl: './recipe-add.component.html',
+  styleUrls: ['./recipe-add.component.css']
 })
-export class AddRecipeComponent implements OnInit {
+export class RecipeAddComponent implements OnInit {
   // Complexity levels
   complexityLevels: ComplexityLevel[] = [{
       value: 1,
@@ -46,7 +46,7 @@ export class AddRecipeComponent implements OnInit {
   form: FormGroup;
   helper = new JwtHelperService();
 
-  constructor(private fb: FormBuilder, private addRecipeService: AddRecipeService, private userService: RegisterService) {
+  constructor(private fb: FormBuilder, private recipeService: RecipesService, private userService: RegisterService) {
     this.form = this.fb.group({
       name: [''],
       cuisine: [''],
@@ -136,6 +136,7 @@ export class AddRecipeComponent implements OnInit {
           alert("You need to add at least one step!");
         } else {
           const userId = '17eec2a3-5f5a-48b1-b0c1-98bb4a0d4a6f';
+          console.log(this.userService.getToken());
 
           const formData = new FormData();
 
@@ -153,7 +154,7 @@ export class AddRecipeComponent implements OnInit {
           formData.append('recipe', JSON.stringify(recipeDataForm));
           formData.append('file', this.file);
 
-          this.addRecipeService.addRecipe(formData).subscribe((response: any) => {
+          this.recipeService.addRecipe(formData).subscribe((response: any) => {
             console.log(response);
           });
         }

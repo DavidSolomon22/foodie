@@ -3,7 +3,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomePaageComponent } from './home-page/home-paage/home-paage.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { AddRecipeComponent } from './recipes/Recipes-page/addRecipe/addRecipe.component';
+import { RecipeAddComponent } from './recipes/recipe-add/recipe-add.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'addRecipe',
-    component: AddRecipeComponent
+    component: RecipeAddComponent
   },
   {
     path: 'userProfile',

@@ -7,8 +7,12 @@
 <header class="recipes-header">
     <mat-toolbar class="toolbar">   
         <span class="toolbar-actions">
-            <span class="toolbar-action"> Add recipe </span>
-            <span class="toolbar-user-action"> Username </span>
+			<span class="toolbar-action"> 
+				<a [routerLink]="['/addRecipe']"> Add recipe </a>
+			</span>
+			<span class="toolbar-user-action"> 
+				<a [routerLink]="['/userProfile']"> Username </a>
+			</span>
         </span>
     </mat-toolbar>
     <div class="container">
@@ -27,6 +31,9 @@
 </header>
 <main class="recipes-main">
     <div class="container">
-
+        <h2 class="recipes-main-title">🥐  Check some of our most popular recipes!</h2>
+        <div class="recipes-main-cards-container">
+            <app-recipe-card *ngFor="let recipe of recipes;" class="recipe-card-component" [recipe]="recipe"></app-recipe-card>
+        </div>
     </div>
 </main>

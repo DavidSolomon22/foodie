@@ -28,6 +28,7 @@ export class HomePaageComponent implements OnInit {
     this.service.login(val).subscribe((reponse: any) => {
       if (reponse.token !== undefined) {
         localStorage.setItem('access_token', reponse.token);
+        console.log(localStorage);
       }
       this.service.users().subscribe(resp => {
         console.log(resp);
