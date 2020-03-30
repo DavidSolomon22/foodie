@@ -1,0 +1,74 @@
+<div class="main">
+  <div class="text">
+    <div class="title">
+      Join Us
+      <h2 class="second">Today</h2>
+    </div>
+  </div>
+  <mat-card class="card">
+    <mat-card-header>
+      <div class="rogal">
+        <img class="image" src="../../../assets/img/Union 2.png" />
+      </div>
+    </mat-card-header>
+    <div class="matTitle">FOODIE</div>
+    <div class="login">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field class="field">
+          <mat-icon matPrefix> local_post_office</mat-icon>
+          <mat-label>Email</mat-label>
+
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            placeholder=""
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+          />
+        </mat-form-field>
+        <div *ngIf="submitted && f.email.errors" class="invalid">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">
+            Email must be a valid email address
+          </div>
+        </div>
+
+        <mat-form-field class="password">
+          <mat-icon matPrefix>lock</mat-icon>
+          <mat-label>Password</mat-label>
+
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            placeholder=""
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+          />
+        </mat-form-field>
+        <div *ngIf="submitted && f.password.errors" class="invalid">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors.minlength">
+            Password must be at least 8 characters
+          </div>
+          <div *ngIf="f.password.errors.pattern">
+            Password have at least one digit
+          </div>
+        </div>
+
+        <div class="button">
+          <button mat-raised-button color="#ecdcb0">
+            Register
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="register">
+      <a
+        routerLink="/home"
+        routerLinkActive="colorFont"
+        routerLinkActiveOptions="{exact:true}"
+        >Already has an account? Sign in!</a
+      >
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,45 @@
+<mat-toolbar class="toolbar">
+  <button mat-button (click)="logOut()" class="turn">
+    <mat-icon>settings_power</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="container">
+  <mat-card class="card">
+    <div class="panel">
+      <div class="photo">
+        <img src="../../assets/img/user.png" />
+      </div>
+      <!-- <div class="photoButton">
+    <button mat-raised-button color="#E75858">Edit photo</button>
+      </div>-->
+    </div>
+    <div class="container">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-sm-offset-3 col-sm-6 textCenter">
+            <mat-form-field class="field">
+              <mat-label>First Name</mat-label>
+              <input
+                matInput
+                class="test"
+                formControlName="firstname"
+                placeholder=""
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-offset-3 col-sm-6 textright">
+            <mat-form-field class="field">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="surname" placeholder="" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="saveButton">
+          <button mat-raised-button color="#ecdcb0">SAVE</button>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+</div>
