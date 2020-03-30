@@ -17,7 +17,6 @@ namespace RestApi.Controllers
 {
     [Route("api/recipes")]
     [ApiController]
-    
     public class RecipesController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
