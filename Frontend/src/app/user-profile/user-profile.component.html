@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="saveButton">
-          <button mat-raised-button color="#ecdcb0">SAVE</button>
+          <button [disabled]="!form.valid" mat-raised-button color="#ecdcb0">SAVE</button>
         </div>
       </form>
     </div>
