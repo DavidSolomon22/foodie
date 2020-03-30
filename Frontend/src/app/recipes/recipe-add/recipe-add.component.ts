@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray, Form } from '@angular/fo
 import { RecipesService } from 'src/app/services/recipesService/recipes.service';
 import { RegisterService } from 'src/app/services/register.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 interface ComplexityLevel {
   value: number;
@@ -46,7 +47,7 @@ export class RecipeAddComponent implements OnInit {
   form: FormGroup;
   helper = new JwtHelperService();
 
-  constructor(private fb: FormBuilder, private recipeService: RecipesService, private userService: RegisterService) {
+  constructor(private fb: FormBuilder, private recipeService: RecipesService, private userService: RegisterService, private router: Router) {
     this.form = this.fb.group({
       name: [''],
       cuisine: [''],
@@ -154,7 +155,7 @@ export class RecipeAddComponent implements OnInit {
           formData.append('file', this.file);
 
           this.recipeService.addRecipe(formData).subscribe((response: any) => {
-            console.log(response);
+            this.router.navigateByUrl('recipes');
           });
         }
       }
