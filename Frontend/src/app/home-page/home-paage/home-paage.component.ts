@@ -41,6 +41,7 @@ export class HomePaageComponent implements OnInit {
         }
       },
       (error: any) => {
+        console.log(error);
         console.log(error.error);
         this.snack.open('Account is not confirmed ', '', {
           duration: 4000,
