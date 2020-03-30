@@ -23,11 +23,20 @@ namespace EmailService
     private MimeMessage CreateEmailMessage(Message message)
 {
     var emailMessage = new MimeMessage();
+
     emailMessage.From.Add(new MailboxAddress(_emailConfig.From));
+
     emailMessage.To.AddRange(message.To);
+
     emailMessage.Subject = message.Subject;
-    emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = message.Content };
- 
+
+    emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html) 
+    { Text = string.Format("<h2 style=\"color:black\" >Hi there!</h2><p style=\"font-size:15px;color:black\">"+
+    "Thank you for your registration.</p><p style=\"font-size:15px; color:black\">To confirm your e-mail click the button below:</p>"
+    +"<a href=\"{0}\" style=\"background-color:#EB7035;border:1px solid #EB7035;border-radius:3px;color:#ffffff;display:inline-block;"+
+    "font-family:sans-serif;font-size:16px;line-height:44px;text-align:center;text-decoration:none;width:150px;-webkit-text-size-adjust:none;mso-hide:all;\">Confirm</a>",
+                           message.Content) };
+    
     return emailMessage;
 }
  
@@ -38,14 +47,15 @@ private void Send(MimeMessage mailMessage)
         try
         {
             client.Connect(_emailConfig.SmtpServer, _emailConfig.Port, true);
+
             client.AuthenticationMechanisms.Remove("XOAUTH2");
+
             client.Authenticate(_emailConfig.UserName, _emailConfig.Password);
  
             client.Send(mailMessage);
         }
         catch
         {
-            //log an error message or throw an exception or both.
             throw;
         }
         finally
@@ -69,14 +79,15 @@ private async Task SendAsync(MimeMessage mailMessage)
         try
         {
             await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, true);
+
             client.AuthenticationMechanisms.Remove("XOAUTH2");
+
             await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
  
             await client.SendAsync(mailMessage);
         }
         catch
         {
-            //log an error message or throw an exception, or both.
             throw;
         }
         finally
