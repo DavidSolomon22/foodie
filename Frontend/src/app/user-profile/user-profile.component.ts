@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserProfileComponent implements OnInit {
   form: FormGroup;
+  userData;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -23,7 +24,15 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.registerService.getUser().subscribe(resp => {
+      this.userData = resp;
+      this.form.patchValue({
+        firstname: this.userData.firstName,
+        surname: this.userData.surname
+      });
+    });
+  }
 
   onSubmit() {
     let fo = this.form.value;
