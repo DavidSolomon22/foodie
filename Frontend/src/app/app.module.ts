@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select'; 
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -48,6 +49,8 @@ export function tokenGetter() {
     MatSelectModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatToolbarModule,
+    MatSnackBarModule,
     JwtModule
   ],
   providers: [

@@ -29,4 +29,26 @@ export class RegisterService {
     let token = localStorage.getItem('access_token');
     return token !== null ? true : false;
   }
+  logOut() {
+    localStorage.clear();
+  }
+  updateUser(fo: any) {
+    var jsonarray = [];
+    var name = {
+      op: 'replace',
+      path: '/firstname',
+      value: fo.firstname
+    };
+    var surname = {
+      op: 'replace',
+      path: '/surname',
+      value: fo.surname
+    };
+    jsonarray.push(name);
+    jsonarray.push(surname);
+    console.log(jsonarray);
+    var user = localStorage.getItem('user_id');
+    let uri = environment.baseUrl + `api/users/` + user;
+    return this.http.patch(uri, jsonarray);
+  }
 }

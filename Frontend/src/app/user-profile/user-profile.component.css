@@ -1,0 +1,78 @@
+.card {
+  position: absolute;
+  width: 765px;
+  height: 728px;
+  left: 447px;
+  top: 163px;
+
+  background: #ffffff;
+  border-radius: 17px;
+}
+.photo {
+  position: absolute;
+  left: 37.96%;
+  right: 38.51%;
+  top: 5.32%;
+  bottom: 69.67%;
+  border: 8px solid #ecdcb0;
+  box-sizing: border-box;
+  border-radius: 557px;
+}
+.panel {
+  height: 50%;
+}
+.textCenter {
+  text-align: center;
+}
+.textRight {
+  justify-content: end;
+  text-align: right;
+}
+.photoButton {
+  background-color: #e75858;
+  color: white;
+  position: absolute;
+  width: 20%;
+  height: 30px;
+  left: 39.96%;
+  top: 35%;
+  border-radius: 18px;
+  text-align: center;
+  vertical-align: middle;
+}
+.field {
+  font-family: 'Montserrat';
+  font-weight: bolder;
+  text-align: center;
+}
+.row {
+  height: 3%;
+  justify-content: center;
+}
+.saveButton {
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+}
+.mat-raised-button {
+  width: 20%;
+  background-color: #ecdcb0;
+  border-radius: 27px;
+}
+.toolbar {
+  width: 100%;
+  height: 100px;
+  background-color: inherit;
+}
+.turn {
+  margin-left: 95%;
+}
+.mat-icon {
+  font-size: 25px;
+}
+.field {
+  width: 100%;
+}
+.textRight {
+  margin-top: 3%;
+}
