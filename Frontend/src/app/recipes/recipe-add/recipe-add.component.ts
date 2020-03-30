@@ -4,6 +4,7 @@ import { RecipesService } from 'src/app/services/recipesService/recipes.service'
 import { RegisterService } from 'src/app/services/register.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface ComplexityLevel {
   value: number;
@@ -47,7 +48,8 @@ export class RecipeAddComponent implements OnInit {
   form: FormGroup;
   helper = new JwtHelperService();
 
-  constructor(private fb: FormBuilder, private recipeService: RecipesService, private userService: RegisterService, private router: Router) {
+
+  constructor(private fb: FormBuilder, private recipeService: RecipesService, private userService: RegisterService, private router: Router, private snack: MatSnackBar) {
     this.form = this.fb.group({
       name: [''],
       cuisine: [''],
@@ -69,12 +71,28 @@ export class RecipeAddComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       this.file = event.target.files[0];
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      if(this.checkFileType(this.file.type)){
+        reader.readAsDataURL(event.target.files[0]); // read file as data url
 
-      reader.onload = (event) => { // called once readAsDataURL is completed
-        self.url = event.target.result.toString();
+        reader.onload = (event) => { // called once readAsDataURL is completed
+          self.url = event.target.result.toString();
+        }
+      }else{
+        this.snack.open("File extension is wrong. Only .png or .jpg images.", '',{
+          duration: 4000,
+          panelClass: ['snackbar-wrong'],
+          verticalPosition: 'top'
+        });
       }
     }
+  }
+
+  private checkFileType(fileType:string) : boolean{
+    const fileTypeCutted = fileType.split('/');
+    if(fileTypeCutted[1] === ('png') || fileTypeCutted[1] === ('jpeg')){
+      return true;
+    }
+    return false;
   }
 
   // Ingredients
@@ -131,10 +149,18 @@ export class RecipeAddComponent implements OnInit {
 
     if(this.form.valid) {
       if(formValues.ingredients.length < 3) {
-        alert("You need to add at least three ingredients!");
+        this.snack.open("You need to add at least three ingredients!", '',{
+          duration: 4000,
+          panelClass: ['snackbar-wrong'],
+          verticalPosition: 'top'
+        });
       } else {
         if(formValues.steps.length < 1) {
-          alert("You need to add at least one step!");
+          this.snack.open("You need to add at least one step!", '',{
+            duration: 4000,
+            panelClass: ['snackbar-wrong'],
+            verticalPosition: 'top'
+          });
         } else {
           const userId = localStorage.getItem('user_id');
 
