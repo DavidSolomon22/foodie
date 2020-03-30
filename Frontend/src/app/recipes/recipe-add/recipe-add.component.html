@@ -1,123 +1,228 @@
 <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet" />
+<link
+  href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap"
+  rel="stylesheet"
+/>
 
 <header>
-	<mat-toolbar class="toolbar">
-		<span class="toolbar-actions">
-			<span class="toolbar-action"> 
-				<a [routerLink]="['/recipes']"> Recipes </a>
-			</span>
-			<span class="toolbar-user-action"> 
-				<a [routerLink]="['/userProfile']"> Account </a>
-			</span>
-		</span>
-	</mat-toolbar>
+  <mat-toolbar class="toolbar">
+    <span class="toolbar-actions">
+      <span class="toolbar-action">
+        <a [routerLink]="['/recipes']"> Recipes </a>
+      </span>
+      <span class="toolbar-user-action">
+        <a [routerLink]="['/userProfile']"> Account </a>
+      </span>
+    </span>
+  </mat-toolbar>
 </header>
 <main class="add-recipe-main">
-	<div class="container">
-		<h2 class="add-recipe-title"> Add new recipe </h2>
-		<mat-card class="add-recipe-form">
-			<form [formGroup]="form" (ngSubmit)="onSubmit()">
-				<h3 class="add-recipe-form-section-title"> Main information </h3>
-				<div class="add-recipe-2-3-column">
-					<div class="add-recipe-form-row">
-						<mat-form-field class="add-recipe-text-input">
-							<mat-label>Recipe name</mat-label>
-							<input matInput type="text" formControlName="name" placeholder="" required/>
-						</mat-form-field>
-						<mat-form-field class="add-recipe-select-input">
-							<mat-label> Recipe cuisine </mat-label>
-							<input matInput type="text" formControlName="cuisine" placeholder="" required/>
-						</mat-form-field>
-					</div>
-					<div class="add-recipe-form-row">
-						<mat-form-field class="add-recipe-select-input">
-							<mat-label> Recipe category </mat-label>
-							<input matInput type="text" formControlName="category" placeholder="" required/>
-						</mat-form-field>
-						<mat-form-field class="add-recipe-select-input">
-							<mat-label> Complexity level </mat-label>
-							<mat-select formControlName="complexityLevel" required>
-								<mat-option *ngFor="let complexityLevel of complexityLevels"
-									[value]="complexityLevel.value">
-									{{complexityLevel.viewValue}}
-								</mat-option>
-							</mat-select>
-						</mat-form-field>
-					</div>
-					<div class="add-recipe-form-row">
-						<mat-form-field class="add-recipe-text-input">
-							<mat-label> Estimated time (minutes) </mat-label>
-							<input matInput type="number" placeholder="" formControlName="estimatedTime" required/>
-						</mat-form-field>
-					</div>
-				</div>
-				<div class="add-recipe-1-3-column">
-					<div class="add-recipe-form-row">
-						<div class="add-recipe-image">
-							<div class="add-recipe-image-container">
-								<img [src]="url" height="200">
-							</div>
-							<input style="display: none" type="file" (change)="onSelectFile($event)" #fileInput>
-							<div class="add-recipe-image-button-container">
-								<button mat-raised-button class="add-recipe-image-button" (click)="fileInput.click()" type="button">
-									Select image </button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<h3 class="add-recipe-form-section-title"> Ingredients </h3>
-				<div class="add-recipe-form-row">
-					<div class="add-recipe-form-ingredients">
-						<div formArrayName="ingredients">
-							<div *ngFor="let ingredient of allIngredients.controls; let i = index;"
-								class="add-recipe-form-ingredient">
-								<div class="add-recipe-form-ingredient" [formGroupName]="i">
-									<mat-form-field
-										class="add-recipe-form-ingredient-input add-recipe-form-ingredient-quantity">
-										<mat-label> Quantity </mat-label>
-										<input matInput type="text" placeholder="" formControlName="quantity" required/>
-									</mat-form-field>
-									<mat-form-field
-										class="add-recipe-form-ingredient-input add-recipe-form-ingredient-unit">
-										<mat-label> Unit </mat-label>
-										<input matInput type="text" placeholder="" formControlName="unit" required/>
-									</mat-form-field>
-									<mat-form-field
-										class="add-recipe-form-ingredient-input add-recipe-form-ingredient-name">
-										<mat-label> Name </mat-label>
-										<input matInput type="text" placeholder="" formControlName="name" required/>
-									</mat-form-field>
-									<button mat-raised-button class="add-recipe-form-ingredient-remove-button"
-										(click)="onIngredientRemove(i)" type="button"> Remove </button>
-								</div>
-							</div>
-							<button mat-raised-button class="add-recipe-form-ingredient-add-button"
-								(click)="onIngredientAdd()" type="button"> Add ingredient </button>
-						</div>
-					</div>
-				</div>
-				<h3 class="add-recipe-form-section-title"> Steps </h3>
-				<div class="add-recipe-form-row">
-					<div class="add-recipe-form-steps">
-						<div formArrayName="steps">
-							<div *ngFor="let step of allSteps.controls; let i = index;">
-								<mat-form-field class="add-recipe-form-step-textarea" [formGroupName]="i">
-									<mat-label> Instruction </mat-label>
-									<textarea matInput placeholder="" formControlName="instruction" required></textarea>
-								</mat-form-field>
-								<button mat-raised-button class="add-recipe-form-step-remove-button"
-									(click)="onStepRemove(i)" type="button"> Remove </button>
-							</div>
-							<button mat-raised-button class="add-recipe-form-step-add-button" (click)="onStepAdd()" type="button"> Add
-								step </button>
-						</div>
-					</div>
-				</div>
-				<div class="add-recipe-form-row add-recipe-form-submit">
-					<button mat-raised-button class="add-recipe-form-submit-button" type="submit"> Add recipe </button>
-				</div>
-			</form>
-		</mat-card>
-	</div>
+  <div class="container">
+    <h2 class="add-recipe-title">Add new recipe</h2>
+    <mat-card class="add-recipe-form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h3 class="add-recipe-form-section-title">Main information</h3>
+        <div class="add-recipe-2-3-column">
+          <div class="add-recipe-form-row">
+            <mat-form-field class="add-recipe-text-input">
+              <mat-label>Recipe name</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="name"
+                placeholder=""
+                required
+              />
+            </mat-form-field>
+            <mat-form-field class="add-recipe-select-input">
+              <mat-label> Recipe cuisine </mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="cuisine"
+                placeholder=""
+                required
+              />
+            </mat-form-field>
+          </div>
+          <div class="add-recipe-form-row">
+            <mat-form-field class="add-recipe-select-input">
+              <mat-label> Recipe category </mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="category"
+                placeholder=""
+                required
+              />
+            </mat-form-field>
+            <mat-form-field class="add-recipe-select-input">
+              <mat-label> Complexity level </mat-label>
+              <mat-select formControlName="complexityLevel" required>
+                <mat-option
+                  *ngFor="let complexityLevel of complexityLevels"
+                  [value]="complexityLevel.value"
+                >
+                  {{ complexityLevel.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="add-recipe-form-row">
+            <mat-form-field class="add-recipe-text-input">
+              <mat-label> Estimated time (minutes) </mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder=""
+                formControlName="estimatedTime"
+                required
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="add-recipe-1-3-column">
+          <div class="add-recipe-form-row">
+            <div class="add-recipe-image">
+              <div class="add-recipe-image-container">
+                <img [src]="url" height="200" />
+              </div>
+              <input
+                style="display: none"
+                type="file"
+                (change)="onSelectFile($event)"
+                #fileInput
+              />
+              <div class="add-recipe-image-button-container">
+                <button
+                  mat-raised-button
+                  class="add-recipe-image-button"
+                  (click)="fileInput.click()"
+                  type="button"
+                >
+                  Select image
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3 class="add-recipe-form-section-title">Ingredients</h3>
+        <div class="add-recipe-form-row">
+          <div class="add-recipe-form-ingredients">
+            <div formArrayName="ingredients">
+              <div
+                *ngFor="
+                  let ingredient of allIngredients.controls;
+                  let i = index
+                "
+                class="add-recipe-form-ingredient"
+              >
+                <div class="add-recipe-form-ingredient" [formGroupName]="i">
+                  <mat-form-field
+                    class="add-recipe-form-ingredient-input add-recipe-form-ingredient-quantity"
+                  >
+                    <mat-label> Quantity </mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      placeholder=""
+                      formControlName="quantity"
+                      required
+                    />
+                  </mat-form-field>
+                  <mat-form-field
+                    class="add-recipe-form-ingredient-input add-recipe-form-ingredient-unit"
+                  >
+                    <mat-label> Unit </mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      placeholder=""
+                      formControlName="unit"
+                      required
+                    />
+                  </mat-form-field>
+                  <mat-form-field
+                    class="add-recipe-form-ingredient-input add-recipe-form-ingredient-name"
+                  >
+                    <mat-label> Name </mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      placeholder=""
+                      formControlName="name"
+                      required
+                    />
+                  </mat-form-field>
+                  <button
+                    mat-raised-button
+                    class="add-recipe-form-ingredient-remove-button"
+                    (click)="onIngredientRemove(i)"
+                    type="button"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+              <button
+                mat-raised-button
+                class="add-recipe-form-ingredient-add-button"
+                (click)="onIngredientAdd()"
+                type="button"
+              >
+                Add ingredient
+              </button>
+            </div>
+          </div>
+        </div>
+        <h3 class="add-recipe-form-section-title">Steps</h3>
+        <div class="add-recipe-form-row">
+          <div class="add-recipe-form-steps">
+            <div formArrayName="steps">
+              <div *ngFor="let step of allSteps.controls; let i = index">
+                <mat-form-field
+                  class="add-recipe-form-step-textarea"
+                  [formGroupName]="i"
+                >
+                  <mat-label> Instruction </mat-label>
+                  <textarea
+                    matInput
+                    placeholder=""
+                    formControlName="instruction"
+                    required
+                  ></textarea>
+                </mat-form-field>
+                <button
+                  mat-raised-button
+                  class="add-recipe-form-step-remove-button"
+                  (click)="onStepRemove(i)"
+                  type="button"
+                >
+                  Remove
+                </button>
+              </div>
+              <button
+                mat-raised-button
+                class="add-recipe-form-step-add-button"
+                (click)="onStepAdd()"
+                type="button"
+              >
+                Add step
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="add-recipe-form-row add-recipe-form-submit">
+          <button
+            mat-raised-button
+            class="add-recipe-form-submit-button"
+            [disabled]="!form.valid"
+            type="submit"
+          >
+            Add recipe
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
 </main>
