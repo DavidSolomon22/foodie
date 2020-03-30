@@ -42,12 +42,20 @@ export class HomePaageComponent implements OnInit {
       },
       (error: any) => {
         console.log(error);
-        console.log(error.error);
-        this.snack.open('Account is not confirmed ', '', {
-          duration: 4000,
-          panelClass: ['snackbar-wrong'],
-          verticalPosition: 'top'
-        });
+        var errorRight = error.error.error.toString();
+        if (errorRight === 'Wrong email or password') {
+          this.snack.open('Wrong email or password', '', {
+            duration: 4000,
+            panelClass: ['snackbar-wrong'],
+            verticalPosition: 'top'
+          });
+        } else {
+          this.snack.open('Account is not confirmed ', '', {
+            duration: 4000,
+            panelClass: ['snackbar-wrong'],
+            verticalPosition: 'top'
+          });
+        }
       }
     );
   }
