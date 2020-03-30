@@ -135,8 +135,7 @@ export class RecipeAddComponent implements OnInit {
         if(formValues.steps.length < 1) {
           alert("You need to add at least one step!");
         } else {
-          const userId = '17eec2a3-5f5a-48b1-b0c1-98bb4a0d4a6f';
-          console.log(this.userService.getToken());
+          const userId = localStorage.getItem('user_id');
 
           const formData = new FormData();
 
