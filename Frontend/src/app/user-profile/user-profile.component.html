@@ -1,25 +1,10 @@
-<mat-toolbar class="toolbar">   
-    <span class="toolbar-actions">
-      <span class="toolbar-action"> 
-        <a [routerLink]="['/recipes']"> Recipes </a>
-      </span>
-      <span class="toolbar-action"> 
-        <a [routerLink]="['/addRecipe']"> Add recipe </a>
-      </span>
-      <button mat-button (click)="logOut()" class="turn">
-        <mat-icon>settings_power</mat-icon>
-      </button>
-    </span>
-</mat-toolbar>
+<app-header-toolbar></app-header-toolbar>
 <div class="container">
   <mat-card class="card">
     <div class="panel">
       <div class="photo">
         <img src="../../assets/img/user.png" />
       </div>
-      <!-- <div class="photoButton">
-    <button mat-raised-button color="#E75858">Edit photo</button>
-      </div>-->
     </div>
     <div class="container">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">

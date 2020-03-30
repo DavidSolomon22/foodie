@@ -22,6 +22,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './shared/authconfig.interceptor';
 import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component';
+import { HeaderToolbarComponent } from './header-toolbar/header-toolbar.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -34,7 +35,8 @@ export function tokenGetter() {
     RecipesPageComponent,
     UserProfileComponent,
     RecipeAddComponent,
-    RecipeCardComponent
+    RecipeCardComponent,
+    HeaderToolbarComponent
   ],
   imports: [
     BrowserModule,
