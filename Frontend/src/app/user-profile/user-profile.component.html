@@ -1,7 +1,15 @@
-<mat-toolbar class="toolbar">
-  <button mat-button (click)="logOut()" class="turn">
-    <mat-icon>settings_power</mat-icon>
-  </button>
+<mat-toolbar class="toolbar">   
+    <span class="toolbar-actions">
+      <span class="toolbar-action"> 
+        <a [routerLink]="['/recipes']"> Recipes </a>
+      </span>
+      <span class="toolbar-action"> 
+        <a [routerLink]="['/addRecipe']"> Add recipe </a>
+      </span>
+      <button mat-button (click)="logOut()" class="turn">
+        <mat-icon>settings_power</mat-icon>
+      </button>
+    </span>
 </mat-toolbar>
 <div class="container">
   <mat-card class="card">
