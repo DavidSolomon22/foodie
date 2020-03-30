@@ -56,7 +56,7 @@ namespace RestApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ConfirmEmail(string token, string email)
+        public async Task<IActionResult> ConfirmEmail(string confirmationToken, string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
 
@@ -65,7 +65,7 @@ namespace RestApi.Controllers
                 return BadRequest("User with such e-mail doesn't exist.");
             }
 
-            var result = await _userManager.ConfirmEmailAsync(user, token);
+            var result = await _userManager.ConfirmEmailAsync(user, confirmationToken);
 
             return Redirect("http://localhost:4200/home");
         }
