@@ -11,33 +11,42 @@ namespace RestApi.Utility
     {
         public string UploadFile(IFormFile fileFromRequest)
         {
-
-            var getExtension = fileFromRequest.ContentType.Split('/');
-
-            var fileExtension = getExtension[1].ToString().ToUpper();
-
-            if (fileExtension != "JPG" && fileExtension != "JPEG" && fileExtension != "PNG")
+            if (fileFromRequest != null)
             {
-                throw new System.ArgumentOutOfRangeException("fileFromRequest extension is wrong");
+                var getExtension = fileFromRequest.ContentType.Split('/');
+
+                var fileExtension = getExtension[1].ToString().ToUpper();
+
+                if (fileExtension != "JPG" && fileExtension != "JPEG" && fileExtension != "PNG")
+                {
+                    throw new System.ArgumentOutOfRangeException("fileFromRequest extension is wrong");
+                }
+
+                var fileName = Path.GetRandomFileName() + '.' + fileExtension;
+
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), Path.Combine("Resources", "Images", fileName));
+
+                using (var stream = new FileStream(pathToSave, FileMode.Create))
+                {
+                    fileFromRequest.CopyTo(stream);
+                }
+
+                return pathToSave;
             }
-
-            var fileName = Path.GetRandomFileName() + '.' + fileExtension;
-
-            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), Path.Combine("Resources", "Images", fileName));
-
-            using (var stream = new FileStream(pathToSave, FileMode.Create))
+            else
             {
-                fileFromRequest.CopyTo(stream);
+                return null;
             }
-
-            return pathToSave;
 
         }
 
-         public void DeletePhoto(string recipePhotoPath)
-         {
-             File.Delete(recipePhotoPath);
-         }
+        public void DeletePhoto(string recipePhotoPath)
+        {
+            if( recipePhotoPath != null){
+                 File.Delete(recipePhotoPath);
+            }
+           
+        }
 
         public async Task<MemoryStream> GetRecipePhoto(string recipePhotoPath)
         {
@@ -61,7 +70,7 @@ namespace RestApi.Utility
             return contenTypes[extension];
         }
 
-        public  Dictionary<string, string> GetMimeTypes()
+        public Dictionary<string, string> GetMimeTypes()
         {
             return new Dictionary<string, string>
             {
@@ -70,7 +79,7 @@ namespace RestApi.Utility
                 {".doc", "application/vnd.ms-word"},
                 {".docx", "application/vnd.ms-word"},
                 {".xls", "application/vnd.ms-excel"},
-                {".xlsx", "application/vnd.openxmlformats  officedocument.spreadsheetml.sheet"},  
+                {".xlsx", "application/vnd.openxmlformats  officedocument.spreadsheetml.sheet"},
                 {".png", "image/png"},
                 {".jpg", "image/jpeg"},
                 {".jpeg", "image/jpeg"},
