@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Contracts;
 using Microsoft.AspNetCore.Http;
 
-
 namespace RestApi.Utility
 {
     public class PhotoService : IPhotoService
@@ -37,15 +36,14 @@ namespace RestApi.Utility
             {
                 return null;
             }
-
         }
 
         public void DeletePhoto(string recipePhotoPath)
         {
-            if( recipePhotoPath != null){
+            if (recipePhotoPath != null)
+            {
                  File.Delete(recipePhotoPath);
             }
-           
         }
 
         public async Task<MemoryStream> GetRecipePhoto(string recipePhotoPath)

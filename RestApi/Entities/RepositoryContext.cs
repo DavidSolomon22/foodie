@@ -7,10 +7,9 @@ namespace Entities
 {
     public class RepositoryContext : IdentityDbContext<User>
     {
-        public RepositoryContext(DbContextOptions options)
-            : base(options)
-            {
-            }
+        public RepositoryContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -24,13 +24,13 @@ namespace RestApi.ModelBinders
         public async Task BindModelAsync(ModelBindingContext bindingContext)
         {
             if (bindingContext == null)
+            {
                 throw new ArgumentNullException(nameof(bindingContext));
- 
-            // Retrieve the form part containing the JSON
+            }
+
             var valueResult = bindingContext.ValueProvider.GetValue(bindingContext.FieldName);
             if (valueResult == ValueProviderResult.None)
             {
-                // The JSON was not found
                 var message = bindingContext.ModelMetadata.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(bindingContext.FieldName);
                 bindingContext.ModelState.TryAddModelError(bindingContext.ModelName, message);
                 return;
@@ -38,10 +38,8 @@ namespace RestApi.ModelBinders
  
             var rawValue = valueResult.FirstValue;
  
-            // Deserialize the JSON
             var model = JsonConvert.DeserializeObject(rawValue, bindingContext.ModelType, _jsonOptions.Value.SerializerSettings);
  
-            // Now, bind each of the IFormFile properties from the other form parts
             foreach (var property in bindingContext.ModelMetadata.Properties)
             {
                 if (property.ModelType != typeof(IFormFile))
@@ -59,7 +57,6 @@ namespace RestApi.ModelBinders
  
                 if (propertyResult.IsModelSet)
                 {
-                    // The IFormFile was sucessfully bound, assign it to the corresponding property of the model
                     property.PropertySetter(model, propertyResult.Model);
                 }
                 else if (property.IsBindingRequired)
@@ -69,7 +66,6 @@ namespace RestApi.ModelBinders
                 }
             }
  
-            // Set the successfully constructed model as the result of the model binding
             bindingContext.Result = ModelBindingResult.Success(model);
         }
     }
