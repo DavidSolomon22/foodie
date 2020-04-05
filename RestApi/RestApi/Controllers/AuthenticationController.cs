@@ -6,6 +6,7 @@ using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace RestApi.Controllers
 {
@@ -17,13 +18,17 @@ namespace RestApi.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IAuthenticationManager _authManager;
         private readonly IEmailSender _emailSender;
+        private readonly IConfiguration _configuration;
 
-        public AuthenticationController(UserManager<User> userManager, IMapper mapper, IAuthenticationManager authManager, IEmailSender emailSender)
+        public AuthenticationController(UserManager<User> userManager, IMapper mapper,
+                                        IAuthenticationManager authManager, IEmailSender emailSender,
+                                        IConfiguration configuration)
         {
             _mapper = mapper;
             _userManager = userManager;
             _authManager = authManager;
             _emailSender = emailSender;
+            _configuration = configuration;
         }
 
         [HttpPost("register")]
@@ -66,8 +71,9 @@ namespace RestApi.Controllers
             }
 
             var result = await _userManager.ConfirmEmailAsync(user, confirmationToken);
+            var url = _configuration.GetSection("Frontend:Url").Value + "/home";
 
-            return Redirect("http://localhost:4200/home");
+            return Redirect(url);
         }
 
         [HttpPost("login")]
