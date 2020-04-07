@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
 import { tap } from 'rxjs/operators';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RegisterService {
   constructor(private http: HttpClient) {}
@@ -37,12 +37,12 @@ export class RegisterService {
     var name = {
       op: 'replace',
       path: '/firstname',
-      value: fo.firstname
+      value: fo.firstname,
     };
     var surname = {
       op: 'replace',
       path: '/surname',
-      value: fo.surname
+      value: fo.surname,
     };
     jsonarray.push(name);
     jsonarray.push(surname);
@@ -55,5 +55,10 @@ export class RegisterService {
     var user = localStorage.getItem('user_id');
     var uri = environment.baseUrl + `api/users/` + user;
     return this.http.get(uri);
+  }
+  newPassword(fo: any) {
+    var user = localStorage.getItem('user_id');
+    let uri = environment.baseUrl + `ap/user/password/` + user;
+    return this.http.post(uri, fo);
   }
 }

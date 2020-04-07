@@ -5,7 +5,7 @@ a {
 .card {
   position: absolute;
   width: 765px;
-  height: 728px;
+  height: 900px;
   left: 447px;
   top: 163px;
 
@@ -54,16 +54,21 @@ a {
   justify-content: center;
 }
 .saveButton {
-  margin-top: 10%;
+  margin-top: 5%;
   display: flex;
   justify-content: center;
 }
-.mat-raised-button {
+.save {
   width: 20%;
   background-color: #ecdcb0;
   border-radius: 27px;
 }
-
+.pass {
+  width: 20%;
+  background-color: #e75858;
+  border-radius: 27px;
+  color: white;
+}
 .turn {
   color: #ffffff;
 }
@@ -95,7 +100,7 @@ a {
 }
 
 .toolbar-action {
-  color :#ffffff;
+  color: #ffffff;
   margin: 0 16px;
   font-weight: 600;
   cursor: pointer;
@@ -110,4 +115,10 @@ a {
   font-weight: 700;
   cursor: pointer;
   font-size: 18px;
+}
+.invalid {
+  display: flex;
+  justify-content: center;
+  font-family: 'Montserrat';
+  word-spacing: normal;
 }
