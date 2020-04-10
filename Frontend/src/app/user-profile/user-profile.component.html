@@ -2,8 +2,25 @@
 <div class="container">
   <mat-card class="card">
     <div class="panel">
-      <div class="photo">
-        <img src="../../assets/img/user.png" />
+      <div class="imgContainer">
+        <img [src]="url" alt="Avatar" width="200px" height="200px" />
+      </div>
+      <input
+        style="display: none;"
+        type="file"
+        (change)="onSelectFile($event)"
+        #fileInput
+      />
+      <div class="imgButtonContainer">
+        <button
+          mat-raised-button
+          class="imgButton"
+          (click)="fileInput.click()"
+          color="#E75858"
+          type="button"
+        >
+          Select image
+        </button>
       </div>
     </div>
     <div class="container">
@@ -42,7 +59,7 @@
         <div *ngIf="show">
           <form [formGroup]="formPass">
             <div class="row">
-              <div class="col-sm-offset-3 col-sm-6 textCenter">
+              <div class="col-sm-offset-4 col-sm-6 textCenter">
                 <mat-form-field class="field">
                   <mat-label>Old password</mat-label>
                   <input

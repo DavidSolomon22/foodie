@@ -2,28 +2,47 @@ a {
   color: inherit;
 }
 
+.imgContainer {
+  display: block;
+  width: 215px;
+  height: 215px;
+  margin-top: 10%;
+  margin-left: 35%;
+  border-radius: 50%;
+  border: 8px solid #ecdcb0;
+}
+.imgContainer img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+.imgButton {
+  margin-top: 2%;
+}
+.imgButton {
+  background-color: #e75858;
+  color: white;
+  border-radius: 27px;
+  width: 20%;
+}
 .card {
   position: absolute;
   width: 765px;
-  height: 900px;
+  height: 800px;
   left: 447px;
-  top: 163px;
+  top: 103px;
 
   background: #ffffff;
   border-radius: 17px;
 }
 .photo {
-  position: absolute;
-  left: 37.96%;
-  right: 38.51%;
-  top: 5.32%;
-  bottom: 69.67%;
-  border: 8px solid #ecdcb0;
-  box-sizing: border-box;
-  border-radius: 557px;
+  vertical-align: bottom;
 }
 .panel {
-  height: 50%;
+  height: 45%;
+  text-align: center;
+}
+imgButton {
+  position: absolute;
 }
 .textCenter {
   text-align: center;
@@ -31,18 +50,6 @@ a {
 .textRight {
   justify-content: end;
   text-align: right;
-}
-.photoButton {
-  background-color: #e75858;
-  color: white;
-  position: absolute;
-  width: 20%;
-  height: 30px;
-  left: 39.96%;
-  top: 35%;
-  border-radius: 18px;
-  text-align: center;
-  vertical-align: middle;
 }
 .field {
   font-family: 'Montserrat';
