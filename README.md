@@ -12,6 +12,7 @@ Feature has to be connected with one Issue. Fix branch may or may not be connect
 
 __Conventions__:
 - __only__ english words
+- __only__ lowercase letters
 - branch name always starts with: ___feature/___ or ___fix/___
 - use a __dash__ instead of space
 - better when name of the branch is the same as issue name
@@ -22,11 +23,22 @@ __Example__:
 
 ## Merge Requests
 
+Merge request is created after we finish some ___feature___ or ___fix___ branch.
+
+__Conventions__:
+- include source branch name and destination branch name
+- has structure: ___<srcBranch<srcBranch>> to <dstBranch<dstBranch>>___
+
+__Example__:
+- source branch name: ___feature/setup-backend-project___
+- destination branch name: ___master___
+- merge request name: ___<feature/setup-backend-project> to <master<master>>___
+
 # Server installation and startup
 
 Firstly you need to install dotnet sdk (version 3.1.102) on your computer. You will find this in the link below:
 
-    https://dotnet.microsoft.com/download/dotnet-core/3.1
+-    https://dotnet.microsoft.com/download/dotnet-core/3.1
 
 Second step is two run the app in your favourite IDE or terminal. Personally I recommend to use Visual Studio Code with C# extension. Click run button in VS Code, and after this you can start consume data from WebAPI.
 
