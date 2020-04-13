@@ -23,6 +23,13 @@ namespace RestApi.Utility
 
                 var fileName = Path.GetRandomFileName() + '.' + fileExtension;
 
+                var checkIfDirExists = Directory.Exists(Directory.GetCurrentDirectory() + "\\Resources\\Images");
+                
+                if(checkIfDirExists == false)
+                {
+                    Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Resources\\Images");
+                }
+
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), Path.Combine("Resources", "Images", fileName));
 
                 using (var stream = new FileStream(pathToSave, FileMode.Create))
@@ -46,7 +53,7 @@ namespace RestApi.Utility
             }
         }
 
-        public async Task<MemoryStream> GetRecipePhoto(string recipePhotoPath)
+        public async Task<MemoryStream> GetPhoto(string recipePhotoPath)
         {
             var photoStream = new MemoryStream();
 
