@@ -23,11 +23,11 @@ namespace RestApi.Utility
 
                 var fileName = Path.GetRandomFileName() + '.' + fileExtension;
 
-                var checkIfDirExists = Directory.Exists(Directory.GetCurrentDirectory() + "\\Resources\\Images");
+                var checkIfDirExists = Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Resources", "Images"));
                 
                 if(checkIfDirExists == false)
                 {
-                    Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Resources\\Images");
+                    Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Resources", "Images"));
                 }
 
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), Path.Combine("Resources", "Images", fileName));

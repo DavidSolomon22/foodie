@@ -56,7 +56,7 @@ namespace RestApi.Controllers
             }
         }
 
-        [HttpGet("photo/{id}")]
+        [HttpGet("{id}/photo")]
         public async Task<IActionResult> GetUserPhoto(string id)
         {
             var user = await _repository.User.GetUserAsync(id,trackChanges: false);
@@ -77,8 +77,8 @@ namespace RestApi.Controllers
             return File(userPhoto, _photoService.GetContentType(photoPath), Path.GetFileName(photoPath));
         }
 
-        [HttpPost("photo"), DisableRequestSizeLimit]
-        public async Task<IActionResult> PostUserPhoto([FromForm] string id, [FromForm] IFormFile file)
+        [HttpPost("{id}/photo"), DisableRequestSizeLimit]
+        public async Task<IActionResult> PostUserPhoto(string id, [FromForm] IFormFile file)
         {
             var user = await _repository.User.GetUserAsync(id,trackChanges: true);
 
@@ -103,7 +103,7 @@ namespace RestApi.Controllers
 
             await _repository.SaveAsync();
 
-            return Ok("User photo succesfully uploaded");
+            return NoContent();
 
         }
 
