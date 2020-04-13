@@ -188,10 +188,14 @@ namespace RestApi.Controllers
             {
                 return NotFound();
             }
+            else if(recipe.PhotoPath == null)
+            {
+                return NotFound();
+            }
 
             var recipePhotoPath = recipe.PhotoPath;
 
-            var recipePhoto = await _photoService.GetRecipePhoto(recipePhotoPath);
+            var recipePhoto = await _photoService.GetPhoto(recipePhotoPath);
 
             return File(recipePhoto, _photoService.GetContentType(recipePhotoPath), Path.GetFileName(recipePhotoPath));
         }
