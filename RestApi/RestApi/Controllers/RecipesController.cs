@@ -179,10 +179,9 @@ namespace RestApi.Controllers
         }
 
         [HttpGet("photo/{id}")]
-        public async Task<IActionResult> GetRecipePhoto(Guid Id)
+        public async Task<IActionResult> GetRecipePhoto(Guid id)
         {
-
-            var recipe = await _repository.Recipe.GetRecipeAsync(Id,trackChanges: false);
+            var recipe = await _repository.Recipe.GetRecipeAsync(id, trackChanges: false);
 
             if (recipe == null)
             {
