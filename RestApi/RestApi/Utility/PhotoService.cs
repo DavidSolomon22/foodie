@@ -59,6 +59,7 @@ namespace RestApi.Utility
 
             return photoStream;
         }
+        
         public string GetContentType(string path)
         {
             var contenTypes = GetMimeTypes();
