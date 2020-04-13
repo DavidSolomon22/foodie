@@ -56,6 +56,11 @@ export class RegisterService {
     let uri = environment.baseUrl + `api/users/` + user;
     return this.http.post(uri, file);
   }
+  getUserphoto() {
+    var user = localStorage.getItem('user_id');
+    let uri = environment.baseUrl + `api/users/photo/` + user;
+    return this.http.get(uri);
+  }
   getUser() {
     var user = localStorage.getItem('user_id');
     var uri = environment.baseUrl + `api/users/` + user;

@@ -4,7 +4,6 @@ import { RegisterService } from '../services/register.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { group } from '@angular/animations';
-
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -19,6 +18,7 @@ export class UserProfileComponent implements OnInit {
   differentPass = true;
   url: string;
   file = undefined;
+  imageToSee;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -55,9 +55,13 @@ export class UserProfileComponent implements OnInit {
         surname: this.userData.surname,
       });
     });
+    this.registerService.getUserphoto().subscribe((response) => {});
   }
   get f() {
     return this.formPass.controls;
+  }
+  createImagefromBlob(img: Blob) {
+    let reader = new FileReader();
   }
   checkPasswords(group: FormGroup) {
     // here we have the 'passwords' group
