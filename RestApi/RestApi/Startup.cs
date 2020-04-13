@@ -1,3 +1,4 @@
+using System.IO;
 using AutoMapper;
 using Contracts;
 using Microsoft.AspNetCore.Builder;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NLog;
 using RestApi.Extensions;
 using RestApi.Utility;
 
@@ -15,6 +17,7 @@ namespace RestApi
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
 
@@ -24,6 +27,7 @@ namespace RestApi
         {
             services.ConfigureCors();
             services.ConfigureSqlContext(Configuration);
+            services.ConfigureLoggerService();
             services.ConfigureRepositoryManager();
             services.AddAutoMapper(typeof(Startup));
             services.AddAuthentication();
@@ -38,14 +42,14 @@ namespace RestApi
             );
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.ConfigureExceptionHandler();
+            app.ConfigureExceptionHandler(logger);
 
             if (env.IsProduction())
             {
