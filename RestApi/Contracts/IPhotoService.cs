@@ -8,8 +8,8 @@ namespace Contracts
     public interface IPhotoService
     {
         string UploadFile(IFormFile fileFromRequest);
-        Task<MemoryStream> GetRecipePhoto(string recipePhotoPath);
-        void DeletePhoto(string recipePhotoPath);
+        Task<MemoryStream> GetPhoto(string photoPath);
+        void DeletePhoto(string photoPath);
         string GetContentType(string path);
         Dictionary<string, string> GetMimeTypes();
     }
