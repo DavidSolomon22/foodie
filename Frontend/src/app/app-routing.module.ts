@@ -1,6 +1,6 @@
 import { RecipesPageComponent } from './recipes/Recipes-page/recipes-page.component';
 import { RegisterComponent } from './register/register.component';
-import { HomePaageComponent } from './home-page/home-paage/home-paage.component';
+import { HomePageComponent } from './home-page/home-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { RecipeAddComponent } from './recipes/recipe-add/recipe-add.component';
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomePaageComponent
+    component: HomePageComponent
   },
   {
     path: 'register',
@@ -38,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: HomePaageComponent
+    component: HomePageComponent
   }
 ];
 

@@ -1,0 +1,75 @@
+// Font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@400;600;700&display=swap');
+
+// Global foodie themes
+$primary: #ECDCB0;
+$secondary: #403584;
+$black: #25282B;
+$white: #FFFFFF;
+$success: #6CD16A;
+$error: #E75858;
+$warning: #E79458;
+$form-gray: #DBDDE0;
+
+$main-font-family: "Montserrat";
+
+$title-font: 400 170px "Montserrat", sans-serif;
+$card-title-font: 400 48px "Saira Semi Condensed", sans-serif;
+$body-font: 14px "Montserrat" 600, sans-serif;
+$button-font: 400 18px "Monstserrat", sans-serif;
+$tile-title-font: 600 18px "Monstserrat", sans-serif;
+$headar-nav-font: 600 18px "Monstserrat", sans-serif;
+$recipe-owner-font: 600 16px "Monstserrat", sans-serif;
+
+$container-margin: 0 auto;
+
+
+$extra-large-container: 1170px;
+$large-container: 1080px;
+$medium-container: 960px;
+$small-container: 704px;
+$tiny-container: 380px;
+
+.container {
+    max-width: $extra-large-container;
+    width: 100%;
+    margin: $container-margin;
+    padding: 0 40px;
+}
+
+.form-submit-button {
+    box-sizing: content-box;
+    padding: 8px 16px;
+    background-color: $primary;
+    font: $button-font;
+    border-radius: 2rem;
+    color: $white;
+}
+
+@media (max-width: 1366px) {
+    .container {
+        max-width: $large-container;
+    }
+}
+
+@media (max-width: 1024px) {
+    .container {
+        max-width: $medium-container;
+        padding: 0 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: $small-container;
+        padding: 0 24px;
+    }
+}
+
+@media (max-width: 414px) {
+    .container {
+        max-width: $tiny-container;
+        padding: 0 16px;
+    }
+}

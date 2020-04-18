@@ -1,5 +1,5 @@
 .recipe-card {
-    width: 100%;
+    width: 300px;
     padding: 0;
     cursor: pointer;
 }
@@ -64,4 +64,16 @@
 .recipe-card-user-name-highlight {
     font-weight: 700;
     color: #ECDCB0;
+}
+
+@media (max-width: 1366px) {
+    .recipe-card {
+        width: 260px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .recipe-card {
+        width: 300px;
+    }
 }

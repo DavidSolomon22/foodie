@@ -2,8 +2,8 @@
   <div class="container main">
     <div class="home-page-container">
       <div class="title-container">
-        <h1 class="title"> <span class="title-start"> Join us </span><br> 
-          <span class="title-mid">Today</span>
+        <h1 class="title"> <span class="title-start"> Food </span><br> 
+          <span class="title-mid">cares about</span><span class="title-end"> YOU</span>
         </h1>
       </div>
       <div class="form-container">
@@ -25,27 +25,14 @@
                 <input matInput type="password" formControlName="password" placeholder=""/>
               </mat-form-field>
       
-              <button mat-raised-button class="form-submit-button card-submit-button">Register</button>
+              <button mat-raised-button class="form-submit-button card-submit-button">Login</button>
             </form>
           </div>
           <div class="card-form-bottom">
-            <a routerLink="/home" routerLinkActive="colorFont" routerLinkActiveOptions="{exact:true}"> Already has an account? Sign in! </a>
+            <a routerLink="/register" routerLinkActive="colorFont" routerLinkActiveOptions="{exact:true}"> Not registered? Sign up! </a>
           </div>
-        </div>
-        <div class="button">
-          <button mat-raised-button color="#ecdcb0">
-            Register
-          </button>
-        </div>
-      </form>
-    </div>
-    <div class="register">
-      <a
-        routerLink="/home"
-        routerLinkActive="colorFont"
-        routerLinkActiveOptions="{exact:true}"
-        >Already has an account? Sign in!</a
-      >
+        </mat-card>
+      </div>
     </div>
   </div>
 </main>

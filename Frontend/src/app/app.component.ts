@@ -1,8 +1,7 @@
 import {
   Component,
   AfterViewInit,
-  ElementRef,
-  HostListener,
+  ElementRef
 } from '@angular/core';
 
 @Component({
