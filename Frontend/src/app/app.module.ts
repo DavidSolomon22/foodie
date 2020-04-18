@@ -1,7 +1,7 @@
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RecipeAddComponent } from './recipes/recipe-add/recipe-add.component';
 import { RecipesPageComponent } from './recipes/Recipes-page/recipes-page.component';
-import { HomePaageComponent } from './home-page/home-paage/home-paage.component';
+import { HomePageComponent } from './home-page/home-page.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -23,6 +23,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './shared/authconfig.interceptor';
 import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component';
 import { HeaderToolbarComponent } from './header-toolbar/header-toolbar.component';
+import { WavesComponent } from './artistic/waves/waves.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -30,13 +31,14 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    HomePaageComponent,
+    HomePageComponent,
     RegisterComponent,
     RecipesPageComponent,
     UserProfileComponent,
     RecipeAddComponent,
     RecipeCardComponent,
-    HeaderToolbarComponent
+    HeaderToolbarComponent,
+    WavesComponent
   ],
   imports: [
     BrowserModule,

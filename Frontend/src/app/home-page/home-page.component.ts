@@ -7,10 +7,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home-paage',
-  templateUrl: './home-paage.component.html',
-  styleUrls: ['./home-paage.component.css']
+  templateUrl: './home-page.component.html',
+  styleUrls: ['./home-page.component.scss']
 })
-export class HomePaageComponent implements OnInit {
+export class HomePageComponent implements OnInit {
   form: FormGroup;
   helper = new JwtHelperService();
   constructor(

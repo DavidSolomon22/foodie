@@ -1,8 +1,7 @@
 import {
   Component,
   AfterViewInit,
-  ElementRef,
-  HostListener
+  ElementRef
 } from '@angular/core';
 
 @Component({
@@ -11,10 +10,6 @@ import {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-  @HostListener('window:beforeunload', ['$event'])
-  clearLocalStorage(event) {
-    localStorage.clear();
-  }
   constructor(private elementRef: ElementRef) {}
 
   ngAfterViewInit(): void {

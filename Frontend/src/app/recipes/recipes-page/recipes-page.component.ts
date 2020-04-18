@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-recipes-page',
   templateUrl: './recipes-page.component.html',
-  styleUrls: ['./recipes-page.component.css']
+  styleUrls: ['./recipes-page.component.scss']
 })
 export class RecipesPageComponent implements OnInit {
   recipes;
