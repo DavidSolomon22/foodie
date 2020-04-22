@@ -55,17 +55,17 @@ namespace RestApi.Controllers
                 return Ok(userDto);
             }
         }
-
+        [AllowAnonymous]
         [HttpGet("{id}/photo")]
         public async Task<IActionResult> GetUserPhoto(string id)
         {
-            var user = await _repository.User.GetUserAsync(id,trackChanges: false);
+            var user = await _repository.User.GetUserAsync(id, trackChanges: false);
 
-            if(user == null)
+            if (user == null)
             {
                 return NotFound();
             }
-            else if( user.PhotoPath == null)
+            else if (user.PhotoPath == null)
             {
                 return NotFound();
             }
@@ -80,9 +80,9 @@ namespace RestApi.Controllers
         [HttpPost("{id}/photo"), DisableRequestSizeLimit]
         public async Task<IActionResult> PostUserPhoto(string id, [FromForm] IFormFile file)
         {
-            var user = await _repository.User.GetUserAsync(id,trackChanges: true);
+            var user = await _repository.User.GetUserAsync(id, trackChanges: true);
 
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest("User doesn't exist");
             }
@@ -92,7 +92,7 @@ namespace RestApi.Controllers
                 return UnprocessableEntity(ModelState);
             }
 
-            if(file == null)
+            if (file == null)
             {
                 return BadRequest("File is not provided");
             }
@@ -110,14 +110,14 @@ namespace RestApi.Controllers
         [HttpGet("collection/({ids})")]
         public async Task<IActionResult> GetUserCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))]IEnumerable<string> ids)
         {
-            if(ids == null)
+            if (ids == null)
             {
                 return BadRequest("Parameter ids is null");
             }
 
             var userEntities = await _repository.User.GetUsersByIdsAsync(ids, trackChanges: false);
 
-            if(ids.Count() != userEntities.Count())
+            if (ids.Count() != userEntities.Count())
             {
                 return NotFound();
             }
@@ -130,13 +130,13 @@ namespace RestApi.Controllers
         [HttpPatch("{id}")]
         public async Task<IActionResult> PartiallyUpdateUser(string id, [FromBody] JsonPatchDocument<UserForUpdateDto> patchDoc)
         {
-            if(patchDoc == null)
+            if (patchDoc == null)
             {
                 return BadRequest("patchDoc object is null");
             }
 
             var userEntity = await _repository.User.GetUserAsync(id, trackChanges: true);
-            if(userEntity == null)
+            if (userEntity == null)
             {
                 NotFound();
             }
@@ -155,7 +155,7 @@ namespace RestApi.Controllers
         public async Task<IActionResult> DeleteUser(string id)
         {
             var user = await _repository.User.GetUserAsync(id, trackChanges: false);
-            if(user == null)
+            if (user == null)
             {
                 return NotFound();
             }
