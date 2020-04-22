@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
 import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -53,8 +54,15 @@ export class RegisterService {
   }
   postUserPhoto(file: File) {
     var user = localStorage.getItem('user_id');
-    let uri = environment.baseUrl + `api/users/` + user;
-    return this.http.post(uri, file);
+    let uri = environment.baseUrl + `api/users/` + user + `/photo`;
+    let formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(uri, formData);
+  }
+  getUserphoto() {
+    var user = localStorage.getItem('user_id');
+    let uri = environment.baseUrl + `api/users/` + user + `/photo`;
+    return this.http.get(uri, { responseType: 'blob' });
   }
   getUser() {
     var user = localStorage.getItem('user_id');

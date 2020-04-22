@@ -4,7 +4,7 @@ import { RegisterService } from '../services/register.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { group } from '@angular/animations';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -19,6 +19,8 @@ export class UserProfileComponent implements OnInit {
   differentPass = true;
   url: string;
   file = undefined;
+  imageToSee = true;
+  userPhoto = null;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -55,6 +57,11 @@ export class UserProfileComponent implements OnInit {
         surname: this.userData.surname,
       });
     });
+    // this.registerService.getUserphoto().subscribe((resp) => {
+    //   this.userPhoto = resp;
+    // });
+    const user = localStorage.getItem('user_id');
+    this.userPhoto = `${environment.baseUrl}api/users/${user}/photo`;
   }
   get f() {
     return this.formPass.controls;
@@ -74,7 +81,7 @@ export class UserProfileComponent implements OnInit {
       this.file = event.target.files[0];
       if (this.checkFileType(this.file.type)) {
         this.registerService.postUserPhoto(this.file).subscribe((resp) => {
-          console.log(resp);
+          window.location.reload();
         });
         reader.readAsDataURL(event.target.files[0]);
         reader.onload = (event) => {
