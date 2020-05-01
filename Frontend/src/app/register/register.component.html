@@ -2,7 +2,8 @@
   <div class="container main">
     <div class="home-page-container">
       <div class="title-container">
-        <h1 class="title"> <span class="title-start"> Join us </span><br> 
+        <h1 class="title">
+          <span class="title-start"> Join us </span><br />
           <span class="title-mid">Today</span>
         </h1>
       </div>
@@ -17,35 +18,56 @@
               <mat-form-field class="card-form-field">
                 <mat-icon matPrefix>perm_identity</mat-icon>
                 <mat-label>Email</mat-label>
-                <input matInput type="email" formControlName="email" placeholder="" />
+                <input
+                  matInput
+                  type="email"
+                  formControlName="email"
+                  placeholder=""
+                />
               </mat-form-field>
               <mat-form-field class="card-form-field">
                 <mat-icon matPrefix>lock</mat-icon>
                 <mat-label>Password</mat-label>
-                <input matInput type="password" formControlName="password" placeholder=""/>
+                <input
+                  matInput
+                  type="password"
+                  formControlName="password"
+                  placeholder=""
+                />
               </mat-form-field>
-      
-              <button mat-raised-button class="form-submit-button card-submit-button">Register</button>
+
+              <button
+                mat-raised-button
+                class="form-submit-button card-submit-button"
+              >
+                Register
+              </button>
             </form>
           </div>
           <div class="card-form-bottom">
-            <a routerLink="/home" routerLinkActive="colorFont" routerLinkActiveOptions="{exact:true}"> Already has an account? Sign in! </a>
+            <a
+              routerLink="/home"
+              routerLinkActive="colorFont"
+              routerLinkActiveOptions="{exact:true}"
+            >
+              Already has an account? Sign in!
+            </a>
           </div>
-        </div>
-        <div class="button">
-          <button mat-raised-button color="#ecdcb0">
-            Register
-          </button>
-        </div>
-      </form>
-    </div>
-    <div class="register">
-      <a
-        routerLink="/home"
-        routerLinkActive="colorFont"
-        routerLinkActiveOptions="{exact:true}"
-        >Already has an account? Sign in!</a
-      >
+          <div class="button">
+            <button mat-raised-button color="#ecdcb0">
+              Register
+            </button>
+          </div>
+          <div class="register">
+            <a
+              routerLink="/home"
+              routerLinkActive="colorFont"
+              routerLinkActiveOptions="{exact:true}"
+              >Already has an account? Sign in!</a
+            >
+          </div></mat-card
+        >
+      </div>
     </div>
   </div>
 </main>
