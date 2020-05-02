@@ -5,16 +5,17 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-diet',
   templateUrl: './diet.component.html',
-  styleUrls: ['./diet.component.css'],
+  styleUrls: ['./diet.component.scss'],
 })
 export class DietComponent implements OnInit {
+  diets = [{}];
   constructor(public dialog: MatDialog) {}
 
   ngOnInit() {}
 
   addDiet() {
     this.dialog.open(DietAddComponent, {
-      height: '20%',
+      height: '25%',
       width: '60%',
     });
   }
