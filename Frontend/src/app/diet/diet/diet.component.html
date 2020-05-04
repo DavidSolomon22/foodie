@@ -1,0 +1,58 @@
+<link
+  href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap"
+  rel="stylesheet"
+/>
+<header>
+  <app-header-toolbar></app-header-toolbar>
+</header>
+<div class="title">
+  My diet
+  <button mat-button (click)="addDiet()">
+    <mat-icon class="buttonplus">add</mat-icon>
+  </button>
+</div>
+
+<mat-grid-list cols="4" rowHeight="200px" class="grid">
+  <mat-grid-tile [colspan]="1" [rowspan]="4">
+    <div class="container">
+      <div class="row">
+        <div class="days">
+          MONDAY
+        </div>
+      </div>
+      <div class="row">
+        <div class="days">
+          TUESDAY
+        </div>
+      </div>
+      <div class="row">
+        <div class="days">
+          WEDNESDAY
+        </div>
+      </div>
+      <div class="row">
+        <div class="days">
+          THURSDAY
+        </div>
+      </div>
+      <div class="row">
+        <div class="days">
+          FRIDAY
+        </div>
+      </div>
+      <div class="row">
+        <div class="days">
+          SATURDAY
+        </div>
+      </div>
+      <div class="row">
+        <div class="days">
+          SUNDAY
+        </div>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="3" [rowspan]="4">
+    <div class="container"></div>
+  </mat-grid-tile>
+</mat-grid-list>
