@@ -53,6 +53,8 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="3" [rowspan]="4">
-    <div class="container"></div>
+    <div class="container">
+      <app-diet-card *ngFor="let meal of meals" [meal]="meal"> </app-diet-card>
+    </div>
   </mat-grid-tile>
 </mat-grid-list>

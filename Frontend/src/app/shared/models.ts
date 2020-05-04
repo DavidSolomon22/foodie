@@ -22,3 +22,14 @@ export interface Ingredient {
   quantity: number;
   recipeId: string;
 }
+export class Meal {
+  Id: string;
+  RecipeId: string;
+  Type: string;
+
+  constructor(Id: string, RecipeId: string, Type: string) {
+    this.Id = Id;
+    this.RecipeId = RecipeId;
+    this.Type = Type;
+  }
+}
