@@ -10,7 +10,7 @@ namespace Entities.Models
         public Guid Id {get; set;}
         [ForeignKey("Diet")]
         public Guid DietId {get; set;}
-        public DateTime Day {get; set;}
+        public string Day {get; set;}
 
         public ICollection<Meal> Meals {get; set;}
         public Diet Diet {set; get;}

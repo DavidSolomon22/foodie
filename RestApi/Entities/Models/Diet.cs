@@ -11,6 +11,8 @@ namespace Entities.Models
         [ForeignKey("User")]
         public string CreatorId {get; set;}
         public DateTime DateCreated {get; set;}
+        public string Name {get; set;}
+        public string Description {get; set;}
 
         public ICollection<DailyDiet> DailyDiets {get; set;}
         public ICollection<UserDiet> UserDiets {get; set;}
