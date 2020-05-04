@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestApi.ModelBinders;
+using Entities.RequestFeatures;
+using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace RestApi.Controllers
 {
@@ -32,7 +35,9 @@ namespace RestApi.Controllers
 
 
         [HttpPost, DisableRequestSizeLimit, Authorize]
-        public async Task<IActionResult> CreateRecipe([ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "recipe")][FromForm] RecipeForCreationDto recipe, [FromForm] IFormFile file)
+        public async Task<IActionResult> CreateRecipe(
+            [ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "recipe")][FromForm] RecipeForCreationDto recipe,
+            [FromForm] IFormFile file)
         {
 
             if (recipe == null)
@@ -81,9 +86,12 @@ namespace RestApi.Controllers
         }
 
         [HttpGet, Authorize]
-        public async Task<IActionResult> GetRecipes()
+        public async Task<IActionResult> GetRecipes([FromQuery] RecipeParameters recipeParameters)
         {
-            var recipes = await _repository.Recipe.GetAllRecipesAsync(trackChanges: false);
+            recipeParameters.Cuisine = recipeParameters.Cuisine?.First()?.Split(",");
+            var recipes = await _repository.Recipe.GetAllRecipesAsync(recipeParameters, trackChanges: false);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(recipes.MetaData));
 
             var recipesDto = _mapper.Map<IEnumerable<RecipeDto>>(recipes);
 
@@ -125,7 +133,9 @@ namespace RestApi.Controllers
         }
 
         [HttpPut, DisableRequestSizeLimit, Authorize]
-        public async Task<IActionResult> UpdateRecipe([FromForm]Guid id, [ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "recipe")][FromForm] RecipeForCreationDto recipe, [FromForm] IFormFile file)
+        public async Task<IActionResult> UpdateRecipe(
+            [FromForm]Guid id, [ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "recipe")][FromForm] RecipeForCreationDto recipe,
+            [FromForm] IFormFile file)
         {
             if (recipe == null)
             {

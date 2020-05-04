@@ -6,6 +6,8 @@ using Contracts;
 using Entities;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Repository.Extensions;
+using Entities.RequestFeatures;
 
 namespace Repository
 {
@@ -17,12 +19,17 @@ namespace Repository
 
         public void CreateRecipe(Recipe recipe) => Create(recipe);
 
-        public async Task<IEnumerable<Recipe>> GetAllRecipesAsync(bool trackChanges) =>
-            await FindAll(trackChanges)
-            .OrderBy(r => r.Name)
-            .Include(r => r.Ingredients)
-            .Include(r => r.Steps)
-            .ToListAsync();
+        public async Task<PagedList<Recipe>> GetAllRecipesAsync(RecipeParameters recipeParameters, bool trackChanges)
+        {
+            var recipes = await FindAll(trackChanges)
+                .FilterRecipes(recipeParameters.Cuisine)
+                .Search(recipeParameters.SearchTerm)
+                .OrderBy(r => r.Name)
+                .ToListAsync();
+
+            return PagedList<Recipe>
+                .ToPagedList(recipes, recipeParameters.PageNumber, recipeParameters.PageSize);
+        }
 
         public async Task<Recipe> GetRecipeAsync(Guid recipeId, bool trackChanges) =>
             await FindByCondition(r => r.Id.Equals(recipeId), trackChanges)
