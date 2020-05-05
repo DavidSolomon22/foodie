@@ -11,7 +11,7 @@ namespace Repository
 {
     public class DietRepository : RepositoryBase<Diet>, IDietRepository
     {
-        public DietRepository(RepositoryContext RepositoryContext) : base(repositoryContext)
+        public DietRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
 
@@ -19,22 +19,21 @@ namespace Repository
 
         public async Task<IEnumerable<Diet>> GetAllDietAsync(bool trackChanges) =>
             await FindAll(trackChanges)
-            .OrderBy(d => r.Name)
-            .Include(d => r.DailyDiets)
+            .OrderBy(d => d.Name)
+            .Include(d => d.DailyDiets)
             .ToListAsync();
 
         public async Task<Diet> GetDietAsync(Guid dietId, bool trackChanges) =>
-            await FindByCondition(r => r.Id.Equals(recipeId), trackChanges)
-            .Include(r => r.Ingredients)
-            .Include(r => r.Steps)
+            await FindByCondition(d => d.Id.Equals(dietId), trackChanges)
+            .Include(d => d.DailyDiets)
+                .ThenInclude(d => d.Meals)
             .SingleOrDefaultAsync();
 
         public async Task<IEnumerable<Diet>> GetDietsByIdsAsync(IEnumerable<Guid> ids, bool trackChanges) =>
-            await FindByCondition(r => ids.Contains(r.Id), trackChanges)
-            .Include(r => r.Ingredients)
-            .Include(r => r.Steps)
+            await FindByCondition(d => ids.Contains(d.Id), trackChanges)
+            .Include(d => d.DailyDiets)
             .ToListAsync();
 
-        public void DeleteDiet(Diet diet) => Delete(recipe);
+        public void DeleteDiet(Diet diet) => Delete(diet);
     }
 }

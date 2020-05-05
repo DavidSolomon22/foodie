@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Entities.Models
 {
@@ -13,6 +14,7 @@ namespace Entities.Models
         public string Day {get; set;}
 
         public ICollection<Meal> Meals {get; set;}
+        [JsonIgnore]
         public Diet Diet {set; get;}
     }
 }
