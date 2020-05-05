@@ -6,10 +6,12 @@
   <app-header-toolbar></app-header-toolbar>
 </header>
 <div class="title">
-  My diet
-  <button mat-button (click)="addDiet()">
-    <mat-icon class="buttonplus">add</mat-icon>
-  </button>
+  MY DIET
+  <span *ngIf="dailyMeals.length != 7">
+    <button mat-button (click)="addDiet()">
+      <mat-icon class="buttonplus">add</mat-icon>
+    </button>
+  </span>
 </div>
 
 <mat-grid-list cols="4" rowHeight="200px" class="grid">
@@ -54,7 +56,8 @@
   </mat-grid-tile>
   <mat-grid-tile [colspan]="3" [rowspan]="4">
     <div class="container">
-      <app-diet-card *ngFor="let meal of meals" [meal]="meal"> </app-diet-card>
+      <app-diet-card *ngFor="let meal of dailyMeals" [meal]="meal">
+      </app-diet-card>
     </div>
   </mat-grid-tile>
 </mat-grid-list>

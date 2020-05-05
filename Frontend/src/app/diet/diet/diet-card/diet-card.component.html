@@ -2,9 +2,30 @@
   <div class="information">
     <div class="container">
       <div class="row">
-        <div class="col">Breakfast:{{ meal[0].RecipeId }}</div>
-        <div class="col">Lunch: {{ meal[1].RecipeId }}</div>
-        <div class="col">Supper: {{ meal[2].RecipeId }}</div>
+        <div class="col">
+          <span class="type">Breakfast:</span>
+          <span class="food"
+            >{{ recipe(meal[0].RecipeId) }} {{ nameRecipe }}</span
+          >
+        </div>
+        <div class="col">
+          <span class="type">Lunch:</span>
+          <span class="food">
+            {{ recipe2(meal[1].RecipeId) }} {{ nameRecipe2 }}
+          </span>
+        </div>
+        <div class="col">
+          <span class="type">Supper:</span>
+          <span class="food">
+            {{ recipe3(meal[2].RecipeId) }}
+            {{ nameRecipe3 }}
+          </span>
+        </div>
+        <div>
+          <!-- <button mat-button (click)="delete()">
+            <mat-icon>delete_outline</mat-icon>
+          </button> -->
+        </div>
       </div>
     </div>
   </div>

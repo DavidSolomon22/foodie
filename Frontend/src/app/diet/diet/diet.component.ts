@@ -11,7 +11,7 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class DietComponent implements OnInit {
   diets = [{}];
-  meals = new Array<Meal>();
+  dailyMeals = new Array<Meal>();
   constructor(public dialog: MatDialog) {}
 
   ngOnInit() {}
@@ -20,11 +20,11 @@ export class DietComponent implements OnInit {
     const dialogRef = this.dialog.open(DietAddComponent, {
       height: '25%',
       width: '60%',
-      data: this.meals,
+      data: this.dailyMeals,
     });
     dialogRef.afterClosed().subscribe((data) => {
-      this.meals.push(data);
-      console.log(this.meals);
+      this.dailyMeals.push(data);
+      console.log(this.dailyMeals);
     });
   }
 }
