@@ -1,3 +1,4 @@
+import { DailyDiet } from './../../../shared/models';
 import { DietService } from './../../../services/diet.service';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -14,8 +15,30 @@ export class DietCardComponent {
   counter = 0;
   ctr2 = 0;
   ctr3 = 0;
-  @Input() meal: any;
+  @Input() meal: DailyDiet;
 
+  one(dailydiet) {
+    var temp = dailydiet as DailyDiet;
+    var recipeid = temp.meals[0].recipeId;
+    console.log(recipeid);
+    return this.recipe(recipeid);
+  }
+  two(dailydiet) {
+    var temp = dailydiet as DailyDiet;
+    var recipeid = temp.meals[1].recipeId;
+    console.log(recipeid);
+    return this.recipe2(recipeid);
+  }
+  third(dailydiet) {
+    var temp = dailydiet as DailyDiet;
+    if (temp.meals[2] != undefined) {
+      var recipeid = temp.meals[2].recipeId;
+      console.log(recipeid);
+      return this.recipe3(recipeid);
+    } else {
+      return null;
+    }
+  }
   recipe(id: string) {
     if (this.counter == 0) {
       this.service.getRecipe(id).subscribe((resp) => {
@@ -43,7 +66,5 @@ export class DietCardComponent {
       });
     }
   }
-  delete() {
-    
-  }
+  delete() {}
 }

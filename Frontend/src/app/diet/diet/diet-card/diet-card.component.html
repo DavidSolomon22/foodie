@@ -4,20 +4,16 @@
       <div class="row">
         <div class="col">
           <span class="type">Breakfast:</span>
-          <span class="food"
-            >{{ recipe(meal[0].RecipeId) }} {{ nameRecipe }}</span
-          >
+          <span class="food">{{ one(meal) }} {{ nameRecipe }} </span>
         </div>
         <div class="col">
           <span class="type">Lunch:</span>
-          <span class="food">
-            {{ recipe2(meal[1].RecipeId) }} {{ nameRecipe2 }}
-          </span>
+          <span class="food"> {{ two(meal) }} {{ nameRecipe2 }} </span>
         </div>
         <div class="col">
           <span class="type">Supper:</span>
-          <span class="food">
-            {{ recipe3(meal[2].RecipeId) }}
+          <span *ngIf="meal" class="food">
+            {{ third(meal) }}
             {{ nameRecipe3 }}
           </span>
         </div>

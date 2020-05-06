@@ -16,4 +16,8 @@ export class DietService {
     let uri = environment.baseUrl + `api/recipes/` + id;
     return this.http.get<any>(uri);
   }
+  getDiet(id: any) {
+    let uri = environment.baseUrl + `api/diets/` + id;
+    return this.http.get<any>(uri);
+  }
 }

@@ -12,6 +12,11 @@
       <mat-icon class="buttonplus">add</mat-icon>
     </button>
   </span>
+  <span>
+    <button mat-button (click)="saveDiet()">
+      <mat-icon class="buttonplus">done</mat-icon>
+    </button>
+  </span>
 </div>
 
 <mat-grid-list cols="4" rowHeight="200px" class="grid">
@@ -56,8 +61,7 @@
   </mat-grid-tile>
   <mat-grid-tile [colspan]="3" [rowspan]="4">
     <div class="container">
-      <app-diet-card *ngFor="let meal of dailyMeals" [meal]="meal">
-      </app-diet-card>
+      <app-diet-card *ngFor="let meal of temp" [meal]="meal"> </app-diet-card>
     </div>
   </mat-grid-tile>
 </mat-grid-list>
