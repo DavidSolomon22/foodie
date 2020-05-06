@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Entities.Models
 {
@@ -13,6 +14,7 @@ namespace Entities.Models
         public Guid DailyDietId {get; set;}
         public string Type {get; set;}
 
+        [JsonIgnore]
         public Recipe Recipe {set; get;}
         public DailyDiet DailyDiet {set; get;}
 

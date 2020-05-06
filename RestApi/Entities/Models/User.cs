@@ -15,6 +15,6 @@ namespace Entities.Models
         public ICollection<UserDiet> UserDiets {get; set;}
         public ICollection<Rate> Rates {get; set;}
         public ICollection<Recipe> Recipes {get; set;} 
-        public Diet Diet {get; set;}
+        public ICollection<Diet> Diets {get; set;}
     }
 }
