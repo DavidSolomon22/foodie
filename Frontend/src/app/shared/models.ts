@@ -72,3 +72,8 @@ export class Diet {
     this.dailyDiets = dailyDiets;
   }
 }
+export interface Temp {
+  first: string;
+  second: string;
+  third: string;
+}

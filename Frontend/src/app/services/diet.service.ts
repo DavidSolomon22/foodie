@@ -20,4 +20,12 @@ export class DietService {
     let uri = environment.baseUrl + `api/diets/` + id;
     return this.http.get<any>(uri);
   }
+  getAllDiets() {
+    let uri = environment.baseUrl + `api/diets`;
+    return this.http.get<any>(uri);
+  }
+  postDiet(diet: any) {
+    let uri = environment.baseUrl + `api/diets`;
+    return this.http.post(uri, diet);
+  }
 }

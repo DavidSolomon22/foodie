@@ -20,20 +20,17 @@ export class DietCardComponent {
   one(dailydiet) {
     var temp = dailydiet as DailyDiet;
     var recipeid = temp.meals[0].recipeId;
-    console.log(recipeid);
     return this.recipe(recipeid);
   }
   two(dailydiet) {
     var temp = dailydiet as DailyDiet;
     var recipeid = temp.meals[1].recipeId;
-    console.log(recipeid);
     return this.recipe2(recipeid);
   }
   third(dailydiet) {
     var temp = dailydiet as DailyDiet;
     if (temp.meals[2] != undefined) {
       var recipeid = temp.meals[2].recipeId;
-      console.log(recipeid);
       return this.recipe3(recipeid);
     } else {
       return null;
@@ -42,7 +39,6 @@ export class DietCardComponent {
   recipe(id: string) {
     if (this.counter == 0) {
       this.service.getRecipe(id).subscribe((resp) => {
-        console.log(resp.name);
         this.counter = 1;
         this.nameRecipe = resp.name;
       });
@@ -51,7 +47,6 @@ export class DietCardComponent {
   recipe2(id: string) {
     if (this.ctr2 == 0) {
       this.service.getRecipe(id).subscribe((resp) => {
-        console.log(resp.name);
         this.ctr2 = 1;
         this.nameRecipe2 = resp.name;
       });
@@ -60,7 +55,6 @@ export class DietCardComponent {
   recipe3(id: string) {
     if (this.ctr3 == 0) {
       this.service.getRecipe(id).subscribe((resp) => {
-        console.log(resp.name);
         this.ctr3 = 1;
         this.nameRecipe3 = resp.name;
       });

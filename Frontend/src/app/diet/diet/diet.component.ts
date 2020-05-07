@@ -1,4 +1,5 @@
-import { DailyDiet } from './../../shared/models';
+import { DietDialogComponent } from './diet-dialog/diet-dialog.component';
+import { DailyDiet, Temp } from './../../shared/models';
 import { DietService } from './../../services/diet.service';
 import { DietAddComponent } from './diet-add/diet-add.component';
 import { Component, OnInit } from '@angular/core';
@@ -14,17 +15,35 @@ import { ThrowStmt } from '@angular/compiler';
 export class DietComponent implements OnInit {
   diets = [{}];
   dailyMeals = Array<Meal>();
-  temp: DailyDiet[];
+  temp = new Array<DailyDiet>();
+  dietId;
+  editable = false;
+  dietName = '';
+  showDiet = false;
   constructor(public dialog: MatDialog, private service: DietService) {}
 
   ngOnInit() {
-    let dietId = '6cf87a6a-6e83-45e4-16e4-08d7f1dc12f7';
-    this.service.getDiet(dietId).subscribe((resp) => {
-      var temp1 = resp as Diet;
-      //onsole.log(temp.dailyDiets[0].meals[0].recipeId);
-      this.temp = temp1.dailyDiets as DailyDiet[];
-
-      console.log(this.temp);
+    const dialogInfo = this.dialog.open(DietDialogComponent, {
+      height: '25%',
+      width: '60%',
+    });
+    dialogInfo.afterClosed().subscribe((data) => {
+      var result = data as Temp;
+      if (result.first == '1') {
+        this.dietId = result.second;
+        this.service.getDiet(this.dietId).subscribe((resp) => {
+          var temp1 = resp as Diet;
+          this.temp = temp1.dailyDiets as DailyDiet[];
+          this.dietName = temp1.name;
+          this.showDiet = true;
+          console.log(this.temp);
+        });
+      } else {
+        this.editable = true;
+        console.log('diet created' + result.third);
+        this.dietName = result.third;
+        console.log(this.dailyMeals.length);
+      }
     });
   }
 
@@ -41,6 +60,14 @@ export class DietComponent implements OnInit {
     });
   }
   saveDiet() {
-    console.log(this.temp.length);
+    var diet = new Diet();
+    diet.dailyDiets = this.temp;
+    diet.name = this.dietName;
+    var user = localStorage.getItem('user_id');
+    diet.creatorId = user;
+    console.log(diet);
+    this.service.postDiet(diet).subscribe((resp) => {
+      console.log(resp);
+    });
   }
 }

@@ -6,16 +6,27 @@
   <app-header-toolbar></app-header-toolbar>
 </header>
 <div class="title">
-  MY DIET
-  <span *ngIf="dailyMeals.length != 7">
-    <button mat-button (click)="addDiet()">
-      <mat-icon class="buttonplus">add</mat-icon>
-    </button>
+  MY DIET:
+  <span *ngIf="showDiet">
+    <span class="dietName">
+      {{ dietName }}
+    </span>
   </span>
-  <span>
-    <button mat-button (click)="saveDiet()">
-      <mat-icon class="buttonplus">done</mat-icon>
-    </button>
+
+  <span *ngIf="editable">
+    <span class="dietName">
+      {{ dietName }}
+    </span>
+    <span *ngIf="temp.length != 7">
+      <button mat-button (click)="addDiet()">
+        <mat-icon class="buttonplus">add</mat-icon>
+      </button>
+    </span>
+    <span>
+      <button mat-button (click)="saveDiet()">
+        <mat-icon class="buttonplus">done</mat-icon>
+      </button>
+    </span>
   </span>
 </div>
 

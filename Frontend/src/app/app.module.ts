@@ -1,3 +1,4 @@
+import { DietDialogComponent } from './diet/diet/diet-dialog/diet-dialog.component';
 import { DietCardComponent } from './diet/diet/diet-card/diet-card.component';
 import { DietAddComponent } from './diet/diet/diet-add/diet-add.component';
 import { DietComponent } from './diet/diet/diet.component';
@@ -31,6 +32,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MAT_STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatRadioModule } from '@angular/material/radio';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -49,6 +51,7 @@ export function tokenGetter() {
     DietComponent,
     DietAddComponent,
     DietCardComponent,
+    DietDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,7 @@ export function tokenGetter() {
     MatDialogModule,
     MatStepperModule,
     MatGridListModule,
+    MatRadioModule,
   ],
   providers: [
     {
