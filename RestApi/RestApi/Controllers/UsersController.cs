@@ -74,6 +74,11 @@ namespace RestApi.Controllers
 
             var userPhoto = await _photoService.GetPhoto(photoPath);
 
+            if(userPhoto == null)
+            {
+                return NotFound();
+            }
+
             return File(userPhoto, _photoService.GetContentType(photoPath), Path.GetFileName(photoPath));
         }
 
