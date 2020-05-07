@@ -65,6 +65,7 @@ export class DietComponent implements OnInit {
     diet.name = this.dietName;
     var user = localStorage.getItem('user_id');
     diet.creatorId = user;
+    diet.description = 'sdsdsdsdsd';
     console.log(diet);
     this.service.postDiet(diet).subscribe((resp) => {
       console.log(resp);

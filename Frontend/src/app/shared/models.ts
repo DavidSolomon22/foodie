@@ -23,12 +23,17 @@ export interface Ingredient {
   recipeId: string;
 }
 export class Meal {
-  id: string;
+  id?: string;
   recipeId: string;
   type: string;
-  dailyDietId: string;
+  dailyDietId?: string;
 
-  constructor(id: string, recipeId: string, type: string, dailyDietId: string) {
+  constructor(
+    recipeId: string,
+    type: string,
+    dailyDietId?: string,
+    id?: string
+  ) {
     this.id = id;
     this.recipeId = recipeId;
     this.type = type;
@@ -36,11 +41,11 @@ export class Meal {
   }
 }
 export class DailyDiet {
-  id: string;
-  dietId: string;
+  id?: string;
+  dietId?: string;
   day: string;
   meals: Array<Meal>;
-  constructor(id: string, dietId: string, day: string, meals: Array<Meal>) {
+  constructor(day: string, meals: Array<Meal>, id?: string, dietId?: string) {
     this.id = id;
     this.dietId = dietId;
     this.day = day;

@@ -13,10 +13,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class DietAddComponent implements OnInit {
   recipes;
   form: FormGroup;
-  dailyDiet = new DailyDiet('', '', '', Array<Meal>());
-  meal = new Meal('', '', '', '');
-  meal2 = new Meal('', '', '', '');
-  meal3 = new Meal('', '', '', '');
+  dailyDiet = new DailyDiet('', Array<Meal>());
+  meal = new Meal('', '');
+  meal2 = new Meal('', '');
+  meal3 = new Meal('', '');
   constructor(
     private service: DietService,
     public dialog: MatDialogRef<DietAddComponent>,
