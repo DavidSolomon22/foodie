@@ -21,6 +21,7 @@ namespace Repository
             await FindAll(trackChanges)
             .OrderBy(d => d.Name)
             .Include(d => d.DailyDiets)
+                .ThenInclude(d => d.Meals)
             .ToListAsync();
 
         public async Task<Diet> GetDietAsync(Guid dietId, bool trackChanges) =>
@@ -32,6 +33,7 @@ namespace Repository
         public async Task<IEnumerable<Diet>> GetDietsByIdsAsync(IEnumerable<Guid> ids, bool trackChanges) =>
             await FindByCondition(d => ids.Contains(d.Id), trackChanges)
             .Include(d => d.DailyDiets)
+                .ThenInclude(d => d.Meals)
             .ToListAsync();
 
         public void DeleteDiet(Diet diet) => Delete(diet);
