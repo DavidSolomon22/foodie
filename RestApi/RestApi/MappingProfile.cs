@@ -22,6 +22,9 @@ namespace RestApi
 
             CreateMap<DietForCreationDto, Diet>();
             CreateMap<Diet, DietDto>();
+
+            CreateMap<Rate, RateDto>();
+            CreateMap<RateForCreationDto, Rate>();
         }
     }
 }

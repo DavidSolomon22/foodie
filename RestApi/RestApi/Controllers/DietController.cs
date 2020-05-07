@@ -23,7 +23,7 @@ namespace RestApi.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost, DisableRequestSizeLimit, Authorize]
+        [HttpPost, Authorize]
         public async Task<IActionResult> CreateDiet([FromBody] DietForCreationDto diet)
         {
 
