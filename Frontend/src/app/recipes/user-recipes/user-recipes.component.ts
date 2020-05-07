@@ -3,11 +3,11 @@ import { RecipesService } from 'src/app/services/recipesService/recipes.service'
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-recipes-page',
-  templateUrl: './recipes-page.component.html',
-  styleUrls: ['./recipes-page.component.scss']
+  selector: 'app-user-recipes',
+  templateUrl: './user-recipes.component.html',
+  styleUrls: ['./user-recipes.component.scss']
 })
-export class RecipesPageComponent implements OnInit {
+export class UserRecipesComponent implements OnInit {
   recipes;
 
   constructor(private recipeService: RecipesService) { }

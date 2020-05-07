@@ -1,0 +1,60 @@
+<!-- Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap"
+  rel="stylesheet"/>
+
+<header>
+	<app-header-toolbar></app-header-toolbar>
+</header>
+<main class="recipe-main">
+    <div class="container">
+        <mat-card class="recipe-card">
+            <div class="recipe-image" style="background-image: url({{imageUrl}});">
+            </div>
+            <div class="recipe-details">
+                <h2 class="recipe-title"> {{ recipe.name }} </h2>    
+                <div class="recipe-informations">
+                    <div class="recipe-information">
+                        <span class="material-icons"> outdoor_grill </span> Cuisine: {{recipe.cuisine}}
+                    </div>
+                    <div class="recipe-information">
+                        <span class="material-icons"> category </span> Category: {{recipe.category}}  
+                    </div>
+                    <div class="recipe-information">
+                        <span class="material-icons"> alarm </span> Estimated time: {{recipe.estimatedTime}} minutes
+                    </div>
+                </div>
+                <div class="recipe-section">
+                    <h3 class="recipe-section-title"> Ingredients </h3>
+                    <table mat-table [dataSource]="ingredients">
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Name </th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="unit">
+                            <th mat-header-cell *matHeaderCellDef> unit </th>
+                            <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="quantity">
+                            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                        </ng-container>
+
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </div>
+                <div class="recipe-section">
+                    <h3 class="recipe-section-title"> Steps </h3>
+                    <div *ngFor="let step of steps">
+                        <h4 class="recipe-step-title"> Step {{step.id}} </h4>
+                        <p class="recipe-step-instruction"> {{step.instruction}} </p>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</main>

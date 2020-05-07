@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar'; 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select'; 
+import { MatTableModule } from '@angular/material/table'; 
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -24,6 +25,9 @@ import { AuthInterceptor } from './shared/authconfig.interceptor';
 import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component';
 import { HeaderToolbarComponent } from './header-toolbar/header-toolbar.component';
 import { WavesComponent } from './artistic/waves/waves.component';
+import { RecipePageComponent } from './recipes/recipe-page/recipe-page.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { UserRecipesComponent } from './recipes/user-recipes/user-recipes.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -38,7 +42,10 @@ export function tokenGetter() {
     RecipeAddComponent,
     RecipeCardComponent,
     HeaderToolbarComponent,
-    WavesComponent
+    WavesComponent,
+    RecipePageComponent,
+    RecipeEditComponent,
+    UserRecipesComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +62,7 @@ export function tokenGetter() {
     HttpClientModule,
     MatToolbarModule,
     MatSnackBarModule,
+    MatTableModule,
     JwtModule
   ],
   providers: [

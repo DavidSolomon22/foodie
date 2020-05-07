@@ -7,6 +7,9 @@
             <span class="toolbar-action" *ngIf="currentView !== '/recipes'">
                 <a [routerLink]="['/recipes']"> Recipes </a>
             </span>
+            <span class="toolbar-action" *ngIf="currentView !== '/myRecipes'">
+                <a [routerLink]="['/myRecipes']"> My Recipes </a>
+            </span>
             <span class="toolbar-user-action">
                 <a [routerLink]="['/userProfile']"> Account </a>
             </span>
@@ -32,6 +35,9 @@
         </span>
         <span class="toolbar-action" *ngIf="currentView !== '/recipes'">
             <a [routerLink]="['/recipes']"> Recipes </a>
+        </span>
+        <span class="toolbar-action" *ngIf="currentView !== '/recipes'">
+            <a [routerLink]="['/myRecipes']"> My Recipes </a>
         </span>
         <span class="toolbar-user-action">
             <a [routerLink]="['/userProfile']"> Account </a>
