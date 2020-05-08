@@ -20,11 +20,12 @@ export class DietComponent implements OnInit {
   editable = false;
   dietName = '';
   showDiet = false;
+  diet = new Diet();
   constructor(public dialog: MatDialog, private service: DietService) {}
 
   ngOnInit() {
     const dialogInfo = this.dialog.open(DietDialogComponent, {
-      height: '25%',
+      height: '30%',
       width: '40%',
       disableClose: true,
     });
@@ -43,6 +44,7 @@ export class DietComponent implements OnInit {
         this.editable = true;
         console.log('diet created' + result.third);
         this.dietName = result.third;
+        this.diet.description = result.four;
         console.log(this.dailyMeals.length);
       }
     });
@@ -61,14 +63,12 @@ export class DietComponent implements OnInit {
     });
   }
   saveDiet() {
-    var diet = new Diet();
-    diet.dailyDiets = this.temp;
-    diet.name = this.dietName;
+    this.diet.dailyDiets = this.temp;
+    this.diet.name = this.dietName;
     var user = localStorage.getItem('user_id');
-    diet.creatorId = user;
-    diet.description = 'sdsdsdsdsd';
-    console.log(diet);
-    this.service.postDiet(diet).subscribe((resp) => {
+    this.diet.creatorId = user;
+    console.log(this.diet);
+    this.service.postDiet(this.diet).subscribe((resp) => {
       console.log(resp);
     });
   }

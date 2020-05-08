@@ -81,4 +81,5 @@ export interface Temp {
   first: string;
   second: string;
   third: string;
+  four: string;
 }

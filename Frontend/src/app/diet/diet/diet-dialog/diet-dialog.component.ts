@@ -15,6 +15,7 @@ export class DietDialogComponent implements OnInit {
     first: 0,
     second: ['', Validators.required],
     third: ['', Validators.required],
+    four: ['', Validators.required],
   });
   diets = new Array<Diet>();
   constructor(

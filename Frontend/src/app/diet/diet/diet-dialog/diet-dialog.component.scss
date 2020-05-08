@@ -9,7 +9,7 @@
   justify-content: center;
 }
 .field {
-  margin-top: 3%;
+  margin-top: 2%;
   font-family: Montserrat, sans-serif;
   font-size: 100%;
   display: flex;
@@ -23,5 +23,8 @@
 .button {
   display: flex;
   justify-content: center;
-  margin-top: 5%;
+  margin-top: 3%;
+}
+.matTooltip {
+  font-size: 60px !important;
 }

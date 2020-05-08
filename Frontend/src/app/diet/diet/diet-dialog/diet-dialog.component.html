@@ -16,7 +16,11 @@
       <mat-form-field class="field">
         <mat-label>Diets</mat-label>
         <mat-select formControlName="second">
-          <mat-option *ngFor="let diet of diets" [value]="diet.id">
+          <mat-option
+            *ngFor="let diet of diets"
+            [value]="diet.id"
+            matTooltip="{{ diet.description }}"
+          >
             {{ diet.name }}
           </mat-option>
         </mat-select>
@@ -36,6 +40,10 @@
           <input matInput formControlName="third" />
         </mat-form-field>
         <div *ngIf="form.controls.third.valid">
+          <mat-form-field class="field">
+            <mat-label>Description of diet</mat-label>
+            <textarea matInput formControlName="four" rows="1"> </textarea>
+          </mat-form-field>
           <div class="button">
             <button mat-button (click)="createDiet()">
               <mat-icon color="primary">keyboard_arrow_down</mat-icon>

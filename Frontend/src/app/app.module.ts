@@ -33,6 +33,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MAT_STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -73,6 +74,7 @@ export function tokenGetter() {
     MatStepperModule,
     MatGridListModule,
     MatRadioModule,
+    MatTooltipModule,
   ],
   providers: [
     {
