@@ -8,7 +8,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-diet-dialog',
   templateUrl: './diet-dialog.component.html',
-  styleUrls: ['./diet-dialog.component.css'],
+  styleUrls: ['./diet-dialog.component.scss'],
 })
 export class DietDialogComponent implements OnInit {
   form = this.fb.group({

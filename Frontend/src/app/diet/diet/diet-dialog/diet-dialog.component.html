@@ -1,11 +1,19 @@
+<link
+  href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap"
+  rel="stylesheet"
+/>
 <div class="container">
   <form [formGroup]="form">
-    <mat-radio-group aria-label="Select an option" formControlName="first">
+    <mat-radio-group
+      aria-label="Select an option"
+      formControlName="first"
+      class="radio"
+    >
       <mat-radio-button value="1">Show diet</mat-radio-button>
       <mat-radio-button value="2">Create diet</mat-radio-button>
     </mat-radio-group>
     <div *ngIf="form.value.first == 1">
-      <mat-form-field>
+      <mat-form-field class="field">
         <mat-label>Diets</mat-label>
         <mat-select formControlName="second">
           <mat-option *ngFor="let diet of diets" [value]="diet.id">
@@ -14,21 +22,25 @@
         </mat-select>
       </mat-form-field>
       <div *ngIf="form.controls.second.valid">
-        <button mat-raised-button (click)="showDiet()">
-          SHOW
-        </button>
+        <div class="button">
+          <button mat-button (click)="showDiet()">
+            <mat-icon color="primary">keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
     <div *ngIf="form.value.first == 2">
       <div>
-        <mat-form-field>
+        <mat-form-field class="field">
           <mat-label>Diet name</mat-label>
           <input matInput formControlName="third" />
         </mat-form-field>
         <div *ngIf="form.controls.third.valid">
-          <button mat-raised-button (click)="createDiet()">
-            CREATE
-          </button>
+          <div class="button">
+            <button mat-button (click)="createDiet()">
+              <mat-icon color="primary">keyboard_arrow_down</mat-icon>
+            </button>
+          </div>
         </div>
       </div>
     </div>
