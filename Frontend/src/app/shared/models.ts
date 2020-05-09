@@ -22,3 +22,9 @@ export interface Ingredient {
   quantity: number;
   recipeId: string;
 }
+export interface Rate {
+  RecipeId: string;
+  AuthorId: string;
+  Value: number;
+  Comment?: string;
+}

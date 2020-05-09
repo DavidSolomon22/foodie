@@ -7,6 +7,7 @@ namespace Contracts
         IUserRepository User { get; }
         IRecipeRepository Recipe { get; }
         IDietRepository Diet { get; }
+        IRateRepository Rate { get; }
         Task SaveAsync();
     }
 }

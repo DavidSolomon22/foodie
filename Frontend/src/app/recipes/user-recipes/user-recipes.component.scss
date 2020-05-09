@@ -1,0 +1,78 @@
+@import '../../../foodie-styles.scss';
+
+.user-recipes-main {
+    width: 100%;
+    padding-top: 120px;
+}
+
+.user-recipes-title {
+    font-size: 48px;
+    font-family: Montserrat, sans-serif;
+    color: #403584;
+    font-weight: 600;
+}
+
+.user-recipes-card {
+    margin-top: 32px;
+    padding: 8px 16px;
+}
+
+.user-recipes-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-recipe {
+    width: 100%;
+    height: 60px;
+    transition-duration: 0.25s;
+}
+
+.user-recipe:hover {
+    background-color: #EEEEEE;
+}
+
+.user-recipe-title {
+    width: 30%;
+    height: 100%;
+    display: inline-flex;
+    float: left;
+    align-items: center;
+    font-weight: semi-bold;
+    padding-left: 16px;
+    font-size: 24px;
+    color: $secondary;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+.user-recipe-buttons {
+    width: 30%;
+    float: right;
+    height: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.user-recipe-button {
+    height: 36px;
+    border: none;
+    border-radius: 8px;
+    color: $white;
+    font-weight: semi-bold;
+}
+
+.user-recipe-edit-button {
+    background-color: $success;
+}
+
+.user-recipe-delete-button {
+    background-color: $error;
+}

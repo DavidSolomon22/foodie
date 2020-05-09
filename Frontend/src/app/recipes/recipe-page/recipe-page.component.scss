@@ -1,0 +1,73 @@
+@import '../../../foodie-styles.scss';
+
+.recipe-main {
+    margin-top: 120px;
+}
+
+.recipe-title {
+    font-size: 48px;
+    font-family: Montserrat, sans-serif;
+    color: #403584;
+    font-weight: 600;
+}
+
+.recipe-card {
+    margin: 32px 0;
+    padding: 0;
+}
+
+.recipe-image {
+    width: 100%;
+    height: 400px;
+    background-color: #EEEEEE;
+    background-size: cover;
+    background-position: center;
+}
+
+.recipe-details {
+    padding: 32px 16px 16px 16px;
+}
+
+.recipe-informations {
+    width: 100%;
+    height: 32px;
+    margin-top: 16px;
+}
+
+.recipe-information {
+    margin-right: 16px;
+    color: #BBBBBB;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.recipe-section {
+    width: 100%;
+    margin-top: 16px;
+}
+
+.recipe-section-title {
+    font-size: 24px;
+    font-family: Montserrat, sans-serif;
+    color: #403584;
+    font-weight: 600;
+}
+
+table {
+    width: 100%;
+}
+
+.recipe-step-title {
+    font-size: 18px;
+    font-family: Montserrat, sans-serif;
+    color: #403584;
+    font-weight: 600;
+}
+
+.recipe-step-instruction {
+    font-size: 16px;
+    font-family: Montserrat, sans-serif;
+    color: black;
+    margin-bottom: 16px;
+}

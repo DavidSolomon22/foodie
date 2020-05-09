@@ -1,0 +1,31 @@
+<!-- Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap"
+  rel="stylesheet"
+/>
+
+<header>
+	<app-header-toolbar></app-header-toolbar>
+</header>
+<main class="user-recipes-main">
+    <div class="container">
+        <h2 class="user-recipes-title"> My Recipes </h2>
+        <mat-card class="user-recipes-card">
+            <div class="user-recipes-list">
+                <div class="user-recipe" *ngFor="let recipe of recipes">
+                    <div class="user-recipe-title">
+                        <a [routerLink]="['/recipe', recipe.id]"> {{recipe.name}} </a>
+                    </div>
+                    <div class="user-recipe-buttons">
+                        <button class="user-recipe-button user-recipe-edit-button" [routerLink]="['/editRecipe', recipe.id]">
+                            Edit recipe
+                        </button>
+                        <button class="user-recipe-button user-recipe-delete-button">
+                            Delete recipe
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</main>

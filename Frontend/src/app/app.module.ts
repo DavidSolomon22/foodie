@@ -19,6 +19,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table'; 
+import {MatDividerModule} from '@angular/material/divider';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -31,6 +33,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MAT_STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { RecipePageComponent } from './recipes/recipe-page/recipe-page.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { UserRecipesComponent } from './recipes/user-recipes/user-recipes.component';
+import { RecipeRateComponent } from './recipes/recipe-rate/recipe-rate.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -49,6 +55,10 @@ export function tokenGetter() {
     DietComponent,
     DietAddComponent,
     DietCardComponent,
+    RecipePageComponent,
+    RecipeEditComponent,
+    UserRecipesComponent,
+    RecipeRateComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +79,9 @@ export function tokenGetter() {
     MatDialogModule,
     MatStepperModule,
     MatGridListModule,
+    MatTableModule,
+    JwtModule,
+    MatDividerModule
   ],
   providers: [
     {
