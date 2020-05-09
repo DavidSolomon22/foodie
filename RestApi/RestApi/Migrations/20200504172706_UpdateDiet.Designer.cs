@@ -4,14 +4,16 @@ using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace RestApi.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20200504172706_UpdateDiet")]
+    partial class UpdateDiet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,7 +79,9 @@ namespace RestApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatorId");
+                    b.HasIndex("CreatorId")
+                        .IsUnique()
+                        .HasFilter("[CreatorId] IS NOT NULL");
 
                     b.ToTable("Diets");
                 });
@@ -362,29 +366,29 @@ namespace RestApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1ca0b409-0e4c-431d-b08c-3c8ce4385849",
-                            ConcurrencyStamp = "11890b2d-7055-43cc-8cb8-296eb96e0e46",
+                            Id = "07f88c26-12ff-45b7-a28c-902f15850e94",
+                            ConcurrencyStamp = "444f5cc6-dcd1-4971-8800-8a9ca1f064cc",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "6ac62bbf-b9cc-4421-a32b-5132dfb27caa",
-                            ConcurrencyStamp = "819bc257-bfbf-4246-aa3f-03fdf9bf47ff",
+                            Id = "d1131f87-22b1-4e27-9e24-51b3b106c522",
+                            ConcurrencyStamp = "ad25fd65-cd21-4e85-ac15-5f271c0d433b",
                             Name = "Developer",
                             NormalizedName = "DEVELOPER"
                         },
                         new
                         {
-                            Id = "319b2591-e1e1-416d-8006-6fd4be7c1dfd",
-                            ConcurrencyStamp = "1dbd3610-ff65-4584-9af2-22525f36d1cf",
+                            Id = "6c33a444-9576-44f1-92d6-3669bb4ee059",
+                            ConcurrencyStamp = "f465222a-4ff1-43b7-94ef-2b8bbe74fafe",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "b77b934e-ce2d-48e1-8ff4-f7b42ed3b8a0",
-                            ConcurrencyStamp = "eb1bcc9e-ead9-4cc6-b0c7-a77c1efff1b6",
+                            Id = "357399ee-0698-43bc-9a22-038ea5cc65d3",
+                            ConcurrencyStamp = "8d50c9ba-3df0-46a8-b5fe-fd9491c4b46a",
                             Name = "PremiumUser",
                             NormalizedName = "PREMIUMUSER"
                         });
@@ -515,8 +519,8 @@ namespace RestApi.Migrations
             modelBuilder.Entity("Entities.Models.Diet", b =>
                 {
                     b.HasOne("Entities.Models.User", "User")
-                        .WithMany("Diets")
-                        .HasForeignKey("CreatorId");
+                        .WithOne("Diet")
+                        .HasForeignKey("Entities.Models.Diet", "CreatorId");
                 });
 
             modelBuilder.Entity("Entities.Models.Ingredient", b =>

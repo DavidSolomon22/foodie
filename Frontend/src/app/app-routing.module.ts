@@ -1,3 +1,4 @@
+import { DietComponent } from './diet/diet/diet.component';
 import { RecipesPageComponent } from './recipes/Recipes-page/recipes-page.component';
 import { RegisterComponent } from './register/register.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -11,39 +12,44 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: '/home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'home',
-    component: HomePageComponent
+    component: HomePageComponent,
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
   },
   {
     path: 'recipes',
     component: RecipesPageComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'addRecipe',
     component: RecipeAddComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'userProfile',
     component: UserProfileComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'diet',
+    component: DietComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: '**',
-    component: HomePageComponent
-  }
+    component: HomePageComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

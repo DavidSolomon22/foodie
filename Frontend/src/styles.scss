@@ -12,3 +12,7 @@ $foodie-theme: mat-light-theme($foodie-primary, $foodie-accent, $foodie-warn);
 
 @import '~bootstrap/dist/css/bootstrap.css';
 
+.mat-grid-tile .mat-figure {
+  justify-content: flex-start !important ;
+  align-items: flex-start !important;
+}

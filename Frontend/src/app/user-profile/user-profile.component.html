@@ -1,10 +1,16 @@
+<link
+  href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap"
+  rel="stylesheet"
+/>
+
 <app-header-toolbar></app-header-toolbar>
-<div class="container">
+<h2 class="add-recipe-title">Account</h2>
+<div class="main">
   <mat-card class="card">
     <div class="panel">
       <div class="imgContainer">
         <div *ngIf="userPhoto != null; else elseBlock">
-          <img [src]="userPhoto" alt="Avatar" width="200px" height="200px" />
+          <img [src]="userPhoto" alt="Avatar" width="20%" height="50%" />
         </div>
         <ng-template #elseBlock>
           <div *ngIf="url; else normal">
@@ -62,14 +68,16 @@
           </div>
         </div>
         <div class="row">
-          <button
-            mat-raised-button
-            (click)="showPassword()"
-            class="pass"
-            color="#E75858"
-          >
-            Change password
-          </button>
+          <div class="buttonPass">
+            <button
+              mat-raised-button
+              (click)="showPassword()"
+              class="pass"
+              color="#E75858"
+            >
+              Change password
+            </button>
+          </div>
         </div>
         <div *ngIf="show">
           <form [formGroup]="formPass">

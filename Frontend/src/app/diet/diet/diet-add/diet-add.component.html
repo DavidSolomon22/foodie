@@ -1,0 +1,52 @@
+<mat-horizontal-stepper>
+  <ng-template matStepperIcon="breakfast">
+    <mat-icon>free_breakfast</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="dinner">
+    <mat-icon>fastfood</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="supper">
+    <mat-icon>local_drink</mat-icon>
+  </ng-template>
+  <form [formGroup]="form">
+    <mat-step label="1 Meal" state="breakfast">
+      <mat-form-field>
+        <mat-label>Breakfast</mat-label>
+        <mat-select formControlName="firstmeal">
+          <mat-option *ngFor="let recipe of recipes" [value]="recipe.id">
+            {{ recipe.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="form.controls.firstmeal.valid">
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="2 meal" state="dinner">
+      <mat-form-field>
+        <mat-label>Dinner</mat-label>
+        <mat-select formControlName="secondmeal">
+          <mat-option *ngFor="let recipe of recipes" [value]="recipe.id">
+            {{ recipe.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="form.controls.secondmeal.valid">
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="3 meal" state="supper">
+      <mat-form-field>
+        <mat-label>Supper</mat-label>
+        <mat-select formControlName="thirdmeal">
+          <mat-option *ngFor="let recipe of recipes" [value]="recipe.id">
+            {{ recipe.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="form.controls.thirdmeal.valid">
+        <button mat-raised-button (click)="save()">Finish</button>
+      </div>
+    </mat-step>
+  </form>
+</mat-horizontal-stepper>
