@@ -1,15 +1,28 @@
 a {
   color: inherit;
 }
-
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .imgContainer {
-  display: block;
+  align-items: center;
+  /* display: block;
   width: 215px;
   height: 215px;
   margin-top: 10%;
   margin-left: 35%;
   border-radius: 50%;
-  border: 8px solid #ecdcb0;
+  border: 8px solid #ecdcb0; */
+}
+.add-recipe-title {
+  font-size: 48px;
+  font-family: Montserrat, sans-serif;
+  color: #403584;
+  font-weight: 600;
+  margin-left: 20%;
+  margin-top: 5%;
 }
 .imgContainer img {
   border-radius: 50%;
@@ -23,16 +36,12 @@ a {
   color: white;
   border-radius: 27px;
   width: 20%;
+  font-size: 1vw;
 }
 .card {
-  position: absolute;
-  width: 765px;
-  height: 800px;
-  left: 447px;
-  top: 103px;
-
-  background: #ffffff;
-  border-radius: 17px;
+  text-align: center;
+  border-radius: 18px;
+  width: 60%;
 }
 .photo {
   vertical-align: bottom;
@@ -57,6 +66,7 @@ imgButton {
   text-align: center;
 }
 .row {
+  margin-top: 3%;
   height: 3%;
   justify-content: center;
 }
@@ -70,11 +80,15 @@ imgButton {
   background-color: #ecdcb0;
   border-radius: 27px;
 }
+.buttonPass {
+  width: 100%;
+}
 .pass {
   width: 20%;
   background-color: #e75858;
   border-radius: 27px;
   color: white;
+  font-size: 1vw;
 }
 .turn {
   color: #ffffff;

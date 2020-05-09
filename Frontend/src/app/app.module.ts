@@ -1,3 +1,6 @@
+import { DietCardComponent } from './diet/diet/diet-card/diet-card.component';
+import { DietAddComponent } from './diet/diet/diet-add/diet-add.component';
+import { DietComponent } from './diet/diet/diet.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RecipeAddComponent } from './recipes/recipe-add/recipe-add.component';
 import { RecipesPageComponent } from './recipes/Recipes-page/recipes-page.component';
@@ -13,9 +16,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatSelectModule } from '@angular/material/select'; 
+import { MatSelectModule } from '@angular/material/select';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -24,6 +27,10 @@ import { AuthInterceptor } from './shared/authconfig.interceptor';
 import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component';
 import { HeaderToolbarComponent } from './header-toolbar/header-toolbar.component';
 import { WavesComponent } from './artistic/waves/waves.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MAT_STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -38,7 +45,10 @@ export function tokenGetter() {
     RecipeAddComponent,
     RecipeCardComponent,
     HeaderToolbarComponent,
-    WavesComponent
+    WavesComponent,
+    DietComponent,
+    DietAddComponent,
+    DietCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,15 +65,22 @@ export function tokenGetter() {
     HttpClientModule,
     MatToolbarModule,
     MatSnackBarModule,
-    JwtModule
+    JwtModule,
+    MatDialogModule,
+    MatStepperModule,
+    MatGridListModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
+    {
+      provide: MAT_STEPPER_GLOBAL_OPTIONS,
+      useValue: { displayDefaultIndicatorType: false },
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
