@@ -10,6 +10,7 @@ namespace Repository
         private IUserRepository _userRepository;
         private IRecipeRepository _recipeRepository;
         private IDietRepository _dietRepository;
+        private IRateRepository _rateRepository;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {
@@ -45,6 +46,16 @@ namespace Repository
                     _dietRepository = new DietRepository(_repositoryContext);
 
                 return _dietRepository;
+            }
+        }
+         public IRateRepository Rate
+        {
+            get
+            {
+                if (_rateRepository == null)
+                    _rateRepository = new RateRepository(_repositoryContext);
+
+                return _rateRepository;
             }
         }
 

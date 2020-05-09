@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Entities.Models
 {
@@ -15,7 +16,14 @@ namespace Entities.Models
         public int Value {get; set;}
         public DateTime DateCreated {get; set;}
 
+        [JsonIgnore]
         public User User {get; set;}
+        [JsonIgnore]
         public Recipe Recipe {set;get;}
+
+        public Rate()
+        {
+            this.DateCreated = DateTime.Now;
+        }
     }
 }

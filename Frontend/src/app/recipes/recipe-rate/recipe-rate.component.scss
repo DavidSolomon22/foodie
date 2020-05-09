@@ -1,0 +1,82 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.recipe-rates-container {
+    width: 90%;
+}
+
+.rate-input {
+    width: 80%;
+}
+
+textarea {
+    height: 60px;
+}
+
+.rate-submit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.rates-add {
+    display: flex;
+    justify-content: space-between;
+}
+.recipe-rate-container {
+    display: flex;
+    align-items: center;;
+}
+
+.recipe-rate{
+    cursor: pointer;
+}
+
+.recipe-rate.selected {
+    color:rgb(218, 171, 19);
+}
+
+.recipe-rate:hover {
+    color: rgb(218, 171, 19);
+}
+
+.recipe-rate:nth-child(-n+5):hover ~ .recipe-rate:nth-child(-1n+5) {
+    color: rgb(218, 171, 19);
+}
+
+.recipe-rate:nth-child(-n+5).selected ~ .recipe-rate:nth-child(-1n+5) {
+    color: rgb(218, 171, 19);
+}
+
+.recipe-rate:nth-child(5) {
+    order: -4;
+}
+
+.recipe-rate:nth-child(4) {
+    order: -3;
+}
+
+.recipe-rate:nth-child(3) {
+    order: -2;
+}
+
+.recipe-rate:nth-child(2) {
+    order: -1;
+}
+
+table {
+    width: 100%;
+}
+
+.clear-button {
+    margin-right: 0.5vw;
+}
+
+.rate-not-valid {
+    color: rgba(233, 15, 15, 0.836);
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 3vw;
+    
+}
