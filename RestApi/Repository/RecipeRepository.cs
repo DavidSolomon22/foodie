@@ -22,7 +22,7 @@ namespace Repository
         public async Task<PagedList<Recipe>> GetAllRecipesAsync(RecipeParameters recipeParameters, bool trackChanges)
         {
             var recipes = await FindAll(trackChanges)
-                .FilterRecipes(recipeParameters.Cuisine)
+                .FilterRecipes(recipeParameters.Cuisine, recipeParameters.Category, recipeParameters.ComplexityLevel)
                 .Search(recipeParameters.SearchTerm)
                 .OrderBy(r => r.Name)
                 .ToListAsync();

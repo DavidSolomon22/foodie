@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 using RestApi.ModelBinders;
 using Entities.RequestFeatures;
 using Newtonsoft.Json;
-using System.ComponentModel;
 
 namespace RestApi.Controllers
 {
@@ -89,6 +88,7 @@ namespace RestApi.Controllers
         public async Task<IActionResult> GetRecipes([FromQuery] RecipeParameters recipeParameters)
         {
             recipeParameters.Cuisine = recipeParameters.Cuisine?.First()?.Split(",");
+            recipeParameters.Category = recipeParameters.Category?.First()?.Split(",");
             var recipes = await _repository.Recipe.GetAllRecipesAsync(recipeParameters, trackChanges: false);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(recipes.MetaData));
