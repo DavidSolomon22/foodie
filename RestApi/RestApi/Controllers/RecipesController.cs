@@ -93,7 +93,7 @@ namespace RestApi.Controllers
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(recipes.MetaData));
 
-            var recipesDto = _mapper.Map<IEnumerable<RecipeDto>>(recipes);
+            var recipesDto = _mapper.Map<IEnumerable<RecipesDto>>(recipes);
 
             return Ok(recipesDto);
         }

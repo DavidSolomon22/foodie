@@ -18,6 +18,7 @@ namespace RestApi
 
             CreateMap<RecipeForCreationDto, Recipe>();
             CreateMap<Recipe, RecipeDto>();
+            CreateMap<Recipe, RecipesDto>();
             CreateMap<RecipeForUpdateDto, Recipe>();
 
             CreateMap<DietForCreationDto, Diet>();
