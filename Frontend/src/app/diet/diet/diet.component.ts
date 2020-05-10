@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Meal, Diet } from 'src/app/shared/models';
 import { ThrowStmt } from '@angular/compiler';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-diet',
@@ -21,7 +22,11 @@ export class DietComponent implements OnInit {
   dietName = '';
   showDiet = false;
   diet = new Diet();
-  constructor(public dialog: MatDialog, private service: DietService) {}
+  constructor(
+    public dialog: MatDialog,
+    private service: DietService,
+    private snack: MatSnackBar
+  ) {}
 
   ngOnInit() {
     const dialogInfo = this.dialog.open(DietDialogComponent, {
@@ -69,7 +74,11 @@ export class DietComponent implements OnInit {
     this.diet.creatorId = user;
     console.log(this.diet);
     this.service.postDiet(this.diet).subscribe((resp) => {
-      console.log(resp);
+      this.snack.open('Diet was created', '', {
+        duration: 5000,
+        panelClass: ['snackbar'],
+        verticalPosition: 'top',
+      });
     });
   }
 }

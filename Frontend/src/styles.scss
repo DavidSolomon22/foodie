@@ -16,3 +16,7 @@ $foodie-theme: mat-light-theme($foodie-primary, $foodie-accent, $foodie-warn);
   justify-content: flex-start !important ;
   align-items: flex-start !important;
 }
+.snackbar {
+  background: white;
+  color: green;
+}
