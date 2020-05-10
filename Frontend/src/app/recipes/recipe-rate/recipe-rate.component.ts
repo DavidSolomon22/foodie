@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { RecipesService } from 'src/app/services/recipesService/recipes.service';
 import { ActivatedRoute } from '@angular/router';
 import { Rate } from 'src/app/shared/models';
@@ -19,14 +19,14 @@ export class RecipeRateComponent implements OnInit {
   comment = new FormControl();
   recipeRate = false;
   recipeRates: Rate[] = [];
-  displayedColumns = ['Comment', 'Rate'];
+  displayedColumns = ['Rate','Comment'];
   subject = new Subject<boolean>();
 
   rate: Rate = {
     RecipeId: this.recipeId,
     AuthorId: '',
     Value: null,
-    Comment: 'Recipe without comment.'
+    Comment: ''
   };
 
   constructor(private recipeService: RecipesService, private route: ActivatedRoute) { }
