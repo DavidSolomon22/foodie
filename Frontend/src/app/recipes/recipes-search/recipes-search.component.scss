@@ -1,0 +1,185 @@
+@import '../../../foodie-styles.scss';
+
+a {
+    color: inherit;
+}
+
+.recipe-search-tags {
+    width: 100%;
+}
+
+.recipe-search-tag {
+    display: inline-block;
+    padding: 8px;
+    background-color: #cccccc;
+    color: #ffffff;
+    border-radius: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.recipe-search-tag-delete {
+    margin-left: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.header-container {
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    position: relative;;
+}
+
+.recipes-header {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.recipe-search-button {
+    background-color: $primary;
+    color: #ffffff;
+}
+
+.recipes-search-container {
+    margin-top: 240px;
+    height: 50%;
+    width: 100%;
+}
+
+.recipes-serach {
+    width: 100%;
+    margin-top: -80px;
+}
+
+.recipes-search-box {
+    width: 100%;
+    padding: 16px;
+    background-color: #ffffff;
+    border-radius: 6px;
+}
+
+.recipes-search-title {
+    font-size: 100px;
+    font-weight: bold;
+    color: #403584;
+    font-family: Montserrat;
+}
+
+.recipes-serach-subtitle {
+    margin-top: 48px;
+    font-size: 42px;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: Montserrat, sans-serif;
+}
+
+.recipe-search-text-input {
+    position: relative;
+    width: 100%;
+}
+
+.recipes-searchbar {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    width: 100%;
+    height: 48px;
+    border: 1px solid $secondary;
+}
+
+.recipes-input {
+    width: calc(100% - 10%);
+    border: none;
+    padding: 8px 16px;
+    font-family: Montserrat, sans-serif;
+}
+
+.recipes-search-button {
+    height: 100%;
+    width: 10%;
+    background-color: inherit;
+    border: none;
+    border-left: 1px solid #cccccc;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-weight: 600;
+}
+
+.recipes-main {
+    width: 100%;
+    background-color: #ffffff;
+    padding-bottom: 80px;
+    min-height: 30vh;
+}
+
+.recipes-main-title {
+    text-align: center;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 64px 0;
+}
+
+.recipes-main-cards-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.recipe-card-component { 
+    width: 33.33%;
+    padding: 16px 32px;
+}
+
+@media (max-width: 1366px) {
+    .recipes-searchbar {
+        max-width: 100;
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .recipe-card-component { 
+        width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .recipe-card-component { 
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .recipes-input {
+        width: calc(100% - 25%);
+        border: none;
+        padding: 8px 16px;
+        font-family: Montserrat, sans-serif;
+    }
+    
+    .recipes-search-button {
+        height: 100%;
+        width: 25%;
+        background-color: inherit;
+        border: none;
+        border-left: 1px solid #cccccc;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        font-weight: 600;
+    }
+
+    .recipes-serach-subtitle {
+        line-height: 2.4rem;
+    }
+}
+
+@media (max-width: 414px) {
+    .recipes-search-title {
+        font-size: 76px;
+    }
+    
+    .recipes-serach-subtitle {
+        font-size: 24px;
+    }
+}

@@ -13,7 +13,7 @@ export class UserRecipesComponent implements OnInit {
   constructor(private recipeService: RecipesService) { }
 
   ngOnInit() {
-    this.recipeService.getAllRecipes().subscribe((response: any) => {
+    this.recipeService.getMyRecipes().subscribe((response: any) => {
       this.recipes = response.map((recipe) => {
         recipe.imageUrl = `${environment.baseUrl}api/recipes/photo/${recipe.id}`;
         

@@ -22,7 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table'; 
 import {MatDividerModule} from '@angular/material/divider';
 import { RegisterComponent } from './register/register.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './shared/authconfig.interceptor';
@@ -37,6 +37,7 @@ import { RecipePageComponent } from './recipes/recipe-page/recipe-page.component
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { UserRecipesComponent } from './recipes/user-recipes/user-recipes.component';
 import { RecipeRateComponent } from './recipes/recipe-rate/recipe-rate.component';
+import { RecipesSearchComponent } from './recipes/recipes-search/recipes-search.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -58,7 +59,8 @@ export function tokenGetter() {
     RecipePageComponent,
     RecipeEditComponent,
     UserRecipesComponent,
-    RecipeRateComponent
+    RecipeRateComponent,
+    RecipesSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +83,8 @@ export function tokenGetter() {
     MatGridListModule,
     MatTableModule,
     JwtModule,
-    MatDividerModule
+    MatDividerModule,
+    FormsModule
   ],
   providers: [
     {

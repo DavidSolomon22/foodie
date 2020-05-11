@@ -28,8 +28,6 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    console.log(sessionStorage.getItem);
-
     const val = this.form.value;
     console.log(val);
     this.service.login(val).subscribe(

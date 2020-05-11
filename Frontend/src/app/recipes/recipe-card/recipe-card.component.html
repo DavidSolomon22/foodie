@@ -11,16 +11,16 @@
                 <span class="recipe-card-detail-key"> Category: </span> <span class="recipe-card-detail-value"> {{recipe.category}} </span>
             </div>
             <div class="recipe-card-detail">
-                <span class="recipe-card-detail-key"> Complexity level: </span> <span class="recipe-card-detail-value"> {{recipe.complexity}} </span>
+                <span class="recipe-card-detail-key"> Complexity level: </span> <span class="recipe-card-detail-value"> {{formatComplexityLevel(recipe.complexityLevel)}} </span>
             </div>
             <div class="recipe-card-detail">
                 <span class="recipe-card-detail-key"> Estimated time: </span> <span class="recipe-card-detail-value"> {{recipe.estimatedTime}}m</span>
             </div>
         </div>
     </div>
-    <div class="recipe-card-footer">
+    <!-- <div class="recipe-card-footer">
         <div class="recipe-card-user-image" style="background-image: url({{recipe.imageUrl}})">
         </div>
         <span class="recipe-card-user-name"> By <span class="recipe-card-user-name-highlight"> Foodie </span></span>
-    </div>
+    </div> -->
 </mat-card>

@@ -1,0 +1,86 @@
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet" />
+
+<!-- Component -->
+<header class="recipes-header">
+    <app-header-toolbar></app-header-toolbar>
+    <div class="container">
+        <div class="header-container">
+            <div class="recipes-search-container">
+                <div class="recipes-serach">
+                    <h2 class="recipes-search-title"> Foodie </h2>
+                    <h3 class="recipes-serach-subtitle"> The internet’s source of best recipes! </h3>
+                    <div class="recipes-search-box">
+                        <mat-form-field class="recipe-search-text-input">
+                            <mat-label>Recipe name</mat-label>
+                            <input
+                                matInput
+                                type="text"
+                                [(ngModel)]="search.searchTerm" 
+                                placeholder=""/>
+                        </mat-form-field>
+                        <mat-form-field class="recipe-search-text-input">
+                            <mat-label>Recipe category (press enter to add)</mat-label>
+                            <input
+                                matInput
+                                type="text"
+                                (keyup)="onCategoryInputChange($event)"
+                                placeholder=""/>
+                        </mat-form-field>
+                        <div class="recipe-search-tags">
+                            <div *ngFor="let category of search.category; let i = index;" class="recipe-search-tag">
+                                {{category.value}}
+                                <span class="recipe-search-tag-delete" (click)="deleteCategory(i)"> X </span>
+                            </div>
+                        </div>
+                        <mat-form-field class="recipe-search-text-input">
+                            <mat-label>Recipe cuisine (press enter to add)</mat-label>
+                            <input
+                                matInput
+                                type="text"
+                                (keyup)="onCuisineInputChange($event)"
+                                placeholder=""/>
+                        </mat-form-field>
+                        <div class="recipe-search-tags">
+                            <div *ngFor="let cuisine of search.cuisine; let i = index;" class="recipe-search-tag">
+                                {{cuisine.value}}
+                                <span class="recipe-search-tag-delete" (click)="deleteCuisine(i)"> X </span>
+                            </div>
+                        </div>
+                        <mat-form-field class="add-recipe-select-input">
+                            <mat-label> Complexity level </mat-label>
+                            <mat-select [(value)]="search.complexityLevel">
+                              <mat-option
+                                *ngFor="let complexityLevel of complexityLevels"
+                                [value]="complexityLevel.key"
+                              >
+                                {{ complexityLevel.text }}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div class="add-recipe-image-button-container">
+                            <button
+                              mat-raised-button
+                              class="recipe-search-button"
+                              (click)="onSearchSubmit()"
+                              type="button">
+                              Search
+                            </button>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main class="recipes-main">
+    <div class="container">
+        <h2 class="recipes-main-title" *ngIf="recipes.length == 0">
+            🥐 We couldn't find recipes for given parameters :(
+        </h2>
+        <div class="recipes-main-cards-container">
+            <app-recipe-card *ngFor="let recipe of recipes" class="recipe-card-component" [recipe]="recipe" (click)="onRecipeClick(recipe.id)">
+            </app-recipe-card>
+        </div>
+    </div>
+</main>

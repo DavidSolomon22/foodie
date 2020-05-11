@@ -10,6 +10,7 @@ import { AuthGuard } from './shared/guard';
 import { UserRecipesComponent } from './recipes/user-recipes/user-recipes.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipePageComponent } from './recipes/recipe-page/recipe-page.component';
+import { RecipesSearchComponent } from './recipes/recipes-search/recipes-search.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'recipes',
     component: RecipesPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'recipesSearch',
+    component: RecipesSearchComponent,
     canActivate: [AuthGuard],
   },
   {
