@@ -7,4 +7,25 @@ import { Component, Input } from '@angular/core';
 })
 export class RecipeCardComponent {
   @Input() recipe: any;
+
+  complexityLevels = [
+    {
+      key: 1,
+      value: "Beginner"
+    },
+    {
+      key: 2,
+      value: "Intermediate"
+    },
+    {
+      key: 3,
+      value: "Advanced"
+    }
+  ]
+
+  formatComplexityLevel(value) {
+    return this.complexityLevels.find((level) => {
+      return level.key == value;
+    }).value;
+  }
 }

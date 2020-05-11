@@ -4,9 +4,18 @@ import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
 import { tap } from 'rxjs/operators';
 import { Rate } from 'src/app/shared/models';
+
+interface RecipeParameters {
+  cuisine: string[],
+  category: string[],
+  complexityLevel: number,
+  searchTerm: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class RecipesService {
   constructor(private http: HttpClient) {}
 
@@ -20,9 +29,35 @@ export class RecipesService {
     return this.http.put<any>(uri, form);
   }
 
-  getAllRecipes() {
+  getAllRecipes(recipeParameters?: RecipeParameters) {
     const uri = environment.baseUrl + `api/recipes`;
-    return this.http.get<any>(uri);
+
+    if(recipeParameters) {
+      let url = new URL(uri);
+      if(recipeParameters.cuisine.length > 0) {
+        url.searchParams.set("Cuisine", recipeParameters.cuisine.join(","));
+      }
+
+      if(recipeParameters.category.length > 0) {
+        url.searchParams.set("Category", recipeParameters.category.join(","));
+      }
+
+      if(recipeParameters.complexityLevel) {
+        url.searchParams.set("ComplexityLevel", recipeParameters.complexityLevel.toString());
+      }
+      
+      console.log(recipeParameters);
+
+      if(recipeParameters.searchTerm) {
+        url.searchParams.set("SearchTerm", recipeParameters.searchTerm);
+      }
+
+      console.log(url.toString());
+
+      return this.http.get<any>(url.toString());
+    } else {
+      return this.http.get<any>(uri);
+    }
   }
 
   getRecipeById(id: string) {
@@ -43,5 +78,10 @@ export class RecipesService {
   addRecipeRate(form: Rate){
     const uri = environment.baseUrl + `api/rates`;
     return this.http.post<any>(uri, form);
+  }
+
+  getMyRecipes() {
+    const uri = environment.baseUrl + `api/users/${localStorage.getItem('user_id')}/recipes`;
+    return this.http.get<any>(uri);
   }
 }

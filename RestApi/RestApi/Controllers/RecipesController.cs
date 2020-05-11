@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestApi.ModelBinders;
+using Entities.RequestFeatures;
+using Newtonsoft.Json;
 
 namespace RestApi.Controllers
 {
@@ -32,7 +34,9 @@ namespace RestApi.Controllers
 
 
         [HttpPost, DisableRequestSizeLimit, Authorize]
-        public async Task<IActionResult> CreateRecipe([ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "recipe")][FromForm] RecipeForCreationDto recipe, [FromForm] IFormFile file)
+        public async Task<IActionResult> CreateRecipe(
+            [ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "recipe")][FromForm] RecipeForCreationDto recipe,
+            [FromForm] IFormFile file)
         {
 
             if (recipe == null)
@@ -81,11 +85,15 @@ namespace RestApi.Controllers
         }
 
         [HttpGet, Authorize]
-        public async Task<IActionResult> GetRecipes()
+        public async Task<IActionResult> GetRecipes([FromQuery] RecipeParameters recipeParameters)
         {
-            var recipes = await _repository.Recipe.GetAllRecipesAsync(trackChanges: false);
+            recipeParameters.Cuisine = recipeParameters.Cuisine?.First()?.Split(",");
+            recipeParameters.Category = recipeParameters.Category?.First()?.Split(",");
+            var recipes = await _repository.Recipe.GetAllRecipesAsync(recipeParameters, trackChanges: false);
 
-            var recipesDto = _mapper.Map<IEnumerable<RecipeDto>>(recipes);
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(recipes.MetaData));
+
+            var recipesDto = _mapper.Map<IEnumerable<RecipesDto>>(recipes);
 
             return Ok(recipesDto);
         }
@@ -124,8 +132,29 @@ namespace RestApi.Controllers
             return Ok(recipesToReturn);
         }
 
+        [HttpGet("/api/users/{userId}/recipes")]
+        public async Task<IActionResult> GetRecipesForUser([FromQuery] RecipeParameters recipeParameters, string userId)
+        {
+            var user = await _repository.User.GetUserAsync(userId, trackChanges: false);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            recipeParameters.Cuisine = recipeParameters.Cuisine?.First()?.Split(",");
+            recipeParameters.Category = recipeParameters.Category?.First()?.Split(",");
+            var recipesFromDb = await _repository.Recipe.GetRecipesForUserAsync(userId, recipeParameters, trackChanges: false);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(recipesFromDb.MetaData));
+            var recipesDto = _mapper.Map<IEnumerable<RecipesDto>>(recipesFromDb);
+
+            return Ok(recipesDto);
+        }
+
         [HttpPut, DisableRequestSizeLimit, Authorize]
-        public async Task<IActionResult> UpdateRecipe([FromForm]Guid id, [ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "recipe")][FromForm] RecipeForCreationDto recipe, [FromForm] IFormFile file)
+        public async Task<IActionResult> UpdateRecipe(
+            [FromForm]Guid id, [ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "recipe")][FromForm] RecipeForCreationDto recipe,
+            [FromForm] IFormFile file)
         {
             if (recipe == null)
             {
