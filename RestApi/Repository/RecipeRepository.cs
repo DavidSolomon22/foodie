@@ -31,6 +31,18 @@ namespace Repository
                 .ToPagedList(recipes, recipeParameters.PageNumber, recipeParameters.PageSize);
         }
 
+        public async Task<PagedList<Recipe>> GetRecipesForUserAsync(string userId, RecipeParameters recipeParameters, bool trackChanges)
+        {
+            var recipes = await FindByCondition(r => r.CreatorId.Equals(userId), trackChanges)
+                .FilterRecipes(recipeParameters.Cuisine, recipeParameters.Category, recipeParameters.ComplexityLevel)
+                .Search(recipeParameters.SearchTerm)
+                .OrderBy(r => r.Name)
+                .ToListAsync();
+
+            return PagedList<Recipe>
+                .ToPagedList(recipes, recipeParameters.PageNumber, recipeParameters.PageSize);
+        }
+
         public async Task<Recipe> GetRecipeAsync(Guid recipeId, bool trackChanges) =>
             await FindByCondition(r => r.Id.Equals(recipeId), trackChanges)
             .Include(r => r.Ingredients)

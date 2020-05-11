@@ -132,6 +132,25 @@ namespace RestApi.Controllers
             return Ok(recipesToReturn);
         }
 
+        [HttpGet("/api/users/{userId}/recipes")]
+        public async Task<IActionResult> GetRecipesForUser([FromQuery] RecipeParameters recipeParameters, string userId)
+        {
+            var user = await _repository.User.GetUserAsync(userId, trackChanges: false);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            recipeParameters.Cuisine = recipeParameters.Cuisine?.First()?.Split(",");
+            recipeParameters.Category = recipeParameters.Category?.First()?.Split(",");
+            var recipesFromDb = await _repository.Recipe.GetRecipesForUserAsync(userId, recipeParameters, trackChanges: false);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(recipesFromDb.MetaData));
+            var recipesDto = _mapper.Map<IEnumerable<RecipesDto>>(recipesFromDb);
+
+            return Ok(recipesDto);
+        }
+
         [HttpPut, DisableRequestSizeLimit, Authorize]
         public async Task<IActionResult> UpdateRecipe(
             [FromForm]Guid id, [ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "recipe")][FromForm] RecipeForCreationDto recipe,

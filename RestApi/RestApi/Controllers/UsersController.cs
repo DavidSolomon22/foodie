@@ -55,6 +55,7 @@ namespace RestApi.Controllers
                 return Ok(userDto);
             }
         }
+
         [AllowAnonymous]
         [HttpGet("{id}/photo")]
         public async Task<IActionResult> GetUserPhoto(string id)
