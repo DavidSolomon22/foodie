@@ -1,23 +1,28 @@
 <div class="toolbar-container">
-    <mat-toolbar class="toolbar">
-        <span class="toolbar-actions">
-            <span class="toolbar-action">
-                <a [routerLink]="['/addRecipe']"  *ngIf="currentView !== '/addRecipe'"> Add recipe </a>
-            </span>
-            <span class="toolbar-action" *ngIf="currentView !== '/recipes'">
-                <a [routerLink]="['/recipes']"> Recipes </a>
-            </span>
-            <span class="toolbar-action" *ngIf="currentView !== '/myRecipes'">
-                <a [routerLink]="['/myRecipes']"> My Recipes </a>
-            </span>
-            <span class="toolbar-user-action">
-                <a [routerLink]="['/userProfile']"> Account </a>
-            </span>
-            <button mat-button (click)="logOut()" class="toolbar-user-logout">
-                <mat-icon>settings_power</mat-icon>
-            </button>
-        </span>
-    </mat-toolbar>
+  <mat-toolbar class="toolbar">
+    <span class="toolbar-actions">
+      <span class="toolbar-action">
+        <a [routerLink]="['/addRecipe']" *ngIf="currentView !== '/addRecipe'">
+          Add recipe
+        </a>
+      </span>
+      <span class="toolbar-action" *ngIf="currentView !== '/recipes'">
+        <a [routerLink]="['/recipes']"> Recipes </a>
+      </span>
+      <span class="toolbar-action" *ngIf="currentView !== '/myRecipes'">
+        <a [routerLink]="['/myRecipes']"> My Recipes </a>
+      </span>
+      <span class="toolbar-action">
+        <a [routerLink]="['/diet']"> Diet </a>
+      </span>
+      <span class="toolbar-user-action">
+        <a [routerLink]="['/userProfile']"> Account </a>
+      </span>
+      <button mat-button (click)="logOut()" class="toolbar-user-logout">
+        <mat-icon>settings_power</mat-icon>
+      </button>
+    </span>
+  </mat-toolbar>
 
   <div id="burger" class="burger" (click)="onClickMe()">
     <span class="burger-line"></span>
@@ -27,23 +32,27 @@
 </div>
 
 <div id="burgerMenu" class="burger-menu">
-    <div class="burger-background">
-    </div>
-    <nav class="burger-nav">
-        <span class="toolbar-action">
-            <a [routerLink]="['/addRecipe']"  *ngIf="currentView !== '/addRecipe'"> Add recipe </a>
-        </span>
-        <span class="toolbar-action" *ngIf="currentView !== '/recipes'">
-            <a [routerLink]="['/recipes']"> Recipes </a>
-        </span>
-        <span class="toolbar-action" *ngIf="currentView !== '/recipes'">
-            <a [routerLink]="['/myRecipes']"> My Recipes </a>
-        </span>
-        <span class="toolbar-user-action">
-            <a [routerLink]="['/userProfile']"> Account </a>
-        </span>
-        <button mat-button (click)="logOut()" class="toolbar-user-logout">
-            <mat-icon>settings_power</mat-icon>
-        </button>
-    </nav>
+  <div class="burger-background"></div>
+  <nav class="burger-nav">
+    <span class="toolbar-action">
+      <a [routerLink]="['/addRecipe']" *ngIf="currentView !== '/addRecipe'">
+        Add recipe
+      </a>
+    </span>
+    <span class="toolbar-action" *ngIf="currentView !== '/recipes'">
+      <a [routerLink]="['/recipes']"> Recipes </a>
+    </span>
+    <span class="toolbar-action" *ngIf="currentView !== '/recipes'">
+      <a [routerLink]="['/myRecipes']"> My Recipes </a>
+    </span>
+    <span class="toolbar-action">
+      <a [routerLink]="['/diet']"> Diet </a>
+    </span>
+    <span class="toolbar-user-action">
+      <a [routerLink]="['/userProfile']"> Account </a>
+    </span>
+    <button mat-button (click)="logOut()" class="toolbar-user-logout">
+      <mat-icon>settings_power</mat-icon>
+    </button>
+  </nav>
 </div>

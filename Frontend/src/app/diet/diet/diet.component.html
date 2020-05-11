@@ -6,10 +6,28 @@
   <app-header-toolbar></app-header-toolbar>
 </header>
 <div class="title">
-  My diet
-  <button mat-button (click)="addDiet()">
-    <mat-icon class="buttonplus">add</mat-icon>
-  </button>
+  MY DIET:
+  <span *ngIf="showDiet">
+    <span class="dietName">
+      {{ dietName }}
+    </span>
+  </span>
+
+  <span *ngIf="editable">
+    <span class="dietName">
+      {{ dietName }}
+    </span>
+    <span *ngIf="temp.length != 7">
+      <button mat-button (click)="addDiet()">
+        <mat-icon class="buttonplus">add</mat-icon>
+      </button>
+    </span>
+    <span>
+      <button mat-button (click)="saveDiet()">
+        <mat-icon class="buttonplus">done</mat-icon>
+      </button>
+    </span>
+  </span>
 </div>
 
 <mat-grid-list cols="4" rowHeight="200px" class="grid">
@@ -17,22 +35,30 @@
     <div class="container">
       <div class="row">
         <div class="days">
-          MONDAY
+          <div class="monday">
+            MONDAY
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="days">
-          TUESDAY
+          <div class="tuesday">
+            TUESDAY
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="days">
-          WEDNESDAY
+          <div class="tuesday">
+            WEDNESDAY
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="days">
-          THURSDAY
+          <div class="tuesday">
+            THURSDAY
+          </div>
         </div>
       </div>
       <div class="row">
@@ -53,6 +79,8 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="3" [rowspan]="4">
-    <div class="container"></div>
+    <div class="container">
+      <app-diet-card *ngFor="let meal of temp" [meal]="meal"> </app-diet-card>
+    </div>
   </mat-grid-tile>
 </mat-grid-list>
