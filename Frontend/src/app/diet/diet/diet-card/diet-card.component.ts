@@ -1,6 +1,7 @@
 import { DailyDiet } from './../../../shared/models';
 import { DietService } from './../../../services/diet.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-diet-card',
@@ -11,7 +12,7 @@ export class DietCardComponent {
   nameRecipe = '';
   nameRecipe2 = '';
   nameRecipe3 = '';
-  constructor(private service: DietService) {}
+  constructor(private service: DietService, public router: Router) {}
   counter = 0;
   ctr2 = 0;
   ctr3 = 0;
@@ -60,5 +61,16 @@ export class DietCardComponent {
       });
     }
   }
-  delete() {}
+  goToRecipeBreakfast() {
+    var link = 'recipe/' + this.meal.meals[0].recipeId;
+    this.router.navigateByUrl(link);
+  }
+  goToRecipeLunch() {
+    var link = 'recipe/' + this.meal.meals[1].recipeId;
+    this.router.navigateByUrl(link);
+  }
+  goToRecipeSupper() {
+    var link = 'recipe/' + this.meal.meals[2].recipeId;
+    this.router.navigateByUrl(link);
+  }
 }
