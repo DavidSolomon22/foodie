@@ -3,14 +3,36 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          Breakfast
+          <span class="type">Breakfast:</span>
+          <span class="food">{{ one(meal) }} {{ nameRecipe }} </span>
+          <span class="icon">
+            <button mat-button (click)="goToRecipeBreakfast()">
+              <mat-icon> restaurant_menu</mat-icon>
+            </button>
+          </span>
         </div>
         <div class="col">
-          Lunch
+          <span class="type">Lunch:</span>
+          <span class="food"> {{ two(meal) }} {{ nameRecipe2 }} </span>
+          <span class="icon">
+            <button mat-button (click)="goToRecipeLunch()">
+              <mat-icon> restaurant_menu</mat-icon>
+            </button>
+          </span>
         </div>
         <div class="col">
-          Supper
+          <span class="type">Supper:</span>
+          <span *ngIf="meal" class="food">
+            {{ third(meal) }}
+            {{ nameRecipe3 }}
+          </span>
+          <span class="icon">
+            <button mat-button (click)="goToRecipeSupper()">
+              <mat-icon> restaurant_menu</mat-icon>
+            </button>
+          </span>
         </div>
+        <div></div>
       </div>
     </div>
   </div>

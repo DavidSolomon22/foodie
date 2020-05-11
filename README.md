@@ -54,4 +54,4 @@ Simplified models scheme is located at the link below
 
 ## Postman
 
-Postman enviroment and collections are in the Collections folder.
+Postman enviroment and collections can be found under this [link](https://drive.google.com/drive/folders/1kqTOrs3lhXW_7B91K80VssgXp7mss6k1?fbclid=IwAR1qPSTWKH-C6JwwgW2zzO3FZodlS_mhAyTNlPHDq6q9er8A65_jgtDKthU).

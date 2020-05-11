@@ -1,3 +1,4 @@
+import { DietDialogComponent } from './diet/diet/diet-dialog/diet-dialog.component';
 import { DietCardComponent } from './diet/diet/diet-card/diet-card.component';
 import { DietAddComponent } from './diet/diet/diet-add/diet-add.component';
 import { DietComponent } from './diet/diet/diet.component';
@@ -19,8 +20,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
-import { MatTableModule } from '@angular/material/table'; 
-import {MatDividerModule} from '@angular/material/divider';
+import { MatTableModule } from '@angular/material/table';
+import { MatDividerModule } from '@angular/material/divider';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -33,6 +34,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MAT_STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RecipePageComponent } from './recipes/recipe-page/recipe-page.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { UserRecipesComponent } from './recipes/user-recipes/user-recipes.component';
@@ -56,6 +59,7 @@ export function tokenGetter() {
     DietComponent,
     DietAddComponent,
     DietCardComponent,
+    DietDialogComponent,
     RecipePageComponent,
     RecipeEditComponent,
     UserRecipesComponent,
@@ -81,6 +85,8 @@ export function tokenGetter() {
     MatDialogModule,
     MatStepperModule,
     MatGridListModule,
+    MatRadioModule,
+    MatTooltipModule,
     MatTableModule,
     JwtModule,
     MatDividerModule,
