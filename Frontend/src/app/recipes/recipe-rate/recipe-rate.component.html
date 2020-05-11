@@ -1,0 +1,42 @@
+<link
+  href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap"
+  rel="stylesheet"
+/>
+<div>
+  <mat-card class="container">
+    <mat-card-content class="recipe-rates-container">
+      <div class="rates-add">
+        <mat-form-field class="rate-input">
+          <mat-label>Post your comment here</mat-label>
+          <textarea matInput [formControl]="comment"></textarea>
+        </mat-form-field>
+        <div class="recipe-rate-container">
+          <mat-icon (click)="rateRecipe($event)" id="star5" class="recipe-rate">star</mat-icon>
+          <mat-icon (click)="rateRecipe($event)" id="star4" class="recipe-rate">star</mat-icon>
+          <mat-icon (click)="rateRecipe($event)" id="star3" class="recipe-rate">star</mat-icon>
+          <mat-icon (click)="rateRecipe($event)" id="star2" class="recipe-rate">star</mat-icon>
+          <mat-icon (click)="rateRecipe($event)" id="star1" class="recipe-rate">star</mat-icon>
+        </div>
+      </div>
+      <div class="rate-submit">
+        <button mat-stroked-button  color="warn" (click)="clearComment()" class="clear-button">Clear</button>
+        <button mat-stroked-button (click)="saveRate()" [disabled]="!recipeRate">Add</button>
+      </div>
+      <!-- <small *ngIf="recipeRate" class="rate-not-valid">Rate 1-5!</small> -->
+        <table mat-table [dataSource]="recipeRates">
+          <ng-container matColumnDef="Comment">
+            <th mat-header-cell *matHeaderCellDef> Comment </th>
+            <td mat-cell *matCellDef="let element"> {{element.comment}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Rate">
+          <th mat-header-cell *matHeaderCellDef> Rate </th>
+          <td mat-cell *matCellDef="let rate"> {{rate.value}} </td>
+      </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </mat-card-content>
+  </mat-card>
+    
+</div>
+

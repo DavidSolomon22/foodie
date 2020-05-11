@@ -83,3 +83,9 @@ export interface Temp {
   third: string;
   four: string;
 }
+export interface Rate {
+  RecipeId: string;
+  AuthorId: string;
+  Value: number;
+  Comment?: string;
+}

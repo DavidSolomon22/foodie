@@ -57,6 +57,11 @@ namespace RestApi.Utility
         {
             var photoStream = new MemoryStream();
 
+            if(!File.Exists(recipePhotoPath))
+            {
+                return null;
+            }
+
             using (var stream = new FileStream(recipePhotoPath, FileMode.Open))
             {
                 await stream.CopyToAsync(photoStream);
