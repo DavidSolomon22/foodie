@@ -11,6 +11,7 @@
     <div class="container">
         <h2 class="user-recipes-title"> My Recipes </h2>
         <mat-card class="user-recipes-card">
+            <div class="user-recipe-no-my-recipes" *ngIf="recipes.length === 0">You haven't created any recipes yet!</div>
             <div class="user-recipes-list">
                 <div class="user-recipe" *ngFor="let recipe of recipes">
                     <div class="user-recipe-title">
@@ -20,9 +21,9 @@
                         <button class="user-recipe-button user-recipe-edit-button" [routerLink]="['/editRecipe', recipe.id]">
                             Edit recipe
                         </button>
-                        <button class="user-recipe-button user-recipe-delete-button">
+                        <!-- <button class="user-recipe-button user-recipe-delete-button">
                             Delete recipe
-                        </button>
+                        </button> -->
                     </div>
                 </div>
             </div>

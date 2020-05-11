@@ -13,7 +13,7 @@
     <mat-icon>local_drink</mat-icon>
   </ng-template>
   <form [formGroup]="form">
-    <mat-step label="1 Meal" state="breakfast">
+    <mat-step label="Breakfast" state="breakfast">
       <mat-form-field>
         <mat-label>Breakfast</mat-label>
         <mat-select formControlName="firstmeal">
@@ -26,7 +26,7 @@
         <button mat-button matStepperNext>Next</button>
       </div>
     </mat-step>
-    <mat-step label="2 meal" state="dinner">
+    <mat-step label="Dinner" state="dinner">
       <mat-form-field>
         <mat-label>Dinner</mat-label>
         <mat-select formControlName="secondmeal">
@@ -39,7 +39,7 @@
         <button mat-button matStepperNext>Next</button>
       </div>
     </mat-step>
-    <mat-step label="3 meal" state="supper">
+    <mat-step label="Supper" state="supper">
       <mat-form-field>
         <mat-label>Supper</mat-label>
         <mat-select formControlName="thirdmeal">
