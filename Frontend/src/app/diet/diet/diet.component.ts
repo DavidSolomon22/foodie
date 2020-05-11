@@ -30,8 +30,8 @@ export class DietComponent implements OnInit {
 
   ngOnInit() {
     const dialogInfo = this.dialog.open(DietDialogComponent, {
-      height: '30%',
-      width: '40%',
+      height: '25%',
+      width: '30%',
       disableClose: true,
     });
     dialogInfo.afterClosed().subscribe((data) => {

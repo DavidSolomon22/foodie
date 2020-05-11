@@ -3,7 +3,7 @@
   font-family: Montserrat, sans-serif;
 }
 .radio {
-  font-size: 200%;
+  font-size: 150%;
   color: #26393e;
   display: flex;
   justify-content: center;
@@ -23,7 +23,12 @@
 .button {
   display: flex;
   justify-content: center;
-  margin-top: 3%;
+  margin-top: 1%;
+}
+.button1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 16.5%;
 }
 .matTooltip {
   font-size: 60px !important;
