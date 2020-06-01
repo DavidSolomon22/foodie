@@ -11,6 +11,7 @@ namespace Repository
         private IRecipeRepository _recipeRepository;
         private IDietRepository _dietRepository;
         private IRateRepository _rateRepository;
+        private ILikedRecipeRepository _likedRecipeRepository;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {
@@ -27,7 +28,6 @@ namespace Repository
                 return _userRepository;
             }
         }
-
         public IRecipeRepository Recipe
         {
             get
@@ -48,7 +48,7 @@ namespace Repository
                 return _dietRepository;
             }
         }
-         public IRateRepository Rate
+        public IRateRepository Rate
         {
             get
             {
@@ -56,6 +56,16 @@ namespace Repository
                     _rateRepository = new RateRepository(_repositoryContext);
 
                 return _rateRepository;
+            }
+        }
+        public ILikedRecipeRepository LikedRecipe
+        {
+            get
+            {
+                if (_likedRecipeRepository == null)
+                    _likedRecipeRepository = new LikedRecipeRepository(_repositoryContext);
+
+                return _likedRecipeRepository;
             }
         }
 
