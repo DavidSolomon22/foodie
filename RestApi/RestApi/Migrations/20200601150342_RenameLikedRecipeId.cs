@@ -51,10 +51,10 @@ namespace RestApi.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "ead71805-377d-4c16-bac2-c6f46bb80b82", "a73722a5-74c9-411d-882a-769e13decb32", "Administrator", "ADMINISTRATOR" },
-                    { "8cc7791e-686c-4786-90ca-5235cfccea9e", "8083f0bb-d973-4a53-8b45-73763c46146c", "Developer", "DEVELOPER" },
-                    { "4dc437bf-edae-43fd-913f-a788d2813ae8", "114faa88-439f-4d21-99c7-1c81f5af264c", "User", "USER" },
-                    { "324651ca-ee02-4588-89b3-10672f8d6320", "b0d7fa84-eed2-438e-820c-467bb75a26f2", "PremiumUser", "PREMIUMUSER" }
+                    { "f1222543-530f-4494-953f-3914436c7ba4", "a287a011-c246-448b-9c96-21d47e819e5a", "Administrator", "ADMINISTRATOR" },
+                    { "2ae63216-6df2-4133-adea-3b75cbaab5d0", "99305106-22d2-40c9-b49b-bb46f7bf1c5d", "Developer", "DEVELOPER" },
+                    { "69e4b95e-11a8-4151-836d-030a6db0145e", "de7b14ba-4752-428b-b9b0-5eb63fbda1ce", "User", "USER" },
+                    { "f1c05552-2b33-4891-b041-db4941365cc8", "509cdda2-af49-4bba-8818-111f86303c3e", "PremiumUser", "PREMIUMUSER" }
                 });
         }
 
@@ -67,22 +67,22 @@ namespace RestApi.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "324651ca-ee02-4588-89b3-10672f8d6320");
+                keyValue: "2ae63216-6df2-4133-adea-3b75cbaab5d0");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "4dc437bf-edae-43fd-913f-a788d2813ae8");
+                keyValue: "69e4b95e-11a8-4151-836d-030a6db0145e");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "8cc7791e-686c-4786-90ca-5235cfccea9e");
+                keyValue: "f1222543-530f-4494-953f-3914436c7ba4");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "ead71805-377d-4c16-bac2-c6f46bb80b82");
+                keyValue: "f1c05552-2b33-4891-b041-db4941365cc8");
 
             migrationBuilder.DropColumn(
                 name: "LikedRecipeId",

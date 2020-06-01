@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RestApi.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20200601144714_RenameLikedRecipeId")]
+    [Migration("20200601150342_RenameLikedRecipeId")]
     partial class RenameLikedRecipeId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -364,29 +364,29 @@ namespace RestApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ead71805-377d-4c16-bac2-c6f46bb80b82",
-                            ConcurrencyStamp = "a73722a5-74c9-411d-882a-769e13decb32",
+                            Id = "f1222543-530f-4494-953f-3914436c7ba4",
+                            ConcurrencyStamp = "a287a011-c246-448b-9c96-21d47e819e5a",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "8cc7791e-686c-4786-90ca-5235cfccea9e",
-                            ConcurrencyStamp = "8083f0bb-d973-4a53-8b45-73763c46146c",
+                            Id = "2ae63216-6df2-4133-adea-3b75cbaab5d0",
+                            ConcurrencyStamp = "99305106-22d2-40c9-b49b-bb46f7bf1c5d",
                             Name = "Developer",
                             NormalizedName = "DEVELOPER"
                         },
                         new
                         {
-                            Id = "4dc437bf-edae-43fd-913f-a788d2813ae8",
-                            ConcurrencyStamp = "114faa88-439f-4d21-99c7-1c81f5af264c",
+                            Id = "69e4b95e-11a8-4151-836d-030a6db0145e",
+                            ConcurrencyStamp = "de7b14ba-4752-428b-b9b0-5eb63fbda1ce",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "324651ca-ee02-4588-89b3-10672f8d6320",
-                            ConcurrencyStamp = "b0d7fa84-eed2-438e-820c-467bb75a26f2",
+                            Id = "f1c05552-2b33-4891-b041-db4941365cc8",
+                            ConcurrencyStamp = "509cdda2-af49-4bba-8818-111f86303c3e",
                             Name = "PremiumUser",
                             NormalizedName = "PREMIUMUSER"
                         });

@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
@@ -6,6 +7,7 @@ namespace Entities.Models
     [Table("LikedRecipes")]
     public class LikedRecipe
     {
+        [Key]
         public Guid LikedRecipeId {get; set;}
         [ForeignKey("User")]
         public string UserId {get; set;}
