@@ -26,6 +26,9 @@ namespace RestApi
 
             CreateMap<Rate, RateDto>();
             CreateMap<RateForCreationDto, Rate>();
+
+            CreateMap<LikedRecipeForCreationDto, LikedRecipe>();
+            CreateMap<LikedRecipe, LikedRecipeDto>();
         }
     }
 }
