@@ -17,7 +17,7 @@ namespace Repository
         public void CreateLikedRecipe(LikedRecipe likedRecipe) => Create(likedRecipe);
 
         public async Task<LikedRecipe> GetLikedRecipeAsync(Guid likedRecipeId, bool trackChanges) =>
-            await FindByCondition(l => l.Id.Equals(likedRecipeId), trackChanges)
+            await FindByCondition(l => l.LikedRecipeId.Equals(likedRecipeId), trackChanges)
             .SingleOrDefaultAsync();
 
         public async Task<IEnumerable<LikedRecipe>> GetLikedRecipesForUserAsync(string userId, bool trackChanges) =>

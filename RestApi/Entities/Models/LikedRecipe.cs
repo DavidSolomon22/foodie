@@ -6,7 +6,7 @@ namespace Entities.Models
     [Table("LikedRecipes")]
     public class LikedRecipe
     {
-        public Guid Id {get; set;}
+        public Guid LikedRecipeId {get; set;}
         [ForeignKey("User")]
         public string UserId {get; set;}
         [ForeignKey("Recipe")]
@@ -14,6 +14,5 @@ namespace Entities.Models
 
         public User User {set; get;}
         public Recipe Recipe {set; get;}
-
     }
 }
