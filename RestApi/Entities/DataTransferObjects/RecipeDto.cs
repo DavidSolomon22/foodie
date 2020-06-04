@@ -14,6 +14,7 @@ namespace Entities.DataTransferObjects
         public DateTime DateCreated { get; set; }
         public int ComplexityLevel { get; set; }
         public int EstimatedTime { get; set; }
+        public int LikesNumber { get; set; }
         public ICollection<Ingredient> Ingredients {get; set;}
         public ICollection<Step> Steps {get; set;}
     }

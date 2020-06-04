@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Contracts;
@@ -28,12 +29,19 @@ namespace RestApi.Controllers
         {
             if (likedRecipe == null)
             {
-                return BadRequest("LikedRecipeForCreationDto object is null");
+                return BadRequest(new { message = "LikedRecipeForCreationDto object is null" });
             }
 
             if (!ModelState.IsValid)
             {
                 return UnprocessableEntity(ModelState);
+            }
+
+            var likedRecipesByUser = await _repository.LikedRecipe.GetLikedRecipesForUserAsync(likedRecipe.UserId, trackChanges: false);
+            var unique = CheckIfUnique(likedRecipesByUser, likedRecipe.RecipeId);
+            if (!unique)
+            {
+                return BadRequest(new { message = "Recipe is already liked by this user" });
             }
 
             var likedRecipeEntity = _mapper.Map<LikedRecipe>(likedRecipe);
@@ -59,6 +67,18 @@ namespace RestApi.Controllers
             await _repository.SaveAsync();
 
             return NoContent();
+        }
+
+        private Boolean CheckIfUnique(IEnumerable<LikedRecipe> likedRecipes, Guid recipeId)
+        {
+            foreach (var recipe in likedRecipes)
+            {
+                if (recipe.RecipeId == recipeId)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
