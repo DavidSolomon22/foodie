@@ -5,14 +5,27 @@
 <header>
   <app-header-toolbar></app-header-toolbar>
 </header>
+
 <div class="title">
   <span *ngIf="showDiet">
+    <button mat-button (click)="openDialog()">
+      <mat-icon class="buttonplus">search</mat-icon>
+    </button>
+    <button mat-button (click)="deleteDiet()">
+      <mat-icon class="buttonplus">delete_outline</mat-icon>
+    </button>
     <span class="dietName">
       {{ dietName }}
     </span>
   </span>
 
   <span *ngIf="editable">
+    <button mat-button (click)="openDialog()">
+      <mat-icon class="buttonplus">search</mat-icon>
+    </button>
+    <button mat-button (click)="deleteDiet()">
+      <mat-icon class="buttonplus">delete_outline</mat-icon>
+    </button>
     <span class="dietName">
       {{ dietName }}
     </span>

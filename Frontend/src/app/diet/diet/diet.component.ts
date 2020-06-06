@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DietDialogComponent } from './diet-dialog/diet-dialog.component';
 import { DailyDiet, Temp } from './../../shared/models';
 import { DietService } from './../../services/diet.service';
@@ -25,7 +26,8 @@ export class DietComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private service: DietService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -79,6 +81,24 @@ export class DietComponent implements OnInit {
         panelClass: ['snackbar'],
         verticalPosition: 'top',
       });
+      this.cleanBoard();
+      this.ngOnInit();
     });
+  }
+  deleteDiet() {
+    this.service.deleteDiet(this.dietId).subscribe((resp) => {
+      this.cleanBoard();
+      this.ngOnInit();
+    });
+  }
+  cleanBoard() {
+    this.temp = [];
+    this.dietName = '';
+    this.showDiet = false;
+    this.editable = false;
+  }
+  openDialog() {
+    this.cleanBoard();
+    this.ngOnInit();
   }
 }
