@@ -96,6 +96,7 @@ export class DietComponent implements OnInit {
     this.dietName = '';
     this.showDiet = false;
     this.editable = false;
+    this.dietId = '';
   }
   openDialog() {
     this.cleanBoard();

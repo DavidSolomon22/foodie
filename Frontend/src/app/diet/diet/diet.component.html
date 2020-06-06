@@ -17,14 +17,14 @@
     <span class="dietName">
       {{ dietName }}
     </span>
+    <button mat-button>
+      <mat-icon class="buttonplus">edit</mat-icon>
+    </button>
   </span>
 
   <span *ngIf="editable">
     <button mat-button (click)="openDialog()">
       <mat-icon class="buttonplus">search</mat-icon>
-    </button>
-    <button mat-button (click)="deleteDiet()">
-      <mat-icon class="buttonplus">delete_outline</mat-icon>
     </button>
     <span class="dietName">
       {{ dietName }}
