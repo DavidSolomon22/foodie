@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using AutoMapper;
 using Contracts;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -16,11 +19,15 @@ namespace RestApi.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IRepositoryManager _repository;
+        private readonly IConverter _converter;
+        private readonly IPdfService _pdfService;
 
-        public DietController(IRepositoryManager repository, IMapper mapper, IPhotoService photoService)
+        public DietController(IRepositoryManager repository, IMapper mapper, IPhotoService photoService, IConverter converter, IPdfService pdfService)
         {
             _repository = repository;
             _mapper = mapper;
+            _converter = converter;
+            _pdfService = pdfService;
         }
 
         [HttpPost, Authorize]
@@ -67,8 +74,8 @@ namespace RestApi.Controllers
             }
             else
             {
-                var recipeDto = _mapper.Map<DietDto>(diet);
-                return Ok(recipeDto);
+                var dietDto = _mapper.Map<DietDto>(diet);
+                return Ok(dietDto);
             }
         }
 
@@ -116,5 +123,68 @@ namespace RestApi.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("{dietId}/pdf"), Authorize]
+        public async Task<IActionResult> CreateDietPdf(Guid dietId)
+        {
+            
+            if (dietId == null)
+            {
+                return BadRequest("DietId is null");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return UnprocessableEntity(ModelState);
+            }
+
+            var dietEntity = await _repository.Diet.GetDietAsync(dietId, trackChanges: true);
+
+            var recipes = new List<Recipe>();
+
+            foreach (DailyDiet dailyDiet in dietEntity.DailyDiets) 
+            {
+                foreach (Meal meal in dailyDiet.Meals)
+                {
+                    recipes.Add(meal.Recipe);
+                }
+            }
+
+            if (dietEntity == null)
+            {
+                return NotFound("Exporting diet to pdf impossible, beacuse diet is null");
+            }
+
+            var globalSettings = new GlobalSettings
+            {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 10 },
+                DocumentTitle = "PDF Report",
+                Out = @"C:\Users\Jacek\Downloads\Diet.pdf"
+            };
+ 
+            var objectSettings = new ObjectSettings
+            {
+                PagesCount = true,
+                // HtmlContent = _pdfService.GenerateDietPdf(dietId),
+                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet =  Path.Combine(Directory.GetCurrentDirectory(), "Resources", "PdfStyling", "styles.css") },
+                HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
+                FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
+            };
+ 
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = globalSettings,
+                Objects = { objectSettings }
+            };
+ 
+            _converter.Convert(pdf);
+
+            return Ok("success");
+
+        }
+
     }
 }
