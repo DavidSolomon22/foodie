@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Contracts;
+using DinkToPdf;
 using Entities.Models;
 
 namespace RestApi.Utility
@@ -15,6 +17,36 @@ namespace RestApi.Utility
         {
             _repository = repository;
         }
+
+        public GlobalSettings GetGlobalSettings()
+        {
+             var globalSettings = new GlobalSettings
+            {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 10 },
+                DocumentTitle = "Diet",
+                Out = @"C:\Users\Jacek\Downloads\Diet.pdf"
+            };
+
+            return globalSettings;
+        }
+
+        public async Task<ObjectSettings> GetObjectSettings(Diet dietEntity)
+        {
+             var objectSettings = new ObjectSettings
+            {
+                PagesCount = true,
+                HtmlContent =  await GenerateDietPdf(dietEntity),
+                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet =  Path.Combine(Directory.GetCurrentDirectory(), "Resources", "PdfStyling", "styles.css") },
+                HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
+                FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Created by Foodie" }
+            };
+
+            return objectSettings;
+        }
+
         public async Task<string> GenerateDietPdf(Diet dietEntity)
         {
             var recipes = new List<Recipe>();

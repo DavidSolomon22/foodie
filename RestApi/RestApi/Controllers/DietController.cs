@@ -144,31 +144,11 @@ namespace RestApi.Controllers
             {
                 return NotFound("Exporting diet to pdf impossible, beacuse diet is null");
             }
-
-
-            var globalSettings = new GlobalSettings
-            {
-                ColorMode = ColorMode.Color,
-                Orientation = Orientation.Portrait,
-                PaperSize = PaperKind.A4,
-                Margins = new MarginSettings { Top = 10 },
-                DocumentTitle = "Diet",
-                Out = @"C:\Users\Jacek\Downloads\Diet.pdf"
-            };
- 
-            var objectSettings = new ObjectSettings
-            {
-                PagesCount = true,
-                HtmlContent =  await _pdfService.GenerateDietPdf(dietEntity),
-                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet =  Path.Combine(Directory.GetCurrentDirectory(), "Resources", "PdfStyling", "styles.css") },
-                HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
-                FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Created by Foodie" }
-            };
  
             var pdf = new HtmlToPdfDocument()
             {
-                GlobalSettings = globalSettings,
-                Objects = { objectSettings }
+                GlobalSettings = _pdfService.GetGlobalSettings(),
+                Objects = { await _pdfService.GetObjectSettings(dietEntity) }
             };
  
             _converter.Convert(pdf);
