@@ -29,6 +29,10 @@ namespace RestApi
                 .ForMember(
                     dest => dest.LikesNumber,
                     opt => opt.MapFrom(src => src.LikedRecipes.Count));
+            CreateMap<Recipe, RecipeWithLikedRecipeIdDto>()
+                .ForMember(
+                    dest => dest.LikesNumber,
+                    opt => opt.MapFrom(src => src.LikedRecipes.Count));
             CreateMap<RecipeForUpdateDto, Recipe>();
 
             CreateMap<DietForCreationDto, Diet>();

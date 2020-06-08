@@ -114,6 +114,18 @@ namespace RestApi.Controllers
         [HttpGet("{id}", Name = "RecipeById"), Authorize]
         public async Task<IActionResult> GetRecipe(Guid id)
         {
+            var userId = "";
+            try
+            {
+                var token = Request.Headers[HeaderNames.Authorization].ToString().Remove(0, 7);
+                var email = _authManager.GetUserEmail(token);
+                userId = await _authManager.GetUserId(email);
+            }
+            catch (System.Exception)
+            {
+                BadRequest(new { message = "Wrong payload" });
+            }
+
             var recipe = await _repository.Recipe.GetRecipeAsync(id, trackChanges: false);
             if (recipe == null)
             {
@@ -121,7 +133,7 @@ namespace RestApi.Controllers
             }
             else
             {
-                var recipeDto = _mapper.Map<RecipeDto>(recipe);
+                var recipeDto = ConvertRecipeToRecipeWithLikedRecipeIdDto(recipe, userId);
                 return Ok(recipeDto);
             }
         }
@@ -262,6 +274,22 @@ namespace RestApi.Controllers
                 }
             }
             return recipesDto;
+        }
+
+        private RecipeWithLikedRecipeIdDto ConvertRecipeToRecipeWithLikedRecipeIdDto(Recipe recipe, string userId)
+        {
+            var recipeDto = _mapper.Map<RecipeWithLikedRecipeIdDto>(recipe);
+            
+            var likedRecipes = recipe.LikedRecipes.ToList();
+            for (int j = 0; j < likedRecipes.Count; j++)
+            {
+                if (likedRecipes[j].UserId == userId)
+                {
+                    recipeDto.LikedRecipeId = likedRecipes[j].LikedRecipeId;
+                    break;
+                }
+            }
+            return recipeDto;
         }
     }
 }
