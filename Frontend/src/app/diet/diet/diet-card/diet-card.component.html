@@ -4,18 +4,21 @@
       <div class="row">
         <div class="col">
           <span class="type">Breakfast:</span>
+          <br />
           <a href="{{ link1 }}" class="food"
             >{{ one(meal) }} {{ nameRecipe }}
           </a>
         </div>
         <div class="col">
           <span class="type">Lunch:</span>
+          <br />
           <a href="{{ link2 }}" class="food">
             {{ two(meal) }} {{ nameRecipe2 }}
           </a>
         </div>
         <div class="col">
           <span class="type">Supper:</span>
+          <br />
           <a href="{{ link3 }}" *ngIf="meal" class="food">
             {{ third(meal) }}
             {{ nameRecipe3 }}

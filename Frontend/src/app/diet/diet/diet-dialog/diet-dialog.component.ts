@@ -29,16 +29,13 @@ export class DietDialogComponent implements OnInit {
   ngOnInit() {
     this.service.getAllDiets().subscribe((resp) => {
       this.diets = resp as Diet[];
-      console.log(this.diets);
     });
   }
   showDiet() {
     var temp = this.form.controls.second.value;
-    console.log(this.form.value);
     this.dialog.close(this.form.value);
   }
   createDiet() {
-    console.log(this.form.value);
     this.dialog.close(this.form.value);
   }
   backToRecipe() {

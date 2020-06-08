@@ -48,15 +48,12 @@ export class DietComponent implements OnInit {
           this.temp = temp1.dailyDiets as DailyDiet[];
           this.dietName = temp1.name;
           this.showDiet = true;
-          console.log(this.temp);
         });
       } else {
         this.editable = true;
         this.data.newMessage('edit');
-        console.log('diet created' + result.third);
         this.dietName = result.third;
         this.diet.description = result.four;
-        console.log(this.dailyMeals.length);
       }
     });
     this.data.currentMessage.subscribe((resp) => {
@@ -83,7 +80,6 @@ export class DietComponent implements OnInit {
         });
       } else {
         this.temp.push(data);
-        console.log(this.temp);
       }
     });
   }
@@ -92,7 +88,6 @@ export class DietComponent implements OnInit {
     this.diet.name = this.dietName;
     var user = localStorage.getItem('user_id');
     this.diet.creatorId = user;
-    console.log(this.diet);
     this.service.postDiet(this.diet).subscribe((resp) => {
       this.snack.open('Diet was created', '', {
         duration: 5000,
@@ -141,5 +136,8 @@ export class DietComponent implements OnInit {
       this.cleanBoard();
       this.ngOnInit();
     });
+  }
+  dietToPdf() {
+    this.service.dietToPdf(this.dietId).subscribe((resp) => {});
   }
 }

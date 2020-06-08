@@ -36,4 +36,8 @@ export class DietService {
     let uri = environment.baseUrl + `api/diets/` + dietId;
     return this.http.put(uri, diet);
   }
+  dietToPdf(dietId: any) {
+    let uri = environment.baseUrl + `api/diets/` + dietId + '/pdf';
+    return this.http.get(uri);
+  }
 }

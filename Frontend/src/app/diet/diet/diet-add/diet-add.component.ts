@@ -41,9 +41,7 @@ export class DietAddComponent implements OnInit {
 
   ngOnInit() {
     this.service.getAllRecipes().subscribe((resp) => {
-      //console.log(resp);
       this.recipes = resp as Recipie;
-      console.log(this.recipes);
     });
   }
   save() {
@@ -58,6 +56,5 @@ export class DietAddComponent implements OnInit {
     this.dailyDiet.meals.push(this.meal2);
     this.dailyDiet.meals.push(this.meal3);
     this.dialog.close(this.dailyDiet);
-    console.log(this.dailyDiet);
   }
 }

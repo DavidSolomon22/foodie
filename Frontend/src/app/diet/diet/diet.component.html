@@ -8,6 +8,9 @@
 
 <div class="title">
   <span *ngIf="showDiet">
+    <button mat-button (click)="dietToPdf()">
+      <mat-icon class="buttonplus">picture_as_pdf</mat-icon>
+    </button>
     <button mat-button (click)="openDialog()">
       <mat-icon class="buttonplus">search</mat-icon>
     </button>

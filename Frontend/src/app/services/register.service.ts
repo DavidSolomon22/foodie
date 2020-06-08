@@ -11,7 +11,6 @@ export class RegisterService {
   constructor(private http: HttpClient) {}
 
   register(form: any) {
-    console.log(form);
     let uri = environment.baseUrl + `api/authentication/register`;
     return this.http.post(uri, form);
   }
@@ -47,7 +46,6 @@ export class RegisterService {
     };
     jsonarray.push(name);
     jsonarray.push(surname);
-    console.log(jsonarray);
     var user = localStorage.getItem('user_id');
     let uri = environment.baseUrl + `api/users/` + user;
     return this.http.patch(uri, jsonarray);
