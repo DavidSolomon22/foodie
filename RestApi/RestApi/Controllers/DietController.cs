@@ -71,5 +71,50 @@ namespace RestApi.Controllers
                 return Ok(recipeDto);
             }
         }
+
+        [HttpDelete("{id}"), Authorize]
+        public async Task<IActionResult> DeleteDiet(Guid id)
+        {
+            var diet = await _repository.Diet.GetDietAsync(id, trackChanges: false);
+
+            if (diet == null)
+            {
+                return NotFound();
+            }
+
+            _repository.Diet.DeleteDiet(diet);
+
+            await _repository.SaveAsync();
+
+            return NoContent();
+
+        }
+
+        [HttpPut("{id}"), Authorize]   
+          public async Task<IActionResult> UpdateDiet(Guid id, [FromBody] DietForUpdateDto diet)
+        {
+            if (diet == null)
+            {
+                return BadRequest("RecipeForUpdateDto object is null");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return UnprocessableEntity(ModelState);
+            }
+
+            var dietEntity = await _repository.Diet.GetDietAsync(id, trackChanges: true);
+
+            if (dietEntity == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(diet, dietEntity);
+            
+            await _repository.SaveAsync();
+
+            return NoContent();
+        }
     }
 }
