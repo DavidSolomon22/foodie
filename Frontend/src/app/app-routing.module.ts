@@ -11,6 +11,7 @@ import { UserRecipesComponent } from './recipes/user-recipes/user-recipes.compon
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipePageComponent } from './recipes/recipe-page/recipe-page.component';
 import { RecipesSearchComponent } from './recipes/recipes-search/recipes-search.component';
+import { UserLikedRecipesComponent } from './recipes/user-liked-recipes/user-liked-recipes.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,11 @@ const routes: Routes = [
   {
     path: 'myRecipes',
     component: UserRecipesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'favorite',
+    component: UserLikedRecipesComponent,
     canActivate: [AuthGuard]
   },
   {

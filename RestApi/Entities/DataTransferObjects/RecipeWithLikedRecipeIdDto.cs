@@ -4,7 +4,7 @@ using Entities.Models;
 
 namespace Entities.DataTransferObjects
 {
-    public class RecipesDto
+    public class RecipeWithLikedRecipeIdDto
     {
         public Guid Id { get; set; }
         public string CreatorId { get; set; }
@@ -15,5 +15,8 @@ namespace Entities.DataTransferObjects
         public int ComplexityLevel { get; set; }
         public int EstimatedTime { get; set; }
         public int LikesNumber { get; set; }
+        public Guid? LikedRecipeId { get; set; }
+        public ICollection<Ingredient> Ingredients { get; set; }
+        public ICollection<Step> Steps { get; set; }
     }
 }

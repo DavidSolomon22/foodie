@@ -19,7 +19,6 @@ export class RecipePageComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    
 
     this.recipeService.getRecipeById(id).subscribe((response: any) => {
       this.recipe = response;
@@ -32,5 +31,19 @@ export class RecipePageComponent implements OnInit {
         }
       });
     });
+  }
+
+  recipeFavoriteClick() {
+    var recipeFavorite = document.querySelector('.recipe-favourite');
+
+    if(recipeFavorite.classList.contains('favorite')) {
+      this.recipeService.dislikeRecipe(this.recipe.likedRecipeId).subscribe((response: any) => {
+      });
+      recipeFavorite.classList.remove('favorite');
+    } else {
+      this.recipeService.likeRecipe(this.recipe.id).subscribe((response: any) => {
+      });
+      recipeFavorite.classList.add('favorite');
+    }
   }
 }

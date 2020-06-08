@@ -17,8 +17,22 @@ namespace RestApi
             CreateMap<User, UserDto>();
 
             CreateMap<RecipeForCreationDto, Recipe>();
-            CreateMap<Recipe, RecipeDto>();
-            CreateMap<Recipe, RecipesDto>();
+            CreateMap<Recipe, RecipeDto>()
+                .ForMember(
+                    dest => dest.LikesNumber,
+                    opt => opt.MapFrom(src => src.LikedRecipes.Count));
+            CreateMap<Recipe, RecipesDto>()
+                .ForMember(
+                    dest => dest.LikesNumber,
+                    opt => opt.MapFrom(src => src.LikedRecipes.Count));
+            CreateMap<Recipe, RecipesWithLikedRecipeIdDto>()
+                .ForMember(
+                    dest => dest.LikesNumber,
+                    opt => opt.MapFrom(src => src.LikedRecipes.Count));
+            CreateMap<Recipe, RecipeWithLikedRecipeIdDto>()
+                .ForMember(
+                    dest => dest.LikesNumber,
+                    opt => opt.MapFrom(src => src.LikedRecipes.Count));
             CreateMap<RecipeForUpdateDto, Recipe>();
 
             CreateMap<DietForCreationDto, Diet>();
@@ -27,6 +41,9 @@ namespace RestApi
 
             CreateMap<Rate, RateDto>();
             CreateMap<RateForCreationDto, Rate>();
+
+            CreateMap<LikedRecipeForCreationDto, LikedRecipe>();
+            CreateMap<LikedRecipe, LikedRecipeDto>();
         }
     }
 }

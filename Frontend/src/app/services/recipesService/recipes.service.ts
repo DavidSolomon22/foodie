@@ -84,4 +84,24 @@ export class RecipesService {
     const uri = environment.baseUrl + `api/users/${localStorage.getItem('user_id')}/recipes`;
     return this.http.get<any>(uri);
   }
+
+  deleteRecipe(recipeId) {
+    const uri = environment.baseUrl + `api/recipes/${recipeId}`;
+    return this.http.delete<any>(uri);
+  }
+
+  likeRecipe(recipeId) {
+    var form = {
+      "userId": localStorage.getItem('user_id'),
+      recipeId
+    }
+
+    const uri = environment.baseUrl + `api/liked-recipes`;
+    return this.http.post<any>(uri, form);
+  }
+
+  dislikeRecipe(recipeId) {
+      const uri = environment.baseUrl + `api/liked-recipes/${recipeId}`;
+      return this.http.delete<any>(uri);
+  }
 }

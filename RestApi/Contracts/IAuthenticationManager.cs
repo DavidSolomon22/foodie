@@ -9,6 +9,7 @@ namespace Contracts
         Task<string> CreateToken();
         Task<bool> IsEmailConfirmed(string email);
         Task<string> GetUserId(string email);
+        string GetUserEmail(string token);
         int? GetExpirationDate(string token);
     }
 }

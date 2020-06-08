@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using RestApi.ModelBinders;
 using Entities.RequestFeatures;
 using Newtonsoft.Json;
+using Microsoft.Net.Http.Headers;
 
 namespace RestApi.Controllers
 {
@@ -22,13 +23,14 @@ namespace RestApi.Controllers
     {
         private readonly IRepositoryManager _repository;
         private readonly IMapper _mapper;
-
+        private readonly IAuthenticationManager _authManager;
         private readonly IPhotoService _photoService;
 
-        public RecipesController(IRepositoryManager repository, IMapper mapper, IPhotoService photoService)
+        public RecipesController(IRepositoryManager repository, IMapper mapper, IAuthenticationManager authManager, IPhotoService photoService)
         {
             _repository = repository;
             _mapper = mapper;
+            _authManager = authManager;
             _photoService = photoService;
         }
 
@@ -87,20 +89,43 @@ namespace RestApi.Controllers
         [HttpGet, Authorize]
         public async Task<IActionResult> GetRecipes([FromQuery] RecipeParameters recipeParameters)
         {
+            var userId = "";
+            try
+            {
+                var token = Request.Headers[HeaderNames.Authorization].ToString().Remove(0, 7);
+                var email = _authManager.GetUserEmail(token);
+                userId = await _authManager.GetUserId(email);
+            }
+            catch (System.Exception)
+            {
+                BadRequest(new { message = "Wrong payload" });
+            }
+
             recipeParameters.Cuisine = recipeParameters.Cuisine?.First()?.Split(",");
             recipeParameters.Category = recipeParameters.Category?.First()?.Split(",");
-            var recipes = await _repository.Recipe.GetAllRecipesAsync(recipeParameters, trackChanges: false);
+            var recipes = await _repository.Recipe.GetAllRecipesAsync(userId, recipeParameters, trackChanges: false);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(recipes.MetaData));
 
-            var recipesDto = _mapper.Map<IEnumerable<RecipesDto>>(recipes);
-
+            var recipesDto = ConvertRecipesToRecipesWithLikedRecipeIdDto(recipes, userId);
             return Ok(recipesDto);
         }
 
         [HttpGet("{id}", Name = "RecipeById"), Authorize]
         public async Task<IActionResult> GetRecipe(Guid id)
         {
+            var userId = "";
+            try
+            {
+                var token = Request.Headers[HeaderNames.Authorization].ToString().Remove(0, 7);
+                var email = _authManager.GetUserEmail(token);
+                userId = await _authManager.GetUserId(email);
+            }
+            catch (System.Exception)
+            {
+                BadRequest(new { message = "Wrong payload" });
+            }
+
             var recipe = await _repository.Recipe.GetRecipeAsync(id, trackChanges: false);
             if (recipe == null)
             {
@@ -108,7 +133,7 @@ namespace RestApi.Controllers
             }
             else
             {
-                var recipeDto = _mapper.Map<RecipeDto>(recipe);
+                var recipeDto = ConvertRecipeToRecipeWithLikedRecipeIdDto(recipe, userId);
                 return Ok(recipeDto);
             }
         }
@@ -231,6 +256,40 @@ namespace RestApi.Controllers
             }
 
             return File(recipePhoto, _photoService.GetContentType(recipePhotoPath), Path.GetFileName(recipePhotoPath));
+        }
+
+        private List<RecipesWithLikedRecipeIdDto> ConvertRecipesToRecipesWithLikedRecipeIdDto(PagedList<Recipe> recipes, string userId)
+        {
+            var recipesDto = _mapper.Map<ICollection<RecipesWithLikedRecipeIdDto>>(recipes).ToList();
+            for (int i = 0; i < recipes.Count; i++)
+            {
+                var likedRecipes = recipes[i].LikedRecipes.ToList();
+                for (int j = 0; j < likedRecipes.Count; j++)
+                {
+                    if (likedRecipes[j].UserId == userId)
+                    {
+                        recipesDto[i].LikedRecipeId = likedRecipes[j].LikedRecipeId;
+                        break;
+                    }
+                }
+            }
+            return recipesDto;
+        }
+
+        private RecipeWithLikedRecipeIdDto ConvertRecipeToRecipeWithLikedRecipeIdDto(Recipe recipe, string userId)
+        {
+            var recipeDto = _mapper.Map<RecipeWithLikedRecipeIdDto>(recipe);
+            
+            var likedRecipes = recipe.LikedRecipes.ToList();
+            for (int j = 0; j < likedRecipes.Count; j++)
+            {
+                if (likedRecipes[j].UserId == userId)
+                {
+                    recipeDto.LikedRecipeId = likedRecipes[j].LikedRecipeId;
+                    break;
+                }
+            }
+            return recipeDto;
         }
     }
 }

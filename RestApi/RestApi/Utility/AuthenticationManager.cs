@@ -48,6 +48,11 @@ namespace RestApi.Utility
             return user.Id;
         }
 
+        public string GetUserEmail(string token)
+        {
+            return new JwtSecurityTokenHandler().ReadJwtToken(token).Payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"].ToString();
+        }
+
         public int? GetExpirationDate(string token)
         {
             return new JwtSecurityTokenHandler().ReadJwtToken(token).Payload.Exp;

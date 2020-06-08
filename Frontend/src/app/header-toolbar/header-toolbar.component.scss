@@ -16,6 +16,28 @@ a {
   position: relative;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
+.toolbar-name {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.toolbar-logo img {
+  height: 40px;
+  width: auto;
+  padding-right: 8px;
+}
+
+.toolbar-foodie {
+  letter-spacing: 4px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
 .toolbar-actions {
   position: absolute;
   right: 0;

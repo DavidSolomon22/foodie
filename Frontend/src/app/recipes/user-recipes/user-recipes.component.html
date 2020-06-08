@@ -21,9 +21,9 @@
                         <button class="user-recipe-button user-recipe-edit-button" [routerLink]="['/editRecipe', recipe.id]">
                             Edit recipe
                         </button>
-                        <!-- <button class="user-recipe-button user-recipe-delete-button">
+                        <button class="user-recipe-button user-recipe-delete-button" (click)="recipeDelete(recipe.id)">
                             Delete recipe
-                        </button> -->
+                        </button>
                     </div>
                 </div>
             </div>

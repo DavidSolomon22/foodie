@@ -12,7 +12,12 @@
             <div class="recipe-image" style="background-image: url({{imageUrl}});">
             </div>
             <div class="recipe-details">
-                <h2 class="recipe-title"> {{ recipe.name }} </h2>    
+                <div class="recipe-details-header">
+                    <span class="recipe-title"> {{ recipe.name }} </span>
+                    <span class="recipe-favourite" [class.favorite]="recipe.likedRecipeId" (click)="recipeFavoriteClick()">
+                        <span class="material-icons"> favorite </span>
+                    </span>   
+                </div>
                 <div class="recipe-informations">
                     <div class="recipe-information">
                         <span class="material-icons"> outdoor_grill </span> Cuisine: {{recipe.cuisine}}

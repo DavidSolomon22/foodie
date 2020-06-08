@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
-using Entities.Models;
 
 namespace Entities.DataTransferObjects
 {
-    public class RecipesDto
+    public class RecipesWithLikedRecipeIdDto
     {
         public Guid Id { get; set; }
         public string CreatorId { get; set; }
@@ -15,5 +13,6 @@ namespace Entities.DataTransferObjects
         public int ComplexityLevel { get; set; }
         public int EstimatedTime { get; set; }
         public int LikesNumber { get; set; }
+        public Guid? LikedRecipeId { get; set; }
     }
 }

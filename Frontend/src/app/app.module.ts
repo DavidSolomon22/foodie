@@ -41,6 +41,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import { UserRecipesComponent } from './recipes/user-recipes/user-recipes.component';
 import { RecipeRateComponent } from './recipes/recipe-rate/recipe-rate.component';
 import { RecipesSearchComponent } from './recipes/recipes-search/recipes-search.component';
+import { UserLikedRecipesComponent } from './recipes/user-liked-recipes/user-liked-recipes.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -64,7 +65,8 @@ export function tokenGetter() {
     RecipeEditComponent,
     UserRecipesComponent,
     RecipeRateComponent,
-    RecipesSearchComponent
+    RecipesSearchComponent,
+    UserLikedRecipesComponent
   ],
   imports: [
     BrowserModule,
