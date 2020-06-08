@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-home-paage',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+  styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
   form: FormGroup;
@@ -21,7 +21,7 @@ export class HomePageComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       email: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
@@ -29,7 +29,6 @@ export class HomePageComponent implements OnInit {
 
   onSubmit() {
     const val = this.form.value;
-    console.log(val);
     this.service.login(val).subscribe(
       (reponse: any) => {
         if (reponse.token !== undefined) {
@@ -39,19 +38,18 @@ export class HomePageComponent implements OnInit {
         }
       },
       (error: any) => {
-        console.log(error);
         var errorRight = error.error.error.toString();
         if (errorRight === 'Wrong email or password') {
           this.snack.open('Wrong email or password', '', {
             duration: 4000,
             panelClass: ['snackbar-wrong'],
-            verticalPosition: 'top'
+            verticalPosition: 'top',
           });
         } else {
           this.snack.open('Account is not confirmed ', '', {
             duration: 4000,
             panelClass: ['snackbar-wrong'],
-            verticalPosition: 'top'
+            verticalPosition: 'top',
           });
         }
       }
