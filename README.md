@@ -42,8 +42,8 @@ Firstly you need to install dotnet sdk (version 3.1.102) on your computer. You w
 
 Second step is two run the app in your favourite IDE or terminal. Personally I recommend to use Visual Studio Code with C# extension. Click run button in VS Code, and after this you can start consume data from WebAPI.
 
-To use full functionalities download these files depending on your Windows version and paste them into directory yourProjectDirectory/RestApi/RestApi
-https://github.com/rdvojmoc/DinkToPdf/tree/master/v0.12.4
+To use PDF feature download these files depending on your Windows version and paste them into directory yourProjectDirectory/RestApi/RestApi
+-    https://github.com/rdvojmoc/DinkToPdf/tree/master/v0.12.4
 
 # Data
 
