@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Entities.Models;
 
 namespace Contracts
 {
     public interface IPdfService
     {
-        string GenerateDietPdf(Diet diet, List<Recipe> recpies);
+        Task<string> GenerateDietPdf(Diet die);
     }
 }

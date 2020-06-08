@@ -138,22 +138,13 @@ namespace RestApi.Controllers
                 return UnprocessableEntity(ModelState);
             }
 
-            var dietEntity = await _repository.Diet.GetDietAsync(dietId, trackChanges: true);
-
-            var recipes = new List<Recipe>();
-
-            foreach (DailyDiet dailyDiet in dietEntity.DailyDiets) 
-            {
-                foreach (Meal meal in dailyDiet.Meals)
-                {
-                    recipes.Add(meal.Recipe);
-                }
-            }
+            var dietEntity = await _repository.Diet.GetDietAsync(dietId, trackChanges: false);
 
             if (dietEntity == null)
             {
                 return NotFound("Exporting diet to pdf impossible, beacuse diet is null");
             }
+
 
             var globalSettings = new GlobalSettings
             {
@@ -161,17 +152,17 @@ namespace RestApi.Controllers
                 Orientation = Orientation.Portrait,
                 PaperSize = PaperKind.A4,
                 Margins = new MarginSettings { Top = 10 },
-                DocumentTitle = "PDF Report",
+                DocumentTitle = "Diet",
                 Out = @"C:\Users\Jacek\Downloads\Diet.pdf"
             };
  
             var objectSettings = new ObjectSettings
             {
                 PagesCount = true,
-                // HtmlContent = _pdfService.GenerateDietPdf(dietId),
+                HtmlContent =  await _pdfService.GenerateDietPdf(dietEntity),
                 WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet =  Path.Combine(Directory.GetCurrentDirectory(), "Resources", "PdfStyling", "styles.css") },
                 HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
-                FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
+                FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Created by Foodie" }
             };
  
             var pdf = new HtmlToPdfDocument()
