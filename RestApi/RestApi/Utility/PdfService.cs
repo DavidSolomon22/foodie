@@ -20,6 +20,11 @@ namespace RestApi.Utility
 
         public GlobalSettings GetGlobalSettings()
         {
+            string userNameWithComputerName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+
+            var userName =  userNameWithComputerName.Split(@"\");
+            
+
              var globalSettings = new GlobalSettings
             {
                 ColorMode = ColorMode.Color,
@@ -27,7 +32,7 @@ namespace RestApi.Utility
                 PaperSize = PaperKind.A4,
                 Margins = new MarginSettings { Top = 10 },
                 DocumentTitle = "Diet",
-                Out = @"C:\Users\Jacek\Downloads\Diet.pdf"
+                Out = $@"C:\Users\{userName[1]}\Downloads\Diet.pdf"
             };
 
             return globalSettings;
