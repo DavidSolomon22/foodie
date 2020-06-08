@@ -1,5 +1,15 @@
 <div class="toolbar-container">
   <mat-toolbar class="toolbar">
+    <a [routerLink]="['/recipes']">
+      <span class="toolbar-name">
+        <span class="toolbar-logo">
+          <img src="../../../assets/img/logo_white.png" />
+        </span>
+        <span class="toolbar-foodie">
+          FOODIE
+        </span>
+      </span>
+    </a>
     <span class="toolbar-actions">
       <span class="toolbar-action">
         <a [routerLink]="['/addRecipe']" *ngIf="currentView !== '/addRecipe'">
@@ -11,6 +21,9 @@
       </span>
       <span class="toolbar-action" *ngIf="currentView !== '/myRecipes'">
         <a [routerLink]="['/myRecipes']"> My Recipes </a>
+      </span>
+      <span class="toolbar-action" *ngIf="currentView !== '/favorite'">
+        <a [routerLink]="['/favorite']"> Favorite </a>
       </span>
       <span class="toolbar-action">
         <a [routerLink]="['/diet']"> Diet </a>
@@ -44,6 +57,9 @@
     </span>
     <span class="toolbar-action" *ngIf="currentView !== '/recipes'">
       <a [routerLink]="['/myRecipes']"> My Recipes </a>
+    </span>
+    <span class="toolbar-action" *ngIf="currentView !== '/favorite'">
+      <a [routerLink]="['/favorite']"> Favorite </a>
     </span>
     <span class="toolbar-action">
       <a [routerLink]="['/diet']"> Diet </a>

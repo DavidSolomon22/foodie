@@ -4,11 +4,46 @@
     margin-top: 120px;
 }
 
+.recipe-details-header {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 32px;
+}
+
 .recipe-title {
+    float: left;
     font-size: 48px;
     font-family: Montserrat, sans-serif;
     color: #403584;
     font-weight: 600;
+}
+
+.recipe-favourite {
+    float: right;
+    color: #BBBBBB;
+    transition-duration: 0.33s;
+    cursor: pointer;
+}
+
+.recipe-favourite span {
+    font-size: 48px;
+    margin-right: 16px;
+}
+
+.recipe-favourite:hover {
+    transform: rotateZ(12deg) scale(125%);
+    color: palevioletred;
+}
+
+.recipe-favourite.favorite {
+    animation-duration: 0.33s;
+    animation-name: clicked;
+    color: crimson;
+}
+
+@keyframes clicked {
+    from {color: palevioletred;}
+    to {color: crimson;}
 }
 
 .recipe-card {

@@ -1,0 +1,28 @@
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet" />
+
+<!-- Component -->
+<header class="recipes-header">
+    <app-header-toolbar></app-header-toolbar>
+    <div class="container">
+        <div class="header-container">
+            <div class="recipes-search-container">
+                <div class="recipes-serach">
+                    <h2 class="recipes-search-title"> Foodie </h2>
+                    <h3 class="recipes-serach-subtitle"> Your favorite recipes! </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main class="recipes-main">
+    <div class="container">
+        <h2 class="recipes-main-title" *ngIf="recipes.length == 0">
+            🥐 You haven't liked any recipes yet! :(
+        </h2>
+        <div class="recipes-main-cards-container">
+            <app-recipe-card *ngFor="let recipe of recipes" class="recipe-card-component" [recipe]="recipe" (click)="onRecipeClick(recipe.id)">
+            </app-recipe-card>
+        </div>
+    </div>
+</main>
