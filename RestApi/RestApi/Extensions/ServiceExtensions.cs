@@ -1,5 +1,7 @@
 using System.Text;
 using Contracts;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using EmailService;
 using Entities;
 using Entities.Models;
@@ -87,6 +89,12 @@ namespace RestApi.Extensions
             services.AddSingleton(emailConfig);
             services.AddScoped<IEmailSender,EmailSender>();
         }
+
+        public static void ConfigurePdfConverter(this IServiceCollection services) =>
+            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
+         public static void ConfigurePdfService(this IServiceCollection services) =>
+            services.AddScoped<IPdfService, PdfService>();
 
     }
 }
