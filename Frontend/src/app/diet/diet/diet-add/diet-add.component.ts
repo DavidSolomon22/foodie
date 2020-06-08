@@ -26,8 +26,18 @@ export class DietAddComponent implements OnInit {
       firstmeal: ['', Validators.required],
       secondmeal: ['', Validators.required],
       thirdmeal: ['', Validators.required],
+      day: ['', Validators.required],
     });
   }
+  days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ];
 
   ngOnInit() {
     this.service.getAllRecipes().subscribe((resp) => {
@@ -43,12 +53,11 @@ export class DietAddComponent implements OnInit {
     this.meal2.type = 'Lunch';
     this.meal3.recipeId = this.form.controls.thirdmeal.value;
     this.meal3.type = 'Supper';
-    // this.meals.push(this.meal);
-    // this.meals.push(this.meal2);
-    // this.meals.push(this.meal3);
+    this.dailyDiet.day = this.form.controls.day.value;
     this.dailyDiet.meals.push(this.meal);
     this.dailyDiet.meals.push(this.meal2);
     this.dailyDiet.meals.push(this.meal3);
     this.dialog.close(this.dailyDiet);
+    console.log(this.dailyDiet);
   }
 }

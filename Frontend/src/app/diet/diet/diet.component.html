@@ -17,9 +17,23 @@
     <span class="dietName">
       {{ dietName }}
     </span>
-    <button mat-button>
-      <mat-icon class="buttonplus">edit</mat-icon>
-    </button>
+    <span *ngIf="editD == false">
+      <button mat-button (click)="editDiet()">
+        <mat-icon class="buttonplus">edit</mat-icon>
+      </button>
+    </span>
+    <span *ngIf="editD">
+      <span *ngIf="temp.length != 7">
+        <button mat-button (click)="addDiet()">
+          <mat-icon class="buttonplus">add</mat-icon>
+        </button>
+      </span>
+      <span>
+        <button mat-button (click)="updateDiet()">
+          <mat-icon class="buttonplus">done</mat-icon>
+        </button>
+      </span>
+    </span>
   </span>
 
   <span *ngIf="editable">
@@ -42,57 +56,108 @@
   </span>
 </div>
 
-<mat-grid-list cols="4" rowHeight="200px" class="grid">
-  <mat-grid-tile [colspan]="1" [rowspan]="4">
-    <div class="container">
-      <div class="row">
-        <div class="days">
-          <div class="monday">
-            MONDAY
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="days">
-          <div class="tuesday">
-            TUESDAY
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="days">
-          <div class="tuesday">
-            WEDNESDAY
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="days">
-          <div class="tuesday">
-            THURSDAY
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="days">
-          FRIDAY
-        </div>
-      </div>
-      <div class="row">
-        <div class="days">
-          SATURDAY
-        </div>
-      </div>
-      <div class="row">
-        <div class="days">
-          SUNDAY
-        </div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="days">
+        MONDAY
       </div>
     </div>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]="3" [rowspan]="4">
+    <div class="col-sm-9">
+      <span *ngFor="let meal of temp" class="cardD">
+        <span *ngIf="meal.day === 'Monday'">
+          <app-diet-card [meal]="meal"> </app-diet-card>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="days">
+        TUESDAY
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <span *ngFor="let meal of temp" class="cardD">
+        <span *ngIf="meal.day === 'Tuesday'">
+          <app-diet-card [meal]="meal"> </app-diet-card>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="days">
+        WEDNESDAY
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <span *ngFor="let meal of temp" class="cardD">
+        <span *ngIf="meal.day === 'Wednesday'">
+          <app-diet-card [meal]="meal"> </app-diet-card>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="days">
+        THURSDAY
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <span *ngFor="let meal of temp" class="cardD">
+        <span *ngIf="meal.day === 'Thursday'">
+          <app-diet-card [meal]="meal"> </app-diet-card>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="days">
+        FRIDAY
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <span *ngFor="let meal of temp" class="cardD">
+        <span *ngIf="meal.day === 'Friday'">
+          <app-diet-card [meal]="meal"> </app-diet-card>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="days">
+        SATURDAY
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <span *ngFor="let meal of temp" class="cardD">
+        <span *ngIf="meal.day === 'Saturday'">
+          <app-diet-card [meal]="meal"> </app-diet-card>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="days">
+        SUNDAY
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <span *ngFor="let meal of temp" class="cardD">
+        <span *ngIf="meal.day === 'Sunday'">
+          <app-diet-card [meal]="meal"> </app-diet-card>
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
+<!-- <mat-grid-tile [colspan]="3" [rowspan]="4">
     <div class="container">
       <app-diet-card *ngFor="let meal of temp" [meal]="meal"> </app-diet-card>
     </div>
-  </mat-grid-tile>
-</mat-grid-list>
+  </mat-grid-tile> -->

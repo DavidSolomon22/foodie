@@ -32,4 +32,8 @@ export class DietService {
     let uri = environment.baseUrl + `api/diets/` + dietId;
     return this.http.delete(uri);
   }
+  putDiet(diet: any, dietId: any) {
+    let uri = environment.baseUrl + `api/diets/` + dietId;
+    return this.http.put(uri, diet);
+  }
 }

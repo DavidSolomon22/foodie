@@ -4,34 +4,28 @@
       <div class="row">
         <div class="col">
           <span class="type">Breakfast:</span>
-          <span class="food">{{ one(meal) }} {{ nameRecipe }} </span>
-          <span class="icon">
-            <button mat-button (click)="goToRecipeBreakfast()">
-              <mat-icon> restaurant_menu</mat-icon>
-            </button>
-          </span>
+          <a href="{{ link1 }}" class="food"
+            >{{ one(meal) }} {{ nameRecipe }}
+          </a>
         </div>
         <div class="col">
           <span class="type">Lunch:</span>
-          <span class="food"> {{ two(meal) }} {{ nameRecipe2 }} </span>
-          <span class="icon">
-            <button mat-button (click)="goToRecipeLunch()">
-              <mat-icon> restaurant_menu</mat-icon>
-            </button>
-          </span>
+          <a href="{{ link2 }}" class="food">
+            {{ two(meal) }} {{ nameRecipe2 }}
+          </a>
         </div>
         <div class="col">
           <span class="type">Supper:</span>
-          <span *ngIf="meal" class="food">
+          <a href="{{ link3 }}" *ngIf="meal" class="food">
             {{ third(meal) }}
             {{ nameRecipe3 }}
-          </span>
-          <span class="icon">
-            <button mat-button (click)="goToRecipeSupper()">
-              <mat-icon> restaurant_menu</mat-icon>
-            </button>
-          </span>
+          </a>
         </div>
+        <span *ngIf="edit">
+          <button mat-button (click)="deleteDay()">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </span>
         <div></div>
       </div>
     </div>

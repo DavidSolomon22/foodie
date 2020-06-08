@@ -1,3 +1,4 @@
+import { DataService } from './../../services/data.service';
 import { Router } from '@angular/router';
 import { DietDialogComponent } from './diet-dialog/diet-dialog.component';
 import { DailyDiet, Temp } from './../../shared/models';
@@ -23,11 +24,13 @@ export class DietComponent implements OnInit {
   dietName = '';
   showDiet = false;
   diet = new Diet();
+  editD = false;
   constructor(
     public dialog: MatDialog,
     private service: DietService,
     private snack: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private data: DataService
   ) {}
 
   ngOnInit() {
@@ -49,10 +52,18 @@ export class DietComponent implements OnInit {
         });
       } else {
         this.editable = true;
+        this.data.newMessage('edit');
         console.log('diet created' + result.third);
         this.dietName = result.third;
         this.diet.description = result.four;
         console.log(this.dailyMeals.length);
+      }
+    });
+    this.data.currentMessage.subscribe((resp) => {
+      const del = this.temp.find((t) => t.day == resp);
+      const index = this.temp.indexOf(del);
+      if (index !== -1) {
+        this.temp.splice(index, 1);
       }
     });
   }
@@ -64,9 +75,16 @@ export class DietComponent implements OnInit {
       data: this.dailyMeals,
     });
     dialogRef.afterClosed().subscribe((data) => {
-      //this.dailyMeals.push(data);
-      this.temp.push(data);
-      console.log(this.temp);
+      if (this.temp.find((t) => t.day == data.day)) {
+        this.snack.open('Day is already on diet', '', {
+          duration: 5000,
+          panelClass: ['snackbar'],
+          verticalPosition: 'top',
+        });
+      } else {
+        this.temp.push(data);
+        console.log(this.temp);
+      }
     });
   }
   saveDiet() {
@@ -97,9 +115,31 @@ export class DietComponent implements OnInit {
     this.showDiet = false;
     this.editable = false;
     this.dietId = '';
+    this.editD = false;
+    this.data.newMessage('editStop');
   }
   openDialog() {
     this.cleanBoard();
     this.ngOnInit();
+  }
+
+  editDiet() {
+    this.editD = true;
+    this.data.newMessage('edit');
+  }
+  updateDiet() {
+    this.diet.dailyDiets = this.temp;
+    this.diet.name = this.dietName;
+    var user = localStorage.getItem('user_id');
+    this.diet.creatorId = user;
+    this.service.putDiet(this.diet, this.dietId).subscribe((resp) => {
+      this.snack.open('Diet was updated', '', {
+        duration: 5000,
+        panelClass: ['snackbar'],
+        verticalPosition: 'top',
+      });
+      this.cleanBoard();
+      this.ngOnInit();
+    });
   }
 }
