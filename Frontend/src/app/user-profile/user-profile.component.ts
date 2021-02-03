@@ -117,6 +117,7 @@ export class UserProfileComponent implements OnInit {
       });
       if (this.formPass.invalid) {
       } else {
+        console.log(this.formPass.value);
         this.registerService.newPassword(this.formPass).subscribe(
           (resp) => {
             this.snack.open('Successfully changed', '', {

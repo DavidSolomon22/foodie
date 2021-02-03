@@ -15,24 +15,14 @@
   <form [formGroup]="form">
     <mat-step label="Breakfast" state="breakfast">
       <mat-form-field>
-        <mat-label>Day</mat-label>
-        <mat-select formControlName="day">
-          <mat-option *ngFor="let day of days" [value]="day">
-            {{ day }}
+        <mat-label>Breakfast</mat-label>
+        <mat-select formControlName="firstmeal">
+          <mat-option *ngFor="let recipe of recipes" [value]="recipe.id">
+            {{ recipe.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div>
-        <mat-form-field>
-          <mat-label>Breakfast</mat-label>
-          <mat-select formControlName="firstmeal">
-            <mat-option *ngFor="let recipe of recipes" [value]="recipe.id">
-              {{ recipe.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div *ngIf="form.controls.firstmeal.valid && form.controls.day.valid">
+      <div *ngIf="form.controls.firstmeal.valid">
         <button mat-button matStepperNext>Next</button>
       </div>
     </mat-step>

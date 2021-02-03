@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
@@ -23,9 +23,9 @@ export class RegisterComponent implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.minLength(8),
-          Validators.pattern(/\d/),
-        ]),
-      ],
+          Validators.pattern(/\d/)
+        ])
+      ]
     });
   }
 
@@ -37,21 +37,25 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     const val = this.form.value;
+    console.log(val);
     if (this.form.invalid) {
+      console.log('form invalid');
     } else {
+      console.log(val);
       this.registerService.register(val).subscribe(
-        (resp) => {
+        resp => {
           this.snack.open('Confirmation email has been sent', '', {
             duration: 4000,
             panelClass: ['snackbar'],
-            verticalPosition: 'top',
+            verticalPosition: 'top'
           });
         },
         (error: any) => {
+          console.log(error.error);
           this.snack.open('Email is already taken', '', {
             duration: 4000,
             panelClass: ['snackbar-wrong'],
-            verticalPosition: 'top',
+            verticalPosition: 'top'
           });
         }
       );

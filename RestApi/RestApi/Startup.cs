@@ -35,9 +35,7 @@ namespace RestApi
             services.ConfigureJwt(Configuration);
             services.ConfigurePhotoService();
             services.ConfigureEmailSerivce(Configuration);
-            services.ConfigurePdfConverter();
             services.AddScoped<IAuthenticationManager, AuthenticationManager>();
-            services.ConfigurePdfService();
 
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore

@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using AutoMapper;
 using Contracts;
-using DinkToPdf;
-using DinkToPdf.Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -19,15 +16,11 @@ namespace RestApi.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IRepositoryManager _repository;
-        private readonly IConverter _converter;
-        private readonly IPdfService _pdfService;
 
-        public DietController(IRepositoryManager repository, IMapper mapper, IPhotoService photoService, IConverter converter, IPdfService pdfService)
+        public DietController(IRepositoryManager repository, IMapper mapper, IPhotoService photoService)
         {
             _repository = repository;
             _mapper = mapper;
-            _converter = converter;
-            _pdfService = pdfService;
         }
 
         [HttpPost, Authorize]
@@ -74,8 +67,8 @@ namespace RestApi.Controllers
             }
             else
             {
-                var dietDto = _mapper.Map<DietDto>(diet);
-                return Ok(dietDto);
+                var recipeDto = _mapper.Map<DietDto>(diet);
+                return Ok(recipeDto);
             }
         }
 
@@ -123,38 +116,5 @@ namespace RestApi.Controllers
 
             return NoContent();
         }
-
-        [HttpGet("{dietId}/pdf"), Authorize]
-        public async Task<IActionResult> CreateDietPdf(Guid dietId)
-        {
-            
-            if (dietId == null)
-            {
-                return BadRequest("DietId is null");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return UnprocessableEntity(ModelState);
-            }
-
-            var dietEntity = await _repository.Diet.GetDietAsync(dietId, trackChanges: false);
-
-            if (dietEntity == null)
-            {
-                return NotFound("Exporting diet to pdf impossible, beacuse diet is null");
-            }
- 
-            var pdf = new HtmlToPdfDocument()
-            {
-                GlobalSettings = _pdfService.GetGlobalSettings(),
-                Objects = { await _pdfService.GetObjectSettings(dietEntity) }
-            };
- 
-            _converter.Convert(pdf);
-
-            return Ok("Pdf created succesfully");
-        }
-
     }
 }

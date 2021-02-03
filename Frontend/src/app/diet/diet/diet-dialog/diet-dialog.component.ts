@@ -4,7 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Diet } from 'src/app/shared/models';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-diet-dialog',
@@ -22,24 +21,22 @@ export class DietDialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: DietService,
-    public dialog: MatDialogRef<DietDialogComponent>,
-    private router: Router
+    public dialog: MatDialogRef<DietDialogComponent>
   ) {}
 
   ngOnInit() {
     this.service.getAllDiets().subscribe((resp) => {
       this.diets = resp as Diet[];
+      console.log(this.diets);
     });
   }
   showDiet() {
     var temp = this.form.controls.second.value;
+    console.log(this.form.value);
     this.dialog.close(this.form.value);
   }
   createDiet() {
+    console.log(this.form.value);
     this.dialog.close(this.form.value);
-  }
-  backToRecipe() {
-    this.dialog.close();
-    this.router.navigateByUrl('/recipes');
   }
 }

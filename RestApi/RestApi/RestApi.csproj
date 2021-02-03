@@ -6,7 +6,7 @@
     <ProjectReference Include="..\Contracts\Contracts.csproj"/>
     <ProjectReference Include="..\Repository\Repository.csproj"/>
     <ProjectReference Include="..\EmailService\EmailService.csproj"/>
-    <ProjectReference Include="..\LoggerService\LoggerService.csproj"/>
+    <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3"/>

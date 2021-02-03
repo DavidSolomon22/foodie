@@ -1,11 +1,7 @@
-import { DataService } from './../../../services/data.service';
-import { RecipePageComponent } from './../../../recipes/recipe-page/recipe-page.component';
 import { DailyDiet } from './../../../shared/models';
 import { DietService } from './../../../services/diet.service';
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-diet-card',
@@ -16,48 +12,26 @@ export class DietCardComponent {
   nameRecipe = '';
   nameRecipe2 = '';
   nameRecipe3 = '';
-  constructor(
-    private service: DietService,
-    public router: Router,
-    public dialog: MatDialog,
-    private data: DataService
-  ) {}
+  constructor(private service: DietService, public router: Router) {}
   counter = 0;
   ctr2 = 0;
   ctr3 = 0;
   @Input() meal: DailyDiet;
-  link1 = '';
-  link2 = '';
-  link3 = '';
-  edit = false;
 
-  ngOnInit() {
-    this.data.currentMessage.subscribe((resp) => {
-      if (resp == 'edit') {
-        this.edit = true;
-      }
-      if (resp == 'editStop') {
-        this.edit = false;
-      }
-    });
-  }
   one(dailydiet) {
     var temp = dailydiet as DailyDiet;
     var recipeid = temp.meals[0].recipeId;
-    this.link1 = 'http://localhost:4200/recipe/' + recipeid;
     return this.recipe(recipeid);
   }
   two(dailydiet) {
     var temp = dailydiet as DailyDiet;
     var recipeid = temp.meals[1].recipeId;
-    this.link2 = 'http://localhost:4200/recipe/' + recipeid;
     return this.recipe2(recipeid);
   }
   third(dailydiet) {
     var temp = dailydiet as DailyDiet;
     if (temp.meals[2] != undefined) {
       var recipeid = temp.meals[2].recipeId;
-      this.link3 = 'http://localhost:4200/recipe/' + recipeid;
       return this.recipe3(recipeid);
     } else {
       return null;
@@ -87,7 +61,16 @@ export class DietCardComponent {
       });
     }
   }
-  deleteDay() {
-    this.data.newMessage(this.meal.day);
+  goToRecipeBreakfast() {
+    var link = 'recipe/' + this.meal.meals[0].recipeId;
+    this.router.navigateByUrl(link);
+  }
+  goToRecipeLunch() {
+    var link = 'recipe/' + this.meal.meals[1].recipeId;
+    this.router.navigateByUrl(link);
+  }
+  goToRecipeSupper() {
+    var link = 'recipe/' + this.meal.meals[2].recipeId;
+    this.router.navigateByUrl(link);
   }
 }

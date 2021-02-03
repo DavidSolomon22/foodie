@@ -21,10 +21,11 @@
   max-width: 100%;
 }
 .days {
+  text-align: center;
   vertical-align: middle;
   width: 100%;
   height: 100%;
-  margin-top: 20%;
+  margin-top: 5%;
   font-size: 2vw;
 }
 .buttonplus {
@@ -36,11 +37,9 @@
 .icons {
   justify-content: right;
 }
-.buttonB {
-  background: #ecdcb0;
+.monday {
+  margin-top: 7%;
 }
-.cardD {
-  width: 50%;
-  font-size: 10px;
-  height: 100%;
+.tuesday {
+  margin-top: 5%;
 }
